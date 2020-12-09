@@ -1,14 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
-import Dropdown from "./Dropdown";
-
 const Header = () => {
   const [activeItem, setActiveItem] = useState(null);
   const headRef = useRef();
 
   useEffect(() => {
-    console.log("wwww");
     const refArray = Object.values(headRef.current.children);
     const activeItem = refArray.filter(
       (item) => item.className === "item active"
@@ -17,7 +14,6 @@ const Header = () => {
   }, []);
 
   const handleClick = (e) => {
-    //e.preventDefault();
     activeItem.className = "item";
     e.target.className = "item active";
     setActiveItem(e.target);
@@ -32,7 +28,6 @@ const Header = () => {
         <Link onClick={(e) => handleClick(e)} to="/" className="item active">
           Главная
         </Link>
-        <Dropdown />
         <Link onClick={(e) => handleClick(e)} to="/collection" className="item">
           Коллекция
         </Link>
@@ -45,6 +40,9 @@ const Header = () => {
         <Link onClick={(e) => handleClick(e)} to="/delivery" className="item">
           Доставка
         </Link>
+        <div className="right item">
+          <i className="shopping cart icon"></i>
+        </div>
       </div>
     </div>
   );
