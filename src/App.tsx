@@ -2,12 +2,12 @@ import React from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
 import history from './history';
 
-import Header from './Components/Header';
-import Main from './Components/Main';
-import About from './Components/About';
-import Contacts from './Components/Contacts';
-import Collection from './Components/Collection';
-import Delivery from './Components/Delivery';
+import Header from './components/header/Header';
+import Main from './components/main/Main';
+import About from './components/About';
+import Contacts from './components/Contacts';
+import Collection from './components/Collection';
+import Delivery from './components/Delivery';
 
 const App = () => {
   return (
