@@ -1,20 +1,18 @@
 import React from 'react';
-import image from '../../assets/homepage02.jpg';
 import './Main.scss';
 
 const Main = () => {
   return (
-    <div className='main container'>
-      <img className='backimg' src={image} alt='back ground pic' />
+    <div className='main_container'>
       <div className='dimmer'></div>
-      <div className='text container'>
-        <h1 className='main header text'>
+      <div className='text_container'>
+        <h1 className='main_header_text'>
           Лучшие итальянские и турецкие бренды
         </h1>
-        <h3 className='main secondary text'>
+        <h3 className='main_secondary_text'>
           Откройте для себя новую коллекцию лучших брендов
         </h3>
-        <div className='ui primary button'>Посмотреть</div>
+        <button className='look_button'>Посмотреть</button>
       </div>
     </div>
   );
