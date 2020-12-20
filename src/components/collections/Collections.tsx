@@ -1,6 +1,6 @@
 import React from 'react';
-import { sections } from './example/directory.data';
-import './Collection.scss';
+import { sections } from '../example/directory.data';
+import './Collections.scss';
 import { Link } from 'react-router-dom';
 
 const Collection = () => {
