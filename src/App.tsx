@@ -1,11 +1,12 @@
 import React from 'react';
 
 import DomRouter from './dom-router/DomRouter';
+import Header from './components/header/Header.tsx';
 
 const App = () => {
   return (
     <div>
-      <DomRouter />
+      <Header />
     </div>
   );
 };

@@ -1,0 +1,37 @@
+.header {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  background-color: #131921;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  .header_logo {
+    width: 136px;
+    object-fit: contain;
+    margin: 10px 20px 10px 20px;
+  } 
+
+  .header_search {
+    display: flex;
+
+   .header_searchInput {
+    width: 50vw;
+    height: 32px;
+    border: 3px solid #FF9900;
+    text-indent: 10px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    background-color: #fff;
+   }
+
+   .search_icon {
+    padding: 8px;
+    height: 32px;
+    background-color: #FF9900;
+   }
+  }
+}
+
+
