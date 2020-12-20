@@ -3,20 +3,16 @@ import { sections } from './example/directory.data';
 import './Collection.scss';
 import { Link } from 'react-router-dom';
 
-interface props {
-  match: string;
-}
-
-const Collection = ({ match }: props) => {
+const Collection = () => {
   return (
     <div className='menu container'>
       {sections.map((section) => (
         <div key={section.id} className='collection-item'>
-          <Link className='image' to={match + section.linkUrl}>
+          <Link className='image' to={section.linkUrl}>
             <img src={section.imageUrl} alt='card pic' />
           </Link>
           <div className='content-text'>
-            <Link className='header-text' to={match + section.linkUrl}>
+            <Link className='header-text' to={section.linkUrl}>
               {section.title}
             </Link>
             <div className='meta'>
