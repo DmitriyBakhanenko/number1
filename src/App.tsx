@@ -1,7 +1,7 @@
 import React from 'react';
 
 import DomRouter from './dom-router/DomRouter';
-import Header from './components/header/Header.tsx';
+import Header from './components/header/Header';
 
 const App = () => {
   return (
