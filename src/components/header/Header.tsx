@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import Logo from '../../assets/logoMain1.png';
 import { ReactComponent as Bag } from '../../assets/bag.svg';
@@ -17,21 +18,21 @@ const Header = () => {
         <Search className='search_icon' />
       </div>
       <div className='header_nav'>
-        <div className='header_option'>
+        <Link to='/login' className='header_option'>
           <span className='header_optionLineOne'>Привет</span>
           <span className='header_optionLineTwo'>Логин</span>
-        </div>
-        <div className='header_option'>
+        </Link>
+        <Link to='/orders' className='header_option'>
           <span className='header_optionLineOne'>Покупки</span>
           <span className='header_optionLineTwo'>& Заказы</span>
-        </div>
-        <div className='header_option'>
+        </Link>
+        <Link to='/contacts' className='header_option'>
           <span className='header_optionLineOne'>О нас</span>
           <span className='header_optionLineTwo'>Контакты</span>
-        </div>
+        </Link>
         <div
           onMouseEnter={() => setColor('#FF9900')}
-          onMouseLeave={() => setColor('white')}
+          onMouseLeave={() => setColor('#fff')}
           className='shopicon_container'
         >
           <Bag stroke={color} fill={color} className='shop_icon' />
