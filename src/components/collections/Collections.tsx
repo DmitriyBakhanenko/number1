@@ -15,9 +15,6 @@ const Collection = () => {
             <Link className='header-text' to={section.linkUrl}>
               {section.title}
             </Link>
-            <div className='meta'>
-              <div>Просмотр</div>
-            </div>
           </div>
         </div>
       ))}
