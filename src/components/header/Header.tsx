@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import Logo from '../../assets/logoMain1.png';
-import { ReactComponent as Bag } from '../../assets/bag.svg';
 import { ReactComponent as Search } from '../../assets/search.svg';
+import CartIcon from '../cart/cart-icon/cart-icon';
 
 import './Header.scss';
 
@@ -37,8 +37,7 @@ const Header = () => {
           onMouseLeave={() => setColor('#fff')}
           className='shopicon_container'
         >
-          <Bag stroke={color} fill={color} className='shop_icon' />
-          <span className='items_count'>3</span>
+          <CartIcon color={color} />
         </div>
       </div>
     </div>

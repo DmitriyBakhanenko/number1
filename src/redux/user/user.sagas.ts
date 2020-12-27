@@ -36,12 +36,7 @@ export function* signInWithGoogle() {
   }
 }
 
-interface payload {
-  email: string;
-  password: string;
-}
-
-export function* signInWithEmailAndPassword({ email, password }: payload) {
+export function* signInWithEmailAndPassword({ email, password }: any) {
   try {
     const { user } = yield auth.signInWithEmailAndPassword(email, password);
     yield getSnapshotFromUserAuth(user);

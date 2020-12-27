@@ -5,14 +5,13 @@ import { useDispatch } from 'react-redux';
 import { paymentSuccess } from '../../redux/user/user.actions';
 
 // TODO - price, paymentSuccess
-const StripeCheckoutBtn = () => {
+const StripeCheckoutBtn = ({ price }: any) => {
   const dispatch = useDispatch();
-  const price = 123;
   const priceForStripe = price * 100;
   const publishableKey =
     'pk_test_51HpHg6FlzvANYvNV4E37iWhqiosVdlMXvho3IIwea2am8YFctygmeHBzwWTpUrtbfIKeTcedPHEZgDgMTX3Ahbvw00nNXQ7Yxg';
 
-  const onToken = (token) => {
+  const onToken = (token: any) => {
     axios({
       url: 'payment',
       method: 'post',
@@ -49,9 +48,4 @@ const StripeCheckoutBtn = () => {
   );
 };
 
-//export const mapDispatchToProps = (dispatch) => ({
-//paymentSuccess: () => dispatch(paymentSuccess()),
-//});
-
-//export default connect(null, mapDispatchToProps)(StripeCheckoutBtn);
 export default StripeCheckoutBtn;

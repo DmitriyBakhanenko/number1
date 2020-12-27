@@ -7,7 +7,7 @@ import {
   removeItem,
 } from '../../redux/cart/cart.actions';
 
-const CheckoutItem = ({ cartItem }) => {
+const CheckoutItem = ({ cartItem }: any) => {
   const { name, imageUrl, price, quantity } = cartItem;
   const dispatch = useDispatch();
 
