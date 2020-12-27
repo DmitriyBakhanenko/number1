@@ -13,7 +13,10 @@ export const signInFailure = (error: string) => ({
   type: userActionsTypes.SIGN_IN_FAILURE,
   payload: error,
 });
-export const emailSignInStart = (emailAndPassword: object) => ({
+export const emailSignInStart = (emailAndPassword: {
+  email: string;
+  password: string;
+}) => ({
   type: userActionsTypes.EMAIL_SIGN_IN_START,
   payload: emailAndPassword,
 });

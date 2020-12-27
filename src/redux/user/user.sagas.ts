@@ -17,7 +17,7 @@ import userActionsTypes from './user.types';
 
 export function* getSnapshotFromUserAuth(userAuth: any) {
   try {
-    const userRef = yield call(createUserProfileDocument, userAuth);
+    const userRef = yield call(createUserProfileDocument, userAuth, null);
     const userSnapShot = yield userRef.get();
     yield put(signInSucces({ id: userSnapShot.id, ...userSnapShot.data() }));
   } catch (error) {
@@ -36,7 +36,12 @@ export function* signInWithGoogle() {
   }
 }
 
-export function* signInWithEmailAndPassword({ payload: { email, password } }) {
+interface payload {
+  email: string;
+  password: string;
+}
+
+export function* signInWithEmailAndPassword({ email, password }: payload) {
   try {
     const { user } = yield auth.signInWithEmailAndPassword(email, password);
     yield getSnapshotFromUserAuth(user);
