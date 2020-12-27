@@ -12,7 +12,9 @@ const Header = () => {
 
   return (
     <div className='header'>
-      <img src={Logo} alt='logo' className='header_logo'></img>
+      <Link to='/'>
+        <img src={Logo} alt='logo' className='header_logo'></img>
+      </Link>
       <div className='header_search'>
         <input type='text' className='header_searchInput' />
         <Search className='search_icon' />
@@ -22,7 +24,7 @@ const Header = () => {
           <span className='header_optionLineOne'>Привет</span>
           <span className='header_optionLineTwo'>Логин</span>
         </Link>
-        <Link to='/orders' className='header_option'>
+        <Link to='/checkout' className='header_option'>
           <span className='header_optionLineOne'>Покупки</span>
           <span className='header_optionLineTwo'>& Заказы</span>
         </Link>

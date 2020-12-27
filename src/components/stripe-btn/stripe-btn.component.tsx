@@ -2,10 +2,12 @@ import React from 'react';
 import StripeCheckout from 'react-stripe-checkout';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
-//import { paymentSuccess } from '../../redux/user/user.actions';
+import { paymentSuccess } from '../../redux/user/user.actions';
 
-const StripeCheckoutBtn = ({ price, paymentSuccess }) => {
+// TODO - price, paymentSuccess
+const StripeCheckoutBtn = () => {
   const dispatch = useDispatch();
+  const price = 123;
   const priceForStripe = price * 100;
   const publishableKey =
     'pk_test_51HpHg6FlzvANYvNV4E37iWhqiosVdlMXvho3IIwea2am8YFctygmeHBzwWTpUrtbfIKeTcedPHEZgDgMTX3Ahbvw00nNXQ7Yxg';

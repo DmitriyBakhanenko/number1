@@ -33,13 +33,13 @@ const initialState = {
       linkUrl: 'shop/mens',
     },
   ],
-}
+};
 
-const directoryReducer = (state = initialState, action) => {
+const directoryReducer = (state = initialState, action: any) => {
   switch (action.type) {
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default directoryReducer
+export default directoryReducer;

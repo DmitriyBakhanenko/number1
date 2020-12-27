@@ -10,7 +10,7 @@ import overlayReducer from './overlay/overlay.reducer';
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['cart']
+  whitelist: ['cart'],
 };
 
 const rootReducer = combineReducers({
@@ -18,7 +18,7 @@ const rootReducer = combineReducers({
   cart: cartReducer,
   directory: directoryReducer,
   shop: shopReducer,
-  overlay: overlayReducer
+  overlay: overlayReducer,
 });
 
 export default persistReducer(persistConfig, rootReducer);
