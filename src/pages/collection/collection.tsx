@@ -8,7 +8,6 @@ import {
   SpinnerContainer,
 } from '../../components/with-spinner/with-spinner.styles';
 import { selectIsCollectionsLoaded } from '../../redux/shop/shop.selectors';
-import WithSpinner from '../../components/with-spinner/with-spinner.component';
 import './collection.scss';
 import { useRouteMatch } from 'react-router-dom';
 
@@ -21,8 +20,9 @@ const CollectionPage = () => {
   }, [isLoaded]);
 
   const match: any = useRouteMatch();
+  const collectionId = match.params.collectionId;
   const { collections }: any = useSelector((state: any) => ({
-    collections: selectCollection(match.params.collectionId)(state),
+    collections: selectCollection(collectionId)(state),
   }));
 
   return (
@@ -32,7 +32,11 @@ const CollectionPage = () => {
           <h2 className='title'>{collections.title}</h2>
           <div className='items'>
             {collections.items.map((item: any) => (
-              <CollectionItem key={item.id} item={item} />
+              <CollectionItem
+                key={item.id}
+                collectionId={collectionId}
+                item={item}
+              />
             ))}
           </div>
         </div>
@@ -45,4 +49,4 @@ const CollectionPage = () => {
   );
 };
 
-export default WithSpinner(CollectionPage);
+export default CollectionPage;

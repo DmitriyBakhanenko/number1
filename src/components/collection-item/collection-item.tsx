@@ -3,24 +3,30 @@ import './collection-item.styles.scss';
 import CustomButton from '../custom-button/custom-button';
 import { useDispatch } from 'react-redux';
 import { addItem } from '../../redux/cart/cart.actions';
+import { useHistory, useRouteMatch } from 'react-router-dom';
 
-const CollectionItem = ({ item }: any) => {
+const CollectionItem = ({ item, collectionId }: any) => {
   const dispatch = useDispatch();
+  const history = useHistory();
+  const match = useRouteMatch();
   const { name, price, imageUrl } = item;
 
-  const func = (item: any) => {
-    console.log(item);
-    dispatch(addItem(item));
+  const showDetails = () => {
+    history.push(`/details/${collectionId}/${item.id}`);
   };
 
   return (
     <div className='collection-item'>
-      <div className='image' style={{ backgroundImage: `url(${imageUrl})` }} />
+      <div
+        className='image'
+        onClick={showDetails}
+        style={{ backgroundImage: `url(${imageUrl})` }}
+      />
       <div className='collection-footer'>
         <span className='name'>{name}</span>
         <span className='price'>{price}</span>
       </div>
-      <CustomButton onClick={() => func(item)} inverted>
+      <CustomButton onClick={() => dispatch(addItem(item))} inverted>
         В корзину
       </CustomButton>
     </div>
