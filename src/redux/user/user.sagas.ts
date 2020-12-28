@@ -15,9 +15,11 @@ import {
 } from './user.actions';
 import userActionsTypes from './user.types';
 
+const takeLatest_any: any = takeLatest;
+
 export function* getSnapshotFromUserAuth(userAuth: any) {
   try {
-    const userRef = yield call(createUserProfileDocument, userAuth, null);
+    const userRef = yield call(createUserProfileDocument, userAuth);
     const userSnapShot = yield userRef.get();
     yield put(signInSucces({ id: userSnapShot.id, ...userSnapShot.data() }));
   } catch (error) {
@@ -28,6 +30,7 @@ export function* getSnapshotFromUserAuth(userAuth: any) {
 
 export function* signInWithGoogle() {
   try {
+    console.log('sadasdasdsadasdasdasdasdasdasdasdasd');
     const { user } = yield auth.signInWithPopup(googleProvider);
     yield getSnapshotFromUserAuth(user);
   } catch (error) {
@@ -36,9 +39,13 @@ export function* signInWithGoogle() {
   }
 }
 
-export function* signInWithEmailAndPassword({ email, password }: any) {
+export function* signInWithEmailAndPassword({ payload }: any) {
   try {
-    const { user } = yield auth.signInWithEmailAndPassword(email, password);
+    console.log(payload);
+    const { user } = yield auth.signInWithEmailAndPassword(
+      payload.email,
+      payload.password
+    );
     yield getSnapshotFromUserAuth(user);
   } catch (error) {
     yield put(signInFailure(error));
@@ -66,15 +73,25 @@ export function* signOut() {
     alert(error.message);
   }
 }
-export function* signUp(data: any) {
+
+interface Data {
+  payload: {
+    email: string;
+    password: string;
+    displayName: string;
+  };
+}
+
+export function* signUp(data: Data) {
   try {
     const {
-      payload: { email, password, displayName },
+      payload: { email, password },
     } = data;
+    const credentials = { email, password };
     const { user } = yield auth.createUserWithEmailAndPassword(email, password);
-    yield createUserProfileDocument(user, { displayName });
+    yield createUserProfileDocument(user);
     yield put(signUpSuccess());
-    yield signInWithEmailAndPassword(data);
+    yield signInWithEmailAndPassword(credentials);
   } catch (error) {
     yield put(signUpFailure(error));
     alert(error.message);
@@ -82,25 +99,28 @@ export function* signUp(data: any) {
 }
 
 export function* onEmailSignInStart() {
-  yield takeLatest(
+  yield takeLatest_any(
     userActionsTypes.EMAIL_SIGN_IN_START,
     signInWithEmailAndPassword
   );
 }
 
 export function* onGoogleSignInStart() {
-  yield takeLatest(userActionsTypes.GOOGLE_SIGN_IN_START, signInWithGoogle);
+  yield takeLatest_any(userActionsTypes.GOOGLE_SIGN_IN_START, signInWithGoogle);
 }
 
 export function* onCheckUserSession() {
-  yield takeLatest(userActionsTypes.CHECK_USER_SESSION, isUserAuthenticated);
+  yield takeLatest_any(
+    userActionsTypes.CHECK_USER_SESSION,
+    isUserAuthenticated
+  );
 }
 
 export function* onSignOutStart() {
-  yield takeLatest(userActionsTypes.SIGN_OUT_START, signOut);
+  yield takeLatest_any(userActionsTypes.SIGN_OUT_START, signOut);
 }
 export function* onSignUpStart() {
-  yield takeLatest(userActionsTypes.SIGN_UP_START, signUp);
+  yield takeLatest_any(userActionsTypes.SIGN_UP_START, signUp);
 }
 
 export function* userSagas() {

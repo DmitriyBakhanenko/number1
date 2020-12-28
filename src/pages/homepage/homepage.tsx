@@ -1,12 +1,12 @@
 import React from 'react';
 
 import Collections from '../../components/collections/Collections';
-import Header from '../../components/header/Header';
+import './homepage.scss';
 
 const HomePage = () => {
   return (
     <React.Fragment>
-      <Header />
+      <div className='linier_background' />
       <Collections />
     </React.Fragment>
   );

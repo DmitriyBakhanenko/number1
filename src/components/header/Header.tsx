@@ -4,11 +4,18 @@ import { Link } from 'react-router-dom';
 import Logo from '../../assets/logoMain1.png';
 import { ReactComponent as Search } from '../../assets/search.svg';
 import CartIcon from '../cart/cart-icon/cart-icon';
+import { selectCartHidden } from '../../redux/cart/cart.selectors';
+import { selectCurrentUser } from '../../redux/user/user.selectors';
+import { signOutStart } from '../../redux/user/user.actions';
 
 import './Header.scss';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Header = () => {
   const [color, setColor] = useState('white');
+  const currentUser = useSelector(selectCurrentUser);
+  const hidden = useSelector(selectCartHidden);
+  const dispatch = useDispatch();
 
   return (
     <div className='header'>
@@ -22,7 +29,16 @@ const Header = () => {
       <div className='header_nav'>
         <Link to='/login' className='header_option'>
           <span className='header_optionLineOne'>Привет</span>
-          <span className='header_optionLineTwo'>Логин</span>
+          {currentUser ? (
+            <span
+              className='header_optionLineTwo'
+              onClick={() => dispatch(signOutStart())}
+            >
+              {currentUser.displayName}
+            </span>
+          ) : (
+            <span className='header_optionLineTwo'>Логин</span>
+          )}
         </Link>
         <Link to='/checkout' className='header_option'>
           <span className='header_optionLineOne'>Покупки</span>

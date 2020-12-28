@@ -6,6 +6,11 @@ const INITIAL_STATE = {
   isLoading: false,
 };
 
+//interface Act {
+//type: string;
+//payload: object;
+//}
+
 const userReducer = (state = INITIAL_STATE, action: any) => {
   switch (action.type) {
     case userActionsTypes.SIGN_UP_START:

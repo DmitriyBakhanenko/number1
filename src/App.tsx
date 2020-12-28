@@ -2,8 +2,6 @@ import React, { useEffect } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import './App.scss';
-
 import HomePage from './pages/homepage/homepage';
 import ContactPage from './pages/contacts/contacts';
 import ShopPage from './pages/shop/shop';

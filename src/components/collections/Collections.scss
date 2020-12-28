@@ -1,7 +1,7 @@
 .menu.container {
   display: flex;
   flex-wrap: wrap;
-  margin: -200px auto;
+  margin: -250px auto;
   justify-content: center;
 
   .collection-item {
@@ -34,7 +34,6 @@
       background-color: rgba($color: #333, $alpha: 0.6);
 
       .header-text {
-          text-decoration: none;
           color: white;
           opacity: 0.6;
       }

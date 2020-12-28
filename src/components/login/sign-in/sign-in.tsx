@@ -21,13 +21,18 @@ const SignIn = () => {
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
-    const credentials = { email, password };
-    dispatch(emailSignInStart(credentials));
+    console.log(userCredentials);
+    dispatch(emailSignInStart(userCredentials));
   };
 
   const handleChange = (event: any) => {
     const { value, name } = event.target;
     setCredentials({ ...userCredentials, [name]: value });
+  };
+
+  const signGoogle = () => {
+    console.log('signIn ---- comp');
+    dispatch(googleSignInStart());
   };
 
   return (
@@ -52,14 +57,12 @@ const SignIn = () => {
           required
         />
         <div className='buttons'>
-          <CustomButton type='submit'> Логин </CustomButton>
-          <CustomButton
-            type={'button'}
-            onClick={() => dispatch(googleSignInStart())}
-            isGoogleSignIn
-          >
-            Google
-          </CustomButton>
+          <CustomButton type={'submit'}> Логин </CustomButton>
+          <div onClick={signGoogle}>
+            <CustomButton type={'button'} isGoogleSignIn>
+              Логин через Google
+            </CustomButton>
+          </div>
         </div>
       </form>
     </div>

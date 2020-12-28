@@ -41,7 +41,7 @@ export const sections = [
     imageUrl:
       'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.c8pyZDVqNC7WfQDDdQHsgwAAAA%26pid%3DApi&f=1',
     size: 'large',
-    id: 5,
+    id: 6,
     linkUrl: 'shop/jackets',
   },
   {
@@ -49,7 +49,7 @@ export const sections = [
     imageUrl:
       'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.MBJ2k8valIxMmZEmzWb2CAHaKP%26pid%3DApi&f=1',
     size: 'large',
-    id: 5,
+    id: 7,
     linkUrl: 'shop/outer',
   },
 ];

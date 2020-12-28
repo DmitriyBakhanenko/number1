@@ -32,5 +32,5 @@ export const selectCartTotal = createSelector([selectCartItems], (cartItems) =>
 
 export const selectIfCartIsEmpty = createSelector(
   [selectCart],
-  (cart) => !!cart.cartItems[0]
+  (cart) => !!cart.cartItems
 );
