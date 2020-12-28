@@ -7,6 +7,7 @@ import CartIcon from '../cart/cart-icon/cart-icon';
 import { selectCartHidden } from '../../redux/cart/cart.selectors';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
 import { signOutStart } from '../../redux/user/user.actions';
+import CartDropdown from '../cart/cart-dropdown/cart-dropdown';
 
 import './Header.scss';
 import { useDispatch, useSelector } from 'react-redux';
@@ -56,6 +57,7 @@ const Header = () => {
           <CartIcon color={color} />
         </div>
       </div>
+      {hidden ? null : <CartDropdown />}
     </div>
   );
 };

@@ -56,14 +56,15 @@ const SignIn = () => {
           onChange={handleChange}
           required
         />
-        <div className='buttons'>
-          <CustomButton type={'submit'}> Логин </CustomButton>
-          <div onClick={signGoogle}>
-            <CustomButton type={'button'} isGoogleSignIn>
-              Логин через Google
-            </CustomButton>
-          </div>
-        </div>
+        <CustomButton type='submit'> Логин </CustomButton>
+        <CustomButton
+          className='buttons'
+          onClick={signGoogle}
+          type='button'
+          isGoogleSignIn
+        >
+          Логин через Google
+        </CustomButton>
       </form>
     </div>
   );

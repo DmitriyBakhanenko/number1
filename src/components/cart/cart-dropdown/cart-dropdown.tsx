@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import './cart-dropdown.styles.scss';
 import CustomButton from '../../custom-button/custom-button';
 import CartItem from '../cart-item/cart-item';
@@ -11,9 +11,25 @@ const CartDropdown = () => {
   const dispatch = useDispatch();
   const cartItems = useSelector(selectCartItems);
   const history = useHistory();
+  const refDrop: any = useRef();
+
+  useEffect(() => {
+    const onClickEvent = (event: any) => {
+      if (!refDrop.current) return;
+      if (!refDrop.current.contains(event.target)) {
+        dispatch(toggleCartHidden());
+      }
+    };
+
+    document.body.addEventListener('click', onClickEvent);
+
+    return () => {
+      document.body.removeEventListener('click', onClickEvent);
+    };
+  });
 
   return (
-    <div className='cart-dropdown'>
+    <div className='cart-dropdown' ref={refDrop}>
       <div className='cart-items'>
         {cartItems.length ? (
           cartItems.map((e: any) => <CartItem key={e.id} item={e} />)

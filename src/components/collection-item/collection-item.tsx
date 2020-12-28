@@ -7,6 +7,12 @@ import { addItem } from '../../redux/cart/cart.actions';
 const CollectionItem = ({ item }: any) => {
   const dispatch = useDispatch();
   const { name, price, imageUrl } = item;
+
+  const func = (item: any) => {
+    console.log(item);
+    dispatch(addItem(item));
+  };
+
   return (
     <div className='collection-item'>
       <div className='image' style={{ backgroundImage: `url(${imageUrl})` }} />
@@ -14,7 +20,7 @@ const CollectionItem = ({ item }: any) => {
         <span className='name'>{name}</span>
         <span className='price'>{price}</span>
       </div>
-      <CustomButton onClick={() => dispatch(addItem(item))} inverted>
+      <CustomButton onClick={() => func(item)} inverted>
         В корзину
       </CustomButton>
     </div>
