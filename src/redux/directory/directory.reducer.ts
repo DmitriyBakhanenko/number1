@@ -1,36 +1,49 @@
 const initialState = {
   sections: [
     {
-      title: 'hats',
-      imageUrl: 'https://i.ibb.co/cvpntL1/hats.png',
+      title: 'Джинсы, Брюки',
+      imageUrl:
+        'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.Z0Y1r0UdhCFmCD_1J8V_xAHaJ4%26pid%3DApi&f=1',
       id: 1,
-      linkUrl: 'shop/hats',
+      linkUrl: 'shop/blouse',
     },
     {
-      title: 'jackets',
-      imageUrl: 'https://i.ibb.co/px2tCc3/jackets.png',
-      id: 2,
+      title: 'Вязанные кардиганы, свитера',
+      imageUrl:
+        'https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fcs2.livemaster.ru%2Fstorage%2F28%2F5c%2F769beb5e393dae6f154d0cb64e6r--odezhda-vyazanyj-kardigan-bonzhur.jpg&f=1&nofb=1',
+      id: 3,
+      linkUrl: 'shop/top',
+    },
+    {
+      title: 'Юбки, шорты',
+      imageUrl:
+        'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.OkNKCaCEhomPfsWcDsj-7AHaKs%26o%3D6%26pid%3DApi&f=1',
+      id: 4,
+      linkUrl: 'shop/shorts',
+    },
+    {
+      title: 'Платья',
+      imageUrl:
+        'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.qub6KHWMRWwEjqY-otaR-AAAAA%26pid%3DApi&f=1',
+      size: 'large',
+      id: 5,
+      linkUrl: 'shop/dress',
+    },
+    {
+      title: 'Куртки, жакеты, пальто',
+      imageUrl:
+        'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.c8pyZDVqNC7WfQDDdQHsgwAAAA%26pid%3DApi&f=1',
+      size: 'large',
+      id: 6,
       linkUrl: 'shop/jackets',
     },
     {
-      title: 'sneakers',
-      imageUrl: 'https://i.ibb.co/0jqHpnp/sneakers.png',
-      id: 3,
-      linkUrl: 'shop/sneakers',
-    },
-    {
-      title: 'womens',
-      imageUrl: 'https://i.ibb.co/GCCdy8t/womens.png',
+      title: 'Пуховики, парки, шубы',
+      imageUrl:
+        'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.MBJ2k8valIxMmZEmzWb2CAHaKP%26pid%3DApi&f=1',
       size: 'large',
-      id: 4,
-      linkUrl: 'shop/womens',
-    },
-    {
-      title: 'mens',
-      imageUrl: 'https://i.ibb.co/R70vBrQ/men.png',
-      size: 'large',
-      id: 5,
-      linkUrl: 'shop/mens',
+      id: 7,
+      linkUrl: 'shop/outer',
     },
   ],
 };

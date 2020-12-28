@@ -1,12 +1,15 @@
 import React from 'react';
-import { sections } from '../example/directory.data';
 import './Collections.scss';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { selectDirectorySection } from '../../redux/directory/directory.selectors';
 
 const Collection = () => {
+  const sections = useSelector(selectDirectorySection);
+
   return (
     <div className='menu container'>
-      {sections.map((section) => (
+      {sections.map((section: any) => (
         <div key={section.id} className='collection-item'>
           <Link className='image' to={section.linkUrl}>
             <img src={section.imageUrl} alt='card pic' />

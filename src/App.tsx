@@ -4,13 +4,14 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import HomePage from './pages/homepage/homepage';
 import ContactPage from './pages/contacts/contacts';
-import ShopPage from './pages/shop/shop';
 import Header from './components/header/Header';
 import LoginPage from './pages/login/login';
 import CheckoutPage from './pages/checkout/checkout';
 import { selectCurrentUser } from './redux/user/user.selectors';
 import { checkUserSession } from './redux/user/user.actions';
 import { selectIfCartIsEmpty } from './redux/cart/cart.selectors';
+import { fetchCollectionsStart } from './redux/shop/shop.actions';
+import CollectionPage from './pages/collection/collection';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(checkUserSession());
+    dispatch(fetchCollectionsStart());
   }, [dispatch]);
 
   return (
@@ -27,7 +29,7 @@ const App = () => {
       <Switch>
         <Route exact path={'/'} component={HomePage} />
         <Route exact path={'/contacts'} component={ContactPage} />
-        <Route path={'/shop'} component={ShopPage} />
+        <Route path={'/shop/:collectionId'} component={CollectionPage} />
         <Route
           exact
           path={'/checkout'}
