@@ -20,7 +20,7 @@ export const fetchDirectoryFailure = (errorMessage: string) => ({
 
 export const fetchDirectoryStartAsync = () => {
   return (dispatch: any) => {
-    const collectionRef = firestore.collection('directory');
+    const collectionRef = firestore.collection('sections');
     dispatch(fetchDirectoryStart());
 
     collectionRef

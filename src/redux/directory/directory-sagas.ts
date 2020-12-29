@@ -11,7 +11,7 @@ import directoryActionTypes from './directory.types';
 
 export function* fetchDirectoryStartAsync() {
   try {
-    const directoryRef = firestore.collection('directory');
+    const directoryRef = firestore.collection('sections');
     const snapshot = yield directoryRef.get();
     const directoryMap = yield call(convertCollectionsSnapshotToMap, snapshot);
     yield put(fetchDirectorySuccess(directoryMap));
