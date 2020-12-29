@@ -72,6 +72,25 @@ export const convertCollectionsSnapshotToMap = (collections: any) => {
   }, {});
 };
 
+export const convertDirectorySnapshotToMap = (sections: any) => {
+  const transformedDirectory = sections.docs.map((doc: any) => {
+    const { title, id, imageUrl, linkUrl } = doc.data();
+
+    return {
+      id,
+      title,
+      imageUrl,
+      linkUrl,
+    };
+  });
+
+  return transformedDirectory;
+  //return transformedDirectory.reduce((accumulator: any, section: any) => {
+  //accumulator[section.id] = section;
+  //return accumulator;
+  //}, {});
+};
+
 export const getCurrentUser = () => {
   return new Promise((resolve, reject) => {
     const unsubscribe = auth.onAuthStateChanged((userAuth) => {

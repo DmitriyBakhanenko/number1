@@ -1,6 +1,6 @@
 import { takeLatest, call, put, all } from 'redux-saga/effects';
 import {
-  convertCollectionsSnapshotToMap,
+  convertDirectorySnapshotToMap,
   firestore,
 } from '../../firebase/firebase.utils';
 import {
@@ -13,7 +13,8 @@ export function* fetchDirectoryStartAsync() {
   try {
     const directoryRef = firestore.collection('sections');
     const snapshot = yield directoryRef.get();
-    const directoryMap = yield call(convertCollectionsSnapshotToMap, snapshot);
+    const directoryMap = yield call(convertDirectorySnapshotToMap, snapshot);
+    console.log('SUCCESS ---- ' + directoryMap);
     yield put(fetchDirectorySuccess(directoryMap));
   } catch (error) {
     yield put(fetchDirectoryFailure(error.message));

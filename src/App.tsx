@@ -13,6 +13,7 @@ import { checkUserSession } from './redux/user/user.actions';
 import { selectIfCartIsEmpty } from './redux/cart/cart.selectors';
 import { fetchCollectionsStart } from './redux/shop/shop.actions';
 import CollectionPage from './pages/collection/collection';
+import { fetchDirectoryStart } from './redux/directory/directory.actions';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(checkUserSession());
+    dispatch(fetchDirectoryStart());
     dispatch(fetchCollectionsStart());
   }, [dispatch]);
 
