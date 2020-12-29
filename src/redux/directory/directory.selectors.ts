@@ -1,10 +1,10 @@
 import { createSelector } from 'reselect';
 
-export const selectDirectory = (state: any) => state.directory;
+const selectDirectory = (state: any) => state.directory;
 
 export const selectDirectorySection = createSelector(
   [selectDirectory],
-  (directory) => directory.directory.sections
+  (directory) => directory.directory
 );
 
 export const selectIsDirectoryFetching = createSelector(

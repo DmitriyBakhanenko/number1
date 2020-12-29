@@ -1,6 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/firebase-firestore';
 import 'firebase/firebase-auth';
+import 'firebase/firebase-storage';
 
 const config = {
   apiKey: 'AIzaSyC7Fxyktik-rtX4nXjklHGXukI-NRGu954',
@@ -39,6 +40,30 @@ export const createUserProfileDocument = async (userAuth: any) => {
 
 firebase.initializeApp(config);
 
+export const addItemToCollection = async (
+  collectionKey: string,
+  objectToAdd: any
+) => {
+  const collectionRef = firestore.collection(collectionKey);
+  const batch = firestore.batch();
+
+  const newDocRef = collectionRef.doc();
+  batch.set(newDocRef, objectToAdd);
+  return await batch.commit();
+};
+
+export const deleteItemFromCollection = async (
+  collectionKey: string,
+  objectKey: string
+) => {
+  const collectionRef = firestore.collection(collectionKey);
+  const batch = firestore.batch();
+
+  const delDocRef = collectionRef.doc(objectKey);
+  batch.delete(delDocRef);
+  return await batch.commit();
+};
+
 export const addCollectionAndDocuments = async (
   collectionKey: any,
   objectsToAdd: any
@@ -74,10 +99,10 @@ export const convertCollectionsSnapshotToMap = (collections: any) => {
 
 export const convertDirectorySnapshotToMap = (sections: any) => {
   const transformedDirectory = sections.docs.map((doc: any) => {
-    const { title, id, imageUrl, linkUrl } = doc.data();
+    const { title, imageUrl, linkUrl } = doc.data();
 
     return {
-      id,
+      id: doc.id,
       title,
       imageUrl,
       linkUrl,
@@ -85,10 +110,6 @@ export const convertDirectorySnapshotToMap = (sections: any) => {
   });
 
   return transformedDirectory;
-  //return transformedDirectory.reduce((accumulator: any, section: any) => {
-  //accumulator[section.id] = section;
-  //return accumulator;
-  //}, {});
 };
 
 export const getCurrentUser = () => {
@@ -102,6 +123,7 @@ export const getCurrentUser = () => {
 
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
+export const storage = firebase.storage();
 
 export const googleProvider = new firebase.auth.GoogleAuthProvider();
 googleProvider.setCustomParameters({

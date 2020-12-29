@@ -3,12 +3,11 @@ import './collection-item.styles.scss';
 import CustomButton from '../custom-button/custom-button';
 import { useDispatch } from 'react-redux';
 import { addItem } from '../../redux/cart/cart.actions';
-import { useHistory, useRouteMatch } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 const CollectionItem = ({ item, collectionId }: any) => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const match = useRouteMatch();
   const { name, price, imageUrl } = item;
 
   const showDetails = () => {

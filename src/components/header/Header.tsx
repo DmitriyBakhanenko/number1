@@ -6,16 +6,19 @@ import { ReactComponent as Search } from '../../assets/search.svg';
 import CartIcon from '../cart/cart-icon/cart-icon';
 import { selectCartHidden } from '../../redux/cart/cart.selectors';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
+import { selectAdminMode } from '../../redux/admin/admin.selector';
 import { signOutStart } from '../../redux/user/user.actions';
 import CartDropdown from '../cart/cart-dropdown/cart-dropdown';
 
 import './Header.scss';
 import { useDispatch, useSelector } from 'react-redux';
+import { toggleAdmin } from '../../redux/admin/admin.actions';
 
 const Header = () => {
   const [color, setColor] = useState('white');
   const currentUser = useSelector(selectCurrentUser);
   const hidden = useSelector(selectCartHidden);
+  const admin = useSelector(selectAdminMode);
   const dispatch = useDispatch();
 
   return (
@@ -28,6 +31,10 @@ const Header = () => {
         <Search className='search_icon' />
       </div>
       <div className='header_nav'>
+        <div className='header_option' onClick={() => dispatch(toggleAdmin())}>
+          <span className='header_optionLineOne'>Админ</span>
+          <span className='header_optionLineTwo'>{admin ? 'Выкл' : 'Вкл'}</span>
+        </div>
         <Link to='/login' className='header_option'>
           <span className='header_optionLineOne'>Привет</span>
           {currentUser ? (

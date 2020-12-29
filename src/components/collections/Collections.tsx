@@ -7,9 +7,11 @@ import {
   SpinnerContainer,
 } from '../../components/with-spinner/with-spinner.styles';
 import {
-  selectDirectory,
+  selectDirectorySection,
   selectIsDirectoryLoaded,
 } from '../../redux/directory/directory.selectors';
+import { selectAdminMode } from '../../redux/admin/admin.selector';
+import CustomButton from '../custom-button/custom-button';
 
 const Collection = () => {
   const isLoaded = useSelector(selectIsDirectoryLoaded);
@@ -19,12 +21,19 @@ const Collection = () => {
     setCurrentStatus(isLoaded);
   }, [isLoaded]);
 
-  const { directory } = useSelector(selectDirectory);
-  console.log(directory);
+  const directory = useSelector(selectDirectorySection);
+  const admin = useSelector(selectAdminMode);
+
   return (
     <React.Fragment>
       {currentStatus ? (
         <div className='menu container'>
+          {admin ? (
+            <div className='collection-item'>
+              <p className='sign_to_action'>+</p>
+              <p className='text_to_action'>Добавить раздел</p>
+            </div>
+          ) : null}
           {directory.map((section: any) => (
             <div key={section.id} className='collection-item'>
               <Link className='image' to={section.linkUrl}>
@@ -35,6 +44,16 @@ const Collection = () => {
                   {section.title}
                 </Link>
               </div>
+              {admin ? (
+                <div className='modify_btn_container'>
+                  <CustomButton className='modify_btn' type='button'>
+                    Изменить
+                  </CustomButton>
+                  <CustomButton className='modify_btn' type='button'>
+                    Удалить
+                  </CustomButton>
+                </div>
+              ) : null}
             </div>
           ))}
         </div>
