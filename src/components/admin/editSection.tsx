@@ -25,7 +25,18 @@ const EditSection = () => {
     setCurrentStatus(isLoaded);
   }, [isLoaded]);
 
-  if (!match.params && !directory) return null;
+  if (!!match.params.itemId === false || !!directory === false)
+    return (
+      <SpinnerOverlay>
+        <p>Загрузка</p>
+        <SpinnerContainer />
+      </SpinnerOverlay>
+    );
+
+  console.log('match params');
+  console.log(!!match.params);
+  console.log('directory');
+  console.log(!!directory);
   const itemToChange = directory.filter(
     (section: any) => section.id === match?.params?.itemId
   );
@@ -47,6 +58,7 @@ const EditSection = () => {
         </div>
       ) : (
         <SpinnerOverlay>
+          <p>Загрузка</p>
           <SpinnerContainer />
         </SpinnerOverlay>
       )}

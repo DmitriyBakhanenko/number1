@@ -4,11 +4,13 @@ export const SpinnerOverlay = styled.div`
   height: 60vh;
   width: 100vw;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 `;
 
 export const SpinnerContainer = styled.div`
+  margin: 10px
   display: inline-block;
   width: 50px;
   height: 50px;

@@ -11,6 +11,7 @@ import { signOutStart } from '../../redux/user/user.actions';
 import CartDropdown from '../cart/cart-dropdown/cart-dropdown';
 
 import './Header.scss';
+import './HeaderSlider.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleAdmin } from '../../redux/admin/admin.actions';
 
@@ -33,7 +34,12 @@ const Header = () => {
       <div className='header_nav'>
         <div className='header_option' onClick={() => dispatch(toggleAdmin())}>
           <span className='header_optionLineOne'>Админ</span>
-          <span className='header_optionLineTwo'>{admin ? 'Выкл' : 'Вкл'}</span>
+          <div className='header_optionLineTwo'>
+            <label className='switch'>
+              <input type='checkbox' />
+              <span className='slider round'></span>
+            </label>
+          </div>
         </div>
         <Link to='/login' className='header_option'>
           <span className='header_optionLineOne'>Привет</span>
