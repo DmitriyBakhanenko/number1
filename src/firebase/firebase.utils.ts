@@ -13,6 +13,57 @@ const config = {
   measurementId: 'G-39DG6L3LWP',
 };
 
+export const uploadImage = (
+  path: string,
+  file: any,
+  setStatus: any,
+  setPercentage: any,
+  setUrl: any
+) => {
+  if (!path || !file) return;
+  const storageRef = storage.ref();
+  const uploadTask = storageRef.child('images/sections/' + file.name).put(file);
+
+  uploadTask.on(
+    firebase.storage.TaskEvent.STATE_CHANGED,
+    function (snapshot) {
+      setStatus('Загрузка...');
+      const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      setPercentage(Math.round(progress));
+      switch (snapshot.state) {
+        case firebase.storage.TaskState.PAUSED: // or 'paused'
+          setStatus('Пауза...');
+          break;
+        case firebase.storage.TaskState.RUNNING: // or 'running'
+          setStatus('Загрузка...');
+          break;
+      }
+    },
+    function (error: any) {
+      switch (error.code) {
+        case 'storage/unauthorized':
+          setStatus('Ошибка!');
+          break;
+        case 'storage/canceled':
+          setStatus('Ошибка!');
+          break;
+        case 'storage/unknown':
+          setStatus('Ошибка!');
+          break;
+        default:
+          setStatus('Ошибка!');
+          break;
+      }
+    },
+    function () {
+      uploadTask.snapshot.ref.getDownloadURL().then(function (url: any) {
+        setUrl(url);
+        setStatus('Загрузка завершена успешно');
+      });
+    }
+  );
+};
+
 export const createUserProfileDocument = async (userAuth: any) => {
   if (!userAuth) return;
 
@@ -48,7 +99,7 @@ export const addItemToCollection = async (
   const batch = firestore.batch();
 
   const newDocRef = collectionRef.doc();
-  batch.set(newDocRef, objectToAdd);
+  batch.set(newDocRef, { ...objectToAdd, id: newDocRef.id });
   return await batch.commit();
 };
 

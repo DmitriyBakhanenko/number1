@@ -1,7 +1,45 @@
-.menu.container {
+.upload_status {
+  text-align: center;
+  margin-top: 10px;
+
+  .status {
+    font-size: 1.5rem;
+  }
+}
+
+.control_btn_container {
+  display: flex;
+  justify-content: center;
+}
+
+.title_label {
+    text-align: center;
+}
+
+.upload_btn {
+  display: flex;
+  margin: auto;
+  margin-bottom: 10px;
+}
+
+.input_title_cont {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  flex: content; 
+
+  .input_title {
+    width: 250px;
+    height: 30px;
+    text-indent: 10px;
+    font-size: 1.3rem;
+  }
+}
+
+.menu.container.admin {
   display: flex;
   flex-wrap: wrap;
-  margin: -250px auto;
+  margin: 50px auto 0;
   justify-content: center;
 
   .collection-item {
@@ -12,59 +50,9 @@
     overflow: hidden;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
-
-    &:hover .sign_to_action {
-      opacity: 0.5;
-      color: black;
-    }
-
-    &:hover .text_to_action {
-      opacity: 0.5;
-      color: black;
-    }
-
-    .sign_to_action {
-      color: white;
-      margin-top: 30%;
-      font-weight: 700;
-      font-size: 6.5rem;
-      text-shadow: 2px 2px grey;
-    }
-
-    .text_to_action {
-      color: white;
-      text-shadow: 2px 2px grey;
-      font-weight: 700;
-      font-size: 1.5rem;
-    }
-
-    &:hover .modify_btn_container .modify_btn {
-      display: unset;
-    }
-
-    .modify_btn_container {
-      width: 40%;
-      opacity: 0.7;
-      position: absolute;
-      top: 275px;
-      left: 10px;
-      display: flex;
-
-      .modify_btn {
-        min-width: 114px;
-        padding: 0 25px 0 25px;
-        position: relative;
-        top: 0;
-      }
-    }
     .image {
       width: 100%;
       height: 100%;
-
-      img {
-        width: 100%;
-        height: 100%;
-      }
     } 
 
     .content-text {

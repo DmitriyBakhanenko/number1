@@ -19,6 +19,7 @@
     display: flex;
     flex: auto;
     background: white;
+    min-width: 100px;
 
    .header_searchInput {
     flex: auto;
@@ -28,6 +29,7 @@
     font-size: 1.2rem;
     font-weight: 600;
     background-color: #fff;
+    min-width: 80px;
    }
 
    .search_icon {

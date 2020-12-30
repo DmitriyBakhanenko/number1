@@ -11,7 +11,7 @@ const CollectionItem = ({ item, collectionId }: any) => {
   const { name, price, imageUrl } = item;
 
   const showDetails = () => {
-    history.push(`/details/${collectionId}/${item.id}`);
+    history.push(`/shop/${collectionId}/${item.id}`);
   };
 
   return (

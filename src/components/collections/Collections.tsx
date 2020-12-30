@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Collections.scss';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import {
   SpinnerOverlay,
@@ -17,19 +17,25 @@ const Collection = () => {
   const isLoaded = useSelector(selectIsDirectoryLoaded);
   const [currentStatus, setCurrentStatus] = useState(isLoaded);
 
+  const directory = useSelector(selectDirectorySection);
+  const admin = useSelector(selectAdminMode);
+  const history = useHistory();
+
   useEffect(() => {
     setCurrentStatus(isLoaded);
   }, [isLoaded]);
-
-  const directory = useSelector(selectDirectorySection);
-  const admin = useSelector(selectAdminMode);
 
   return (
     <React.Fragment>
       {currentStatus ? (
         <div className='menu container'>
           {admin ? (
-            <div className='collection-item'>
+            <div
+              className='collection-item'
+              onClick={() => {
+                history.push('/admin/section');
+              }}
+            >
               <p className='sign_to_action'>+</p>
               <p className='text_to_action'>Добавить раздел</p>
             </div>

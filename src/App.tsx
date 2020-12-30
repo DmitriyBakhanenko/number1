@@ -7,7 +7,9 @@ import ContactPage from './pages/contacts/contacts';
 import Header from './components/header/Header';
 import LoginPage from './pages/login/login';
 import CheckoutPage from './pages/checkout/checkout';
-import ItemDetails from './components/item-details/item-details';
+import DetailsPage from './pages/details/details';
+import AdminSectionsPage from './pages/admin/adminSections';
+
 import { selectCurrentUser } from './redux/user/user.selectors';
 import { checkUserSession } from './redux/user/user.actions';
 import { selectIfCartIsEmpty } from './redux/cart/cart.selectors';
@@ -32,11 +34,13 @@ const App = () => {
       <Switch>
         <Route exact path={'/'} component={HomePage} />
         <Route exact path={'/contacts'} component={ContactPage} />
-        <Route path={'/shop/:collectionId'} component={CollectionPage} />
+        <Route exact path={'/shop/:collectionId'} component={CollectionPage} />
         <Route
-          path={'/details/:collectionId/:itemId'}
-          component={ItemDetails}
+          exact
+          path={'/shop/:collectionId/:itemId'}
+          component={DetailsPage}
         />
+        <Route exact path={'/admin/section'} component={AdminSectionsPage} />
         <Route
           exact
           path={'/checkout'}

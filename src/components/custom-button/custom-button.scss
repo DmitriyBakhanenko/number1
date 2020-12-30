@@ -32,8 +32,14 @@
     }
   }
 
-  &.overlay {
-    margin-top: auto;
+  &.apply {
+    background-color: darkgreen;
+    color: white;
+
+    &:hover {
+      background-color: lightgreen;
+      color: black; 
+    }
   }
 
   &.inverted {
