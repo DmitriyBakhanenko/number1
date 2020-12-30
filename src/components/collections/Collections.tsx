@@ -33,7 +33,7 @@ const Collection = () => {
             <div
               className='collection-item'
               onClick={() => {
-                history.push('/admin/section');
+                history.push('/admin/add/section');
               }}
             >
               <p className='sign_to_action'>+</p>
@@ -52,7 +52,13 @@ const Collection = () => {
               </div>
               {admin ? (
                 <div className='modify_btn_container'>
-                  <CustomButton className='modify_btn' type='button'>
+                  <CustomButton
+                    onClick={() =>
+                      history.push(`/admin/edit/section/${section.id}`)
+                    }
+                    className='modify_btn'
+                    type='button'
+                  >
                     Изменить
                   </CustomButton>
                   <CustomButton className='modify_btn' type='button'>

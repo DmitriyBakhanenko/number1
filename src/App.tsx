@@ -8,7 +8,8 @@ import Header from './components/header/Header';
 import LoginPage from './pages/login/login';
 import CheckoutPage from './pages/checkout/checkout';
 import DetailsPage from './pages/details/details';
-import AdminSectionsPage from './pages/admin/adminSections';
+import AddSectionPage from './pages/admin/addSectionPage';
+import EditSectionPage from './pages/admin/editSectionPage';
 
 import { selectCurrentUser } from './redux/user/user.selectors';
 import { checkUserSession } from './redux/user/user.actions';
@@ -40,7 +41,12 @@ const App = () => {
           path={'/shop/:collectionId/:itemId'}
           component={DetailsPage}
         />
-        <Route exact path={'/admin/section'} component={AdminSectionsPage} />
+        <Route exact path={'/admin/add/section'} component={AddSectionPage} />
+        <Route
+          exact
+          path={'/admin/edit/section/:itemId'}
+          component={EditSectionPage}
+        />
         <Route
           exact
           path={'/checkout'}

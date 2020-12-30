@@ -8,7 +8,7 @@ import {
   uploadImage,
 } from '../../firebase/firebase.utils';
 
-const AdminSections = () => {
+const AddSection = () => {
   const [image, setImage] = useState(
     'https://firebasestorage.googleapis.com/v0/b/eshop-number1.appspot.com/o/images%2Fsections%2FMIBG5bZnNI3Nw0wT-croppedOGU87-jpg?alt=media&token=72be2aa2-824f-4285-bdc8-ba474a49bd90'
   );
@@ -108,4 +108,4 @@ const AdminSections = () => {
   );
 };
 
-export default AdminSections;
+export default AddSection;
