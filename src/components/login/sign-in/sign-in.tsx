@@ -21,6 +21,7 @@ const SignIn = () => {
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
+    console.log(userCredentials);
     dispatch(emailSignInStart(userCredentials));
   };
 

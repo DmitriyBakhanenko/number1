@@ -82,7 +82,10 @@ export const uploadImage = (
   );
 };
 
-export const createUserProfileDocument = async (userAuth: any) => {
+export const createUserProfileDocument = async (
+  userAuth: any,
+  aditionalData: any
+) => {
   if (!userAuth) return;
 
   const userRef = firestore.doc(`users/${userAuth.uid}`);
@@ -96,6 +99,7 @@ export const createUserProfileDocument = async (userAuth: any) => {
         displayName,
         email,
         createdDate,
+        ...aditionalData,
       });
     } catch (error) {
       console.log('error creating user', error.message);

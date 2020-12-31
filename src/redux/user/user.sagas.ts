@@ -19,7 +19,7 @@ const takeLatest_any: any = takeLatest;
 
 export function* getSnapshotFromUserAuth(userAuth: any) {
   try {
-    const userRef = yield call(createUserProfileDocument, userAuth);
+    const userRef = yield call(createUserProfileDocument, userAuth, {});
     const userSnapShot = yield userRef.get();
     yield put(signInSucces({ id: userSnapShot.id, ...userSnapShot.data() }));
   } catch (error) {
@@ -38,13 +38,11 @@ export function* signInWithGoogle() {
   }
 }
 
-export function* signInWithEmailAndPassword({ payload }: any) {
-  console.log(payload.email);
+export function* signInWithEmailAndPassword({
+  payload: { email, password },
+}: any) {
   try {
-    const { user } = yield auth.signInWithEmailAndPassword(
-      payload.email,
-      payload.password
-    );
+    const { user } = yield auth.signInWithEmailAndPassword(email, password);
     yield getSnapshotFromUserAuth(user);
   } catch (error) {
     yield put(signInFailure(error));
@@ -84,13 +82,12 @@ interface Data {
 export function* signUp(data: Data) {
   try {
     const {
-      payload: { email, password },
+      payload: { email, password, displayName },
     } = data;
-    const credentials = { email, password };
     const { user } = yield auth.createUserWithEmailAndPassword(email, password);
-    yield createUserProfileDocument(user);
+    yield createUserProfileDocument(user, { displayName });
     yield put(signUpSuccess());
-    yield signInWithEmailAndPassword(credentials);
+    yield signInWithEmailAndPassword(data);
   } catch (error) {
     yield put(signUpFailure(error));
     alert(error.message);
