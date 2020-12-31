@@ -30,6 +30,10 @@ const AddSection = () => {
       title,
       childRef: childRef.fullPath,
     });
+    addItemToCollection('collections', {
+      routeName: path,
+      title,
+    });
   };
 
   const addItemRef: any = useRef();
