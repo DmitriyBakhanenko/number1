@@ -12,6 +12,10 @@ import {
 } from '../../redux/directory/directory.selectors';
 import { selectAdminMode } from '../../redux/admin/admin.selector';
 import CustomButton from '../custom-button/custom-button';
+import {
+  deleteImage,
+  deleteItemFromCollection,
+} from '../../firebase/firebase.utils';
 
 const Collection = () => {
   const isLoaded = useSelector(selectIsDirectoryLoaded);
@@ -61,7 +65,17 @@ const Collection = () => {
                   >
                     Изменить
                   </CustomButton>
-                  <CustomButton className='modify_btn' type='button'>
+                  <CustomButton
+                    onClick={() => {
+                      deleteImage(section.childRef);
+                      deleteItemFromCollection('sections', section.id);
+                      setInterval(() => {
+                        window.location.reload();
+                      }, 1000);
+                    }}
+                    className='modify_btn'
+                    type='button'
+                  >
                     Удалить
                   </CustomButton>
                 </div>

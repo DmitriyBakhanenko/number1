@@ -14,7 +14,6 @@ export function* fetchDirectoryStartAsync() {
     const directoryRef = firestore.collection('sections');
     const snapshot = yield directoryRef.get();
     const directoryMap = yield call(convertDirectorySnapshotToMap, snapshot);
-    console.log('SUCCESS ---- ' + directoryMap);
     yield put(fetchDirectorySuccess(directoryMap));
   } catch (error) {
     yield put(fetchDirectoryFailure(error.message));

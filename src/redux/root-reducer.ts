@@ -10,7 +10,7 @@ import adminReducer from './admin/admin.reducer';
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['cart'],
+  whitelist: ['cart', 'admin'],
 };
 
 const rootReducer = combineReducers({

@@ -21,7 +21,6 @@ const SignIn = () => {
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
-    console.log(userCredentials);
     dispatch(emailSignInStart(userCredentials));
   };
 
@@ -31,7 +30,6 @@ const SignIn = () => {
   };
 
   const signGoogle = () => {
-    console.log('signIn ---- comp');
     dispatch(googleSignInStart());
   };
 

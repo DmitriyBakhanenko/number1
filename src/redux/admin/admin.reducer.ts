@@ -11,7 +11,11 @@ const adminReducer = (state = INITIAL_STATE, action: any) => {
         ...state,
         adminMode: !state.adminMode,
       };
-
+    case adminActionTypes.EXIT_ADMIN_MOD:
+      return {
+        ...state,
+        adminMode: false,
+      };
     default:
       return state;
   }

@@ -13,16 +13,33 @@ const config = {
   measurementId: 'G-39DG6L3LWP',
 };
 
+export const deleteImage = (childRef: any) => {
+  console.log(childRef);
+  const storageRef = storage.ref();
+  const desertRef = storageRef.child(childRef);
+
+  desertRef
+    .delete()
+    .then(() => {
+      console.log('fileDeleted');
+    })
+    .catch((err: any) => {
+      console.log(err.message);
+    });
+};
+
 export const uploadImage = (
   path: string,
   file: any,
   setStatus: any,
   setPercentage: any,
-  setUrl: any
+  setUrl: any,
+  setChildRef: any
 ) => {
   if (!path || !file) return;
   const storageRef = storage.ref();
-  const uploadTask = storageRef.child('images/sections/' + file.name).put(file);
+  const childRef = storageRef.child('images/sections/' + file.name);
+  const uploadTask = childRef.put(file);
 
   uploadTask.on(
     firebase.storage.TaskEvent.STATE_CHANGED,
@@ -58,6 +75,7 @@ export const uploadImage = (
     function () {
       uploadTask.snapshot.ref.getDownloadURL().then(function (url: any) {
         setUrl(url);
+        setChildRef(childRef);
         setStatus('Загрузка завершена успешно');
       });
     }
@@ -68,13 +86,11 @@ export const createUserProfileDocument = async (userAuth: any) => {
   if (!userAuth) return;
 
   const userRef = firestore.doc(`users/${userAuth.uid}`);
-
   const snapShot = await userRef.get();
 
   if (!snapShot.exists) {
     const { displayName, email } = userAuth;
     const createdDate = new Date();
-
     try {
       await userRef.set({
         displayName,
@@ -85,7 +101,6 @@ export const createUserProfileDocument = async (userAuth: any) => {
       console.log('error creating user', error.message);
     }
   }
-
   return userRef;
 };
 
@@ -107,11 +122,28 @@ export const deleteItemFromCollection = async (
   collectionKey: string,
   objectKey: string
 ) => {
+  console.log('del from coll');
+  console.log(objectKey);
+  console.log(collectionKey);
+
   const collectionRef = firestore.collection(collectionKey);
   const batch = firestore.batch();
 
   const delDocRef = collectionRef.doc(objectKey);
   batch.delete(delDocRef);
+  return await batch.commit();
+};
+
+export const updateItemInCollection = async (
+  collectionKey: string,
+  objectKey: string,
+  newObject: any
+) => {
+  const collectionRef = firestore.collection(collectionKey);
+  const batch = firestore.batch();
+
+  const documentRef = collectionRef.doc(objectKey);
+  batch.update(documentRef, newObject);
   return await batch.commit();
 };
 
@@ -132,13 +164,14 @@ export const addCollectionAndDocuments = async (
 
 export const convertCollectionsSnapshotToMap = (collections: any) => {
   const transformedCollection = collections.docs.map((doc: any) => {
-    const { title, items } = doc.data();
+    const { title, items, childRef } = doc.data();
 
     return {
       routeName: encodeURI(title.toLowerCase()),
       id: doc.id,
       title,
       items,
+      childRef,
     };
   });
 
@@ -150,13 +183,14 @@ export const convertCollectionsSnapshotToMap = (collections: any) => {
 
 export const convertDirectorySnapshotToMap = (sections: any) => {
   const transformedDirectory = sections.docs.map((doc: any) => {
-    const { title, imageUrl, linkUrl } = doc.data();
+    const { title, imageUrl, linkUrl, childRef } = doc.data();
 
     return {
       id: doc.id,
       title,
       imageUrl,
       linkUrl,
+      childRef,
     };
   });
 

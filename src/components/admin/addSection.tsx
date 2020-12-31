@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './section.scss';
 import { useSelector } from 'react-redux';
 import { selectAdminMode } from '../../redux/admin/admin.selector';
@@ -7,47 +7,65 @@ import {
   addItemToCollection,
   uploadImage,
 } from '../../firebase/firebase.utils';
+import { useHistory } from 'react-router-dom';
 
 const AddSection = () => {
-  const [image, setImage] = useState(
-    'https://firebasestorage.googleapis.com/v0/b/eshop-number1.appspot.com/o/images%2Fsections%2FMIBG5bZnNI3Nw0wT-croppedOGU87-jpg?alt=media&token=72be2aa2-824f-4285-bdc8-ba474a49bd90'
-  );
+  const [imageUrl, setImageUrl]: any = useState(null);
   const [file, setFile] = useState(null);
   const [title, setTitle] = useState('TEST');
-  const [url, setUrl] = useState('');
   const [path, setPath] = useState('');
   const [percentage, setPercentage] = useState(null);
   const [status, setStatus] = useState(null);
+  const [childRef, setChildRef]: any = useState(null);
 
   const admin = useSelector(selectAdminMode);
+  const history = useHistory();
+
+  const addItem = () => {
+    let link: string = path;
+    if (!path.includes('shop/')) link = `shop/${path}`;
+    addItemToCollection('sections', {
+      imageUrl,
+      linkUrl: link,
+      title,
+      childRef: childRef.fullPath,
+    });
+  };
+
+  const addItemRef: any = useRef();
+  addItemRef.current = addItem;
 
   useEffect(() => {
-    if (url) {
-      addItemToCollection('sections', {
-        imageUrl: url,
-        linkUrl: `shop/${path}`,
-        title: title,
-      });
+    if (childRef) {
+      addItemRef.current();
       setTimeout(() => {
         window.location.replace('/');
       }, 1000);
     }
-  }, [url, path, title]);
+  }, [childRef]);
 
   const uploadHandler = (e: any) => {
     setFile(e.target.files[0]);
 
     let reader: any = new FileReader();
     reader.onloadend = () => {
-      setImage(reader.result);
+      setImageUrl(reader.result);
     };
     reader.readAsDataURL(e.target.files[0]);
-    console.log(e.target.files[0]);
   };
 
   const onUploadSubmit = () => {
-    uploadImage('images/sections/', file, setStatus, setPercentage, setUrl);
+    uploadImage(
+      'images/sections/',
+      file,
+      setStatus,
+      setPercentage,
+      setImageUrl,
+      setChildRef
+    );
   };
+
+  if (!admin) return <h1>Режим админа не включен</h1>;
 
   return (
     <React.Fragment>
@@ -55,7 +73,7 @@ const AddSection = () => {
         <React.Fragment>
           <div className='menu container admin'>
             <div className='collection-item'>
-              <img className='image' src={image} alt='card pic' />
+              <img className='image' src={imageUrl} alt='' />
               <div className='content-text'>{title}</div>
             </div>
           </div>
@@ -65,15 +83,16 @@ const AddSection = () => {
             name='sectionImg'
             onChange={uploadHandler}
           />
-          <p className='title_label'>Название раздела</p>
+          <p className='title_label'>Указать название раздела</p>
           <div className='input_title_cont'>
             <input
               type='input'
+              value={title}
               onChange={(e) => setTitle(e.target.value)}
               className='input_title'
             />
           </div>
-          <p className='title_label'>Url англ</p>
+          <p className='title_label'>Указать путь англ</p>
           <div className='input_title_cont'>
             <input
               type='input'
@@ -90,7 +109,11 @@ const AddSection = () => {
             >
               Применить
             </CustomButton>
-            <CustomButton className='control_btn' type='button'>
+            <CustomButton
+              onClick={() => history.push('/')}
+              className='control_btn'
+              type='button'
+            >
               Отмена
             </CustomButton>
           </div>
