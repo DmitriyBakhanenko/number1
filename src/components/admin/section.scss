@@ -1,95 +1,88 @@
-.upload_status {
-  text-align: center;
-  margin-top: 10px;
-
-  .status {
-    font-size: 1.5rem;
-  }
-}
-
-.control_btn_container {
+.main_admin_container {
   display: flex;
-  justify-content: center;
-}
-
-.title_label {
-    text-align: center;
-}
-
-.upload_btn {
-  display: flex;
-  margin: auto;
-  margin-bottom: 10px;
-}
-
-.input_title_cont {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-  flex: content; 
-
-  .input_title {
-    width: 250px;
-    height: 30px;
-    text-indent: 10px;
-    font-size: 1.3rem;
-  }
-}
-
-.menu.container.admin {
-  display: flex;
-  flex-wrap: wrap;
   margin: 50px auto 0;
   justify-content: center;
 
-  .collection-item {
-    position: relative;
-    width: 250px;
-    border: 1px solid grey;
-    margin: 0 7.5px 15px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  .showcard_admin_row {
+    margin: 10px;
+    .collection-item {
+      position: relative;
+      width: 250px;
+      border: 1px solid grey;
+      margin: 0 7.5px 15px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+        0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
-    .image {
-      width: 100%;
-      height: 100%;
-    } 
+      .image {
+        width: 100%;
+        height: 100%;
+      }
 
-    .content-text {
-      position: absolute;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      top: 35%;
-      left: 20%;
-      width: 60%;
-      height: 35%;
-      padding: 20px;
-      text-align: center;
-      color: white;
-      font-weight: 700;
-      font-size: 18px;
-      background-color: rgba($color: #333, $alpha: 0.6);
+      .upload_btn {
+        margin: 10px;
+        display: none;
+      }
 
-      .header-text {
+      .content-text {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        top: 35%;
+        left: 20%;
+        width: 60%;
+        height: 35%;
+        padding: 20px;
+        text-align: center;
+        color: white;
+        font-weight: 700;
+        font-size: 18px;
+        background-color: rgba($color: #333, $alpha: 0.6);
+
+        .header-text {
           color: white;
-          opacity: 0.6;
+          opacity: 0.7;
           text-decoration: none;
+        }
       }
     }
-  }  
-
-  .collection-item:hover {
-    cursor: pointer;
-
-    & .image img {
-      transform: scale(1.1);
-      transition: transform 3s cubic-bezier(0.25, 0.45, 0.45, 0.95);
-    }
-
-    & .content-text .header-text {
-      opacity: 1.0;
+    .admin_input_container {
+      margin: 0 10px;
     }
   }
+  .admin_img_prew_container {
+    margin: 0 7px;
+    height: 54px;
+    width: 250px;
+    background: blue;
+    display: flex;
+    justify-content: center;
 
+    .admin_img_prew {
+      width: 50px;
+      background: black;
+      height: 54px;
+      margin: 0 10px 0 0;
+
+      &:last-child {
+        margin: 0;
+      }
+    }
+  }
+}
+.admin_btn_container {
+  display: flex;
+  justify-content: center;
+  margin: 15px 0;
+
+  .control_btn {
+    display: block;
+  }
+}
+
+.admin_status_container {
+  display: flex;
+  margin: 10px;
+  justify-content: center;
 }

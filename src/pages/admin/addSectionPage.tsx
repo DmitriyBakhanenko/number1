@@ -1,5 +1,5 @@
 import React from 'react';
-import AddSection from '../../components/admin/addSection';
+import AddSection from '../../components/admin/AddSection';
 
 const AddSectionPage = () => {
   return (

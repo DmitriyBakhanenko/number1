@@ -40,16 +40,14 @@ const CollectionPage = () => {
   const Admin = () => (
     <React.Fragment>
       {admin ? (
-        <div className='items'>
-          <div
-            className='collection-item'
-            onClick={() => {
-              history.push(`/admin/add/${collectionId}/item`);
-            }}
-          >
-            <p className='sign_to_action'>+</p>
-            <p className='text_to_action'>Добавить позицию</p>
-          </div>
+        <div
+          className='collection_item_admin'
+          onClick={() => {
+            history.push(`/admin/addcollection/${collectionId}/item`);
+          }}
+        >
+          <p className='sign_to_action'>+</p>
+          <p className='text_to_action'>Добавить позицию</p>
         </div>
       ) : null}
     </React.Fragment>
@@ -66,7 +64,7 @@ const CollectionPage = () => {
   const Item = () => (
     <React.Fragment>
       {collections.items ? (
-        <div className='items'>
+        <React.Fragment>
           {collections.items.map((item: any) => (
             <CollectionItem
               key={item.id}
@@ -74,7 +72,7 @@ const CollectionPage = () => {
               item={item}
             />
           ))}
-        </div>
+        </React.Fragment>
       ) : (
         <div className='empty_cont'>
           <p className='empty'>Пусто</p>
@@ -92,8 +90,10 @@ const CollectionPage = () => {
   return (
     <div className='collection-page'>
       <Title />
-      <Admin />
-      {currentStatus ? <Item /> : <Spinner />}
+      <div className='items'>
+        <Admin />
+        {currentStatus ? <Item /> : <Spinner />}
+      </div>
     </div>
   );
 };

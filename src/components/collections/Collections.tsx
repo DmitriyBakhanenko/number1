@@ -11,11 +11,7 @@ import {
   selectIsDirectoryLoaded,
 } from '../../redux/directory/directory.selectors';
 import { selectAdminMode } from '../../redux/admin/admin.selector';
-import CustomButton from '../custom-button/custom-button';
-import {
-  deleteImage,
-  deleteItemFromCollection,
-} from '../../firebase/firebase.utils';
+import AdminBtns from '../admin/AdminBtns';
 
 const Collection = () => {
   const isLoaded = useSelector(selectIsDirectoryLoaded);
@@ -37,7 +33,7 @@ const Collection = () => {
             <div
               className='collection-item'
               onClick={() => {
-                history.push('/admin/add/section');
+                history.push('/admin/addsection/section');
               }}
             >
               <p className='sign_to_action'>+</p>
@@ -54,32 +50,11 @@ const Collection = () => {
                   {section.title}
                 </Link>
               </div>
-              {admin ? (
-                <div className='modify_btn_container'>
-                  <CustomButton
-                    onClick={() =>
-                      history.push(`/admin/edit/section/${section.id}`)
-                    }
-                    className='modify_btn'
-                    type='button'
-                  >
-                    Изменить
-                  </CustomButton>
-                  <CustomButton
-                    onClick={() => {
-                      deleteImage(section.childRef);
-                      deleteItemFromCollection('sections', section.id);
-                      setInterval(() => {
-                        window.location.reload();
-                      }, 1000);
-                    }}
-                    className='modify_btn'
-                    type='button'
-                  >
-                    Удалить
-                  </CustomButton>
-                </div>
-              ) : null}
+              <AdminBtns
+                item={section}
+                editLink={`/admin/editsection/${section.id}`}
+                fireColl={'sections'}
+              />
             </div>
           ))}
         </div>

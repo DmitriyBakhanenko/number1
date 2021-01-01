@@ -17,6 +17,8 @@ import { selectIfCartIsEmpty } from './redux/cart/cart.selectors';
 import { fetchCollectionsStart } from './redux/shop/shop.actions';
 import CollectionPage from './pages/collection/collection';
 import { fetchDirectoryStart } from './redux/directory/directory.actions';
+import AddCollectionPage from './pages/admin/addCollectionPage';
+import EditCollectionPage from './pages/admin/editCollectionPage';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -41,11 +43,25 @@ const App = () => {
           path={'/shop/:collectionId/:itemId'}
           component={DetailsPage}
         />
-        <Route exact path={'/admin/add/section'} component={AddSectionPage} />
         <Route
           exact
-          path={'/admin/edit/section/:itemId'}
+          path={'/admin/addsection/section'}
+          component={AddSectionPage}
+        />
+        <Route
+          exact
+          path={'/admin/addcollection/:section/item'}
+          component={AddCollectionPage}
+        />
+        <Route
+          exact
+          path={'/admin/editsection/:sectionId'}
           component={EditSectionPage}
+        />
+        <Route
+          exact
+          path={'/admin/editcollection/:section/:itemId'}
+          component={EditCollectionPage}
         />
         <Route
           exact

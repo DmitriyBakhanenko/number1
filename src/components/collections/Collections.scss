@@ -12,7 +12,6 @@
     overflow: hidden;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
-
     &:hover .sign_to_action {
       opacity: 0.5;
       color: black;
@@ -38,70 +37,51 @@
       font-size: 1.5rem;
     }
 
-    &:hover .modify_btn_container .modify_btn {
-      display: unset;
-    }
+    @import '../admin/adminBtns.scss';
+  }
+  .image {
+    width: 100%;
+    height: 100%;
 
-    .modify_btn_container {
-      width: 40%;
-      opacity: 0.7;
-      position: absolute;
-      top: 275px;
-      left: 10px;
-      display: flex;
-
-      .modify_btn {
-        min-width: 114px;
-        padding: 0 25px 0 25px;
-        position: relative;
-        top: 0;
-      }
-    }
-    .image {
+    img {
       width: 100%;
       height: 100%;
-
-      img {
-        width: 100%;
-        height: 100%;
-      }
-    } 
-
-    .content-text {
-      position: absolute;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      top: 35%;
-      left: 20%;
-      width: 60%;
-      height: 35%;
-      padding: 20px;
-      text-align: center;
-      color: white;
-      font-weight: 700;
-      font-size: 18px;
-      background-color: rgba($color: #333, $alpha: 0.6);
-
-      .header-text {
-          color: white;
-          opacity: 0.6;
-          text-decoration: none;
-      }
-    }
-  }  
-
-  .collection-item:hover {
-    cursor: pointer;
-
-    & .image img {
-      transform: scale(1.1);
-      transition: transform 3s cubic-bezier(0.25, 0.45, 0.45, 0.95);
-    }
-
-    & .content-text .header-text {
-      opacity: 1.0;
     }
   }
 
+  .content-text {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 35%;
+    left: 20%;
+    width: 60%;
+    height: 35%;
+    padding: 20px;
+    text-align: center;
+    color: white;
+    font-weight: 700;
+    font-size: 18px;
+    background-color: rgba($color: #333, $alpha: 0.6);
+
+    .header-text {
+      color: white;
+      opacity: 0.6;
+      text-decoration: none;
+    }
+  }
+}
+
+.collection-item:hover {
+  cursor: pointer;
+
+  & .image img {
+    transform: scale(1.1);
+    transition: transform 3s cubic-bezier(0.25, 0.45, 0.45, 0.95);
+  }
+
+  & .content-text .header-text {
+    opacity: 1;
+  }
 }

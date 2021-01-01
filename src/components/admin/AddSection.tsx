@@ -9,7 +9,7 @@ import {
 } from '../../firebase/firebase.utils';
 import { useHistory } from 'react-router-dom';
 
-const AddSection = () => {
+const AddSectionOrCollection = () => {
   const [imageUrl, setImageUrl]: any = useState(null);
   const [file, setFile] = useState(null);
   const [title, setTitle] = useState('TEST');
@@ -118,7 +118,7 @@ const AddSection = () => {
               className='control_btn'
               type='button'
             >
-              Отмена
+              Вернуться
             </CustomButton>
           </div>
           {status && percentage ? (
@@ -135,4 +135,4 @@ const AddSection = () => {
   );
 };
 
-export default AddSection;
+export default AddSectionOrCollection;

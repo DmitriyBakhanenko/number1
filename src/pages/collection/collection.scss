@@ -1,13 +1,14 @@
 .empty {
-    text-align: center;
-    font-size: 2rem;
+  position: absolute;
+  top: 50vh;
+  left: 46vw;
+  font-size: 2rem;
 }
 
 .collection-page {
   display: flex;
   justify-content: center;
   flex-direction: column;
-
 
   .title {
     font-size: 38px;
@@ -21,8 +22,75 @@
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 10px;
 
-    & .collection-item {
+    .collection-item {
+      display: flex;
+      width: 20vw;
+      flex-direction: column;
+      height: 350px;
+      align-items: center;
+      position: relative;
       margin-bottom: 30px;
+    }
+
+    .collection_item_admin {
+      position: relative;
+      width: 90%;
+      height: 350px;
+      margin-bottom: 30px;
+      border: 1px solid grey;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+        0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      &:hover .sign_to_action {
+        opacity: 0.5;
+        color: black;
+      }
+
+      &:hover .text_to_action {
+        opacity: 0.5;
+        color: black;
+      }
+
+      .sign_to_action {
+        color: white;
+        margin-top: 30%;
+        font-weight: 700;
+        font-size: 6.5rem;
+        text-shadow: 2px 2px grey;
+        text-align: center;
+      }
+
+      .text_to_action {
+        color: white;
+        text-shadow: 2px 2px grey;
+        font-weight: 700;
+        font-size: 1.5rem;
+        text-align: center;
+      }
+
+      &:hover .modify_btn_container .modify_btn {
+        display: unset;
+      }
+
+      .modify_btn_container {
+        width: 40%;
+        opacity: 0.7;
+        position: absolute;
+        top: 275px;
+        left: 10px;
+        display: flex;
+
+        .modify_btn {
+          min-width: 114px;
+          padding: 0 25px 0 25px;
+          position: relative;
+          top: 0;
+        }
+      }
     }
   }
 }

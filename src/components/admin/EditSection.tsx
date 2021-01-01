@@ -12,13 +12,10 @@ import {
 import { selectAdminMode } from '../../redux/admin/admin.selector';
 import CustomButton from '../custom-button/custom-button';
 import { useHistory, useRouteMatch } from 'react-router-dom';
-import {
-  deleteImage,
-  updateItemInCollection,
-  uploadImage,
-} from '../../firebase/firebase.utils';
+import { deleteImage, uploadImage } from '../../firebase/firebase.utils';
+import { updateItemInCollection } from '../../firebase/firebase.utils';
 
-const EditSection = () => {
+const EditSectionOrCollection = () => {
   const isLoaded = useSelector(selectIsDirectoryLoaded);
   const directory = useSelector(selectDirectorySection);
   const admin = useSelector(selectAdminMode);
@@ -26,52 +23,52 @@ const EditSection = () => {
   const history = useHistory();
 
   const [currentStatus, setCurrentStatus] = useState(isLoaded);
-  const [file, setFile] = useState(null);
+  const [file, setFile] = useState({});
   const [title, setTitle] = useState('TEST');
   const [imageUrl, setImageUrl] = useState('');
   const [path, setPath] = useState('');
-  const [percentage, setPercentage] = useState(null);
+  const [percentage, setPercentage] = useState('');
   const [status, setStatus] = useState('');
   const [id, setId] = useState('');
-  const [childRef, setChildRef] = useState(null);
+  const [childRef, setChildRef]: any = useState();
 
   const sectionDataToStateRef: any = useRef();
   const updateItemRef: any = useRef();
 
   const sectionDataToState = () => {
     directory
-      .filter((section: any) => section.id === match?.params?.itemId)
+      .filter((section: any) => section.id === match.params.sectionId)
       .forEach((item: any) => {
         setImageUrl(item.imageUrl);
         setPath(item.linkUrl);
         setId(item.id);
         setTitle(item.title);
-        if (item.childRef) setChildRef(item.childRef);
+        if (item.childRef && setChildRef) setChildRef(item.childRef);
       });
   };
-  sectionDataToStateRef.current = sectionDataToState;
 
   const updateItem = () => {
     let link: string = path;
-    let ref: any = childRef;
     if (!path.includes('shop/')) link = `shop/${path}`;
-    if (ref.fullPath) {
-      updateItemInCollection('sections', id, {
-        imageUrl,
-        linkUrl: link,
-        title,
-        childRef: ref.fullPath,
-      });
-    } else {
+    if (childRef === undefined) {
       updateItemInCollection('sections', id, {
         title: title,
         linkUrl: link,
       });
+    } else {
+      updateItemInCollection('sections', id, {
+        imageUrl,
+        linkUrl: link,
+        title,
+        childRef: childRef.fullPath,
+      });
     }
+
     setTimeout(() => {
       window.location.replace('/');
     }, 500);
   };
+  sectionDataToStateRef.current = sectionDataToState;
   updateItemRef.current = updateItem;
 
   useEffect(() => {
@@ -160,14 +157,14 @@ const EditSection = () => {
               type='button'
               apply
             >
-              Сохранить
+              Обновить
             </CustomButton>
             <CustomButton
               onClick={() => history.push('/')}
               className='control_btn'
               type='button'
             >
-              Отмена
+              Вернуться
             </CustomButton>
           </div>
           {status && percentage ? (
@@ -189,4 +186,4 @@ const EditSection = () => {
   );
 };
 
-export default EditSection;
+export default EditSectionOrCollection;

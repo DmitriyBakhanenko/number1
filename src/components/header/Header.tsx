@@ -41,7 +41,7 @@ const Header = () => {
                   <div className='header_optionLineTwo'>
                     <label className='switch'>
                       <input
-                        onClick={() => dispatch(toggleAdmin())}
+                        onChange={() => dispatch(toggleAdmin())}
                         type='checkbox'
                         checked={admin ? true : false}
                       />
@@ -59,6 +59,11 @@ const Header = () => {
             <span
               className='header_optionLineTwo'
               onClick={() => dispatch(signOutStart())}
+              style={
+                currentUser.displayName.length > 12
+                  ? { fontSize: '0.7rem' }
+                  : {}
+              }
             >
               {currentUser.displayName}
             </span>

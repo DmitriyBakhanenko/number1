@@ -1,5 +1,5 @@
 import React from 'react';
-import EditSection from '../../components/admin/editSection';
+import EditSection from '../../components/admin/EditSection';
 
 const EditSectionPage = () => {
   return (
