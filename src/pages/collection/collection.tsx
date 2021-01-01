@@ -36,48 +36,64 @@ const CollectionPage = () => {
   }));
 
   console.log(typeof collections);
-  return (
-    <div className='collection-page'>
+
+  const Admin = () => (
+    <React.Fragment>
+      {admin ? (
+        <div className='items'>
+          <div
+            className='collection-item'
+            onClick={() => {
+              history.push(`/admin/add/${collectionId}/item`);
+            }}
+          >
+            <p className='sign_to_action'>+</p>
+            <p className='text_to_action'>Добавить позицию</p>
+          </div>
+        </div>
+      ) : null}
+    </React.Fragment>
+  );
+
+  const Title = () => (
+    <React.Fragment>
       {currentStatus && collections ? (
         <h2 className='title'>{collections.title}</h2>
       ) : null}
-      <React.Fragment>
-        {admin ? (
-          <div className='items'>
-            <div
-              className='collection-item'
-              onClick={() => {
-                history.push(`/admin/add/${collectionId}/item`);
-              }}
-            >
-              <p className='sign_to_action'>+</p>
-              <p className='text_to_action'>Добавить позицию</p>
-            </div>
-          </div>
-        ) : null}
-      </React.Fragment>
-        {currentStatus ? 
-      !!collections.items ? (
-        <React.Fragment>
-          <div className='items'>
-            {collections.items.map((item: any) => (
-              <CollectionItem
-                key={item.id}
-                collectionId={collectionId}
-                item={item}
-              />
-            ))}
-          </div>
-        </React.Fragment>
-      ) : !!collections.items ? (
-        <SpinnerOverlay>
-          <SpinnerContainer />
-        </SpinnerOverlay>
+    </React.Fragment>
+  );
+
+  const Item = () => (
+    <React.Fragment>
+      {collections.items ? (
+        <div className='items'>
+          {collections.items.map((item: any) => (
+            <CollectionItem
+              key={item.id}
+              collectionId={collectionId}
+              item={item}
+            />
+          ))}
+        </div>
       ) : (
         <div className='empty_cont'>
           <p className='empty'>Пусто</p>
         </div>
       )}
+    </React.Fragment>
+  );
+
+  const Spinner = () => (
+    <SpinnerOverlay>
+      <SpinnerContainer />
+    </SpinnerOverlay>
+  );
+
+  return (
+    <div className='collection-page'>
+      <Title />
+      <Admin />
+      {currentStatus ? <Item /> : <Spinner />}
     </div>
   );
 };

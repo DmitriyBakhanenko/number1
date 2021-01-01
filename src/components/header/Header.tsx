@@ -13,12 +13,14 @@ import './Header.scss';
 import './HeaderSlider.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleAdmin } from '../../redux/admin/admin.actions';
+import { selectAdminMode } from '../../redux/admin/admin.selector';
 
 const Header = () => {
   const [color, setColor] = useState('white');
   const currentUser = useSelector(selectCurrentUser);
   const hidden = useSelector(selectCartHidden);
   const dispatch = useDispatch();
+  const admin = useSelector(selectAdminMode);
 
   return (
     <div className='header'>
@@ -41,6 +43,7 @@ const Header = () => {
                       <input
                         onClick={() => dispatch(toggleAdmin())}
                         type='checkbox'
+                        checked={admin ? true : false}
                       />
                       <span className='slider round'></span>
                     </label>
