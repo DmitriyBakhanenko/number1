@@ -55,15 +55,13 @@ const SignIn = () => {
           onChange={handleChange}
           required
         />
-        <CustomButton type='submit'> Логин </CustomButton>
-        <CustomButton
-          className='buttons'
-          onClick={signGoogle}
-          type='button'
-          isGoogleSignIn
-        >
-          Логин через Google
-        </CustomButton>
+        <div className='buttons'>
+          <CustomButton type='submit'> Логин </CustomButton>
+          <CustomButton onClick={signGoogle} type='button' isGoogleSignIn>
+            {' '}
+            Google Логин{' '}
+          </CustomButton>
+        </div>
       </form>
     </div>
   );

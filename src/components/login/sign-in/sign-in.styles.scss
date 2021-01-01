@@ -1,11 +1,7 @@
 .sign-in {
-  width: 380px;
+  width: 30vw;
   display: flex;
   flex-direction: column;
-
-  .label {
-    margin: 10px 0;
-  }
 
   .buttons {
     display: flex;
@@ -13,7 +9,17 @@
   }
 
   h2 {
-    margin: 10px 0;
-    margin-top: 12px;
+    margin: 5px 0;
+    margin-top: 25px;
+  }
+
+  @media only screen and (max-width: 820px) {
+    .buttons {
+      flex-direction: column;
+
+      button {
+        margin-bottom: 10px;
+      }
+    }
   }
 }
