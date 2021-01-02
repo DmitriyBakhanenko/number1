@@ -8,6 +8,7 @@ import {
   uploadImage,
 } from '../../firebase/firebase.utils';
 import { useHistory } from 'react-router-dom';
+import AdminInput from './AdminInput';
 
 const AddSectionOrCollection = () => {
   const [imageUrl, setImageUrl]: any = useState(null);
@@ -36,6 +37,7 @@ const AddSectionOrCollection = () => {
     });
   };
 
+  const uploadRef: any = useRef();
   const addItemRef: any = useRef();
   addItemRef.current = addItem;
 
@@ -69,49 +71,55 @@ const AddSectionOrCollection = () => {
     );
   };
 
+  const uploadFile = () => {
+    uploadRef.current.click();
+  };
+
   if (!admin) return <h1>Режим админа не включен</h1>;
 
   return (
     <React.Fragment>
       {admin ? (
         <React.Fragment>
-          <div className='menu container admin'>
-            <div className='collection-item'>
-              <img className='image' src={imageUrl} alt='' />
-              <div className='content-text'>{title}</div>
+          <div className='admin_preview_container'>
+            <div className='showcard_admin_row'>
+              <div onClick={uploadFile} className='collection-item'>
+                <div className='image'>
+                  <img src={imageUrl} alt='' />
+                </div>
+                <div className='content-text'>
+                  <div className='header-text'>{title}</div>
+                </div>
+              </div>
+              <input
+                className='upload_btn'
+                type='file'
+                name='sectionImg'
+                onChange={uploadHandler}
+                ref={uploadRef}
+              />
+            </div>
+            <div className='admin_input_container'>
+              <AdminInput
+                inputLabel={'Название раздела'}
+                inputValue={title}
+                setInput={setTitle}
+              />
+              <AdminInput
+                inputLabel={'Путь англ'}
+                inputValue={path}
+                setInput={setPath}
+              />
             </div>
           </div>
-          <input
-            className='upload_btn'
-            type='file'
-            name='sectionImg'
-            onChange={uploadHandler}
-          />
-          <p className='title_label'>Указать название раздела</p>
-          <div className='input_title_cont'>
-            <input
-              type='input'
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              className='input_title'
-            />
-          </div>
-          <p className='title_label'>Указать путь англ</p>
-          <div className='input_title_cont'>
-            <input
-              type='input'
-              onChange={(e) => setPath(e.target.value)}
-              className='input_title'
-            />
-          </div>
-          <div className='control_btn_container'>
+          <div className='admin_btn_container'>
             <CustomButton
               onClick={onUploadSubmit}
               className='control_btn'
               type='button'
               apply
             >
-              Применить
+              Отправить
             </CustomButton>
             <CustomButton
               onClick={() => history.push('/')}
@@ -121,14 +129,16 @@ const AddSectionOrCollection = () => {
               Вернуться
             </CustomButton>
           </div>
-          {status && percentage ? (
-            <div className='upload_status'>
-              <p className='status'>{status}</p>
-              {percentage !== '100' ? (
-                <p className='percentage'>{percentage}%</p>
-              ) : null}
-            </div>
-          ) : null}
+          <div className='admin_status_container'>
+            {status && percentage ? (
+              <div className='upload_status'>
+                <p className='status'>{status}</p>
+                {percentage !== '100' ? (
+                  <p className='percentage'>{percentage}%</p>
+                ) : null}
+              </div>
+            ) : null}
+          </div>
         </React.Fragment>
       ) : null}
     </React.Fragment>

@@ -94,7 +94,7 @@ const AddSectionOrCollection = () => {
     <React.Fragment>
       {admin ? (
         <React.Fragment>
-          <div className='main_admin_container'>
+          <div className='admin_preview_container'>
             <div className='showcard_admin_row'>
               <div onClick={uploadFile} className='collection-item'>
                 <img className='image' src={imageUrl} alt='' />

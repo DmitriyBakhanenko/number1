@@ -1,10 +1,11 @@
-.main_admin_container {
+.admin_preview_container {
   display: flex;
   margin: 50px auto 0;
   justify-content: center;
 
   .showcard_admin_row {
     margin: 10px;
+
     .collection-item {
       position: relative;
       width: 250px;
@@ -17,11 +18,11 @@
       .image {
         width: 100%;
         height: 100%;
-      }
 
-      .upload_btn {
-        margin: 10px;
-        display: none;
+        img {
+          width: 100%;
+          height: 100%;
+        }
       }
 
       .content-text {
@@ -47,10 +48,13 @@
         }
       }
     }
-    .admin_input_container {
-      margin: 0 10px;
+
+    .upload_btn {
+      margin: 10px;
+      display: none;
     }
   }
+
   .admin_img_prew_container {
     margin: 0 7px;
     height: 54px;
@@ -70,6 +74,28 @@
       }
     }
   }
+
+  .admin_input_container {
+    margin: 10px 10px 0 10px;
+
+    .admin_label {
+      font-weight: 600;
+      color: #747474;
+    }
+
+    .admin_input {
+      text-indent: 5px;
+      width: 20vw;
+      height: 25px;
+      border: none;
+      font-size: 16px;
+      margin-bottom: 5px;
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
 }
 .admin_btn_container {
   display: flex;
@@ -85,4 +111,9 @@
   display: flex;
   margin: 10px;
   justify-content: center;
+
+  .percentage {
+    text-align: center;
+    font-size: 2rem;
+  }
 }
