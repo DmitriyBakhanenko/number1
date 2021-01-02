@@ -14,6 +14,7 @@ import CustomButton from '../custom-button/custom-button';
 import { useHistory, useRouteMatch } from 'react-router-dom';
 import { deleteImage, uploadImage } from '../../firebase/firebase.utils';
 import { updateItemInCollection } from '../../firebase/firebase.utils';
+import AdminInput from './AdminInput';
 
 const EditSectionOrCollection = () => {
   const isLoaded = useSelector(selectIsDirectoryLoaded);
@@ -116,7 +117,7 @@ const EditSectionOrCollection = () => {
     <React.Fragment>
       {currentStatus && admin ? (
         <React.Fragment>
-          <div className='menu container admin'>
+          <div className='admin_preview_container'>
             <div className='collection-item'>
               <div className='image'>
                 <img src={imageUrl} alt='card pic' />
@@ -132,6 +133,7 @@ const EditSectionOrCollection = () => {
             name='sectionImg'
             onChange={uploadHandler}
           />
+          <AdminInput inputLabel inputValue setInput />
           <p className='title_label'>Название раздела</p>
           <div className='input_title_cont'>
             <input
