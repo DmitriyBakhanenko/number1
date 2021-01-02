@@ -54,6 +54,7 @@ const Collection = () => {
                 item={section}
                 editLink={`/admin/editsection/${section.id}`}
                 fireColl={'sections'}
+                isCollection
               />
             </div>
           ))}

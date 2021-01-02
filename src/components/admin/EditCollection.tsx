@@ -65,9 +65,9 @@ const EditSectionOrCollection = () => {
       });
     }
 
-    setTimeout(() => {
-      window.location.replace('/');
-    }, 500);
+    //setTimeout(() => {
+    //window.location.replace('/');
+    //}, 500);
   };
   sectionDataToStateRef.current = sectionDataToState;
   updateItemRef.current = updateItem;

@@ -24,7 +24,11 @@ const EditSectionOrCollection = () => {
   const history = useHistory();
 
   const [currentStatus, setCurrentStatus] = useState(isLoaded);
-  const [file, setFile] = useState(null);
+  const [file, setFile]: any = useState(null);
+  const [file1, setFile1] = useState(null);
+  const [file2, setFile2] = useState(null);
+  const [file3, setFile3] = useState(null);
+  const [file4, setFile4] = useState(null);
   const [title, setTitle] = useState('TEST');
   const [imageUrl, setImageUrl] = useState('');
   const [path, setPath] = useState('');
@@ -41,7 +45,7 @@ const EditSectionOrCollection = () => {
     directory
       .filter((section: any) => section.id === match.params.sectionId)
       .forEach((item: any) => {
-        setImageUrl(item.imageUrl);
+        setFile(item.imageUrl);
         setPath(item.linkUrl);
         setId(item.id);
         setTitle(item.title);
@@ -52,7 +56,7 @@ const EditSectionOrCollection = () => {
   const updateItem = () => {
     let link: string = path;
     if (!path.includes('shop/')) link = `shop/${path}`;
-    if (childRef === undefined) {
+    if (!childRef) {
       updateItemInCollection('sections', id, {
         title: title,
         linkUrl: link,
@@ -88,12 +92,6 @@ const EditSectionOrCollection = () => {
 
   const uploadHandler = (e: any) => {
     setFile(e.target.files[0]);
-
-    let reader: any = new FileReader();
-    reader.onloadend = () => {
-      setImageUrl(reader.result);
-    };
-    reader.readAsDataURL(e.target.files[0]);
   };
 
   const onSubmit = () => {
@@ -126,7 +124,7 @@ const EditSectionOrCollection = () => {
             <div className='showcard_admin_row'>
               <div onClick={uploadFile} className='collection-item'>
                 <div className='image'>
-                  <img src={imageUrl} alt='' />
+                  <img src={file} alt='' />
                 </div>
                 <div className='content-text'>
                   <div className='header-text'>{title}</div>
