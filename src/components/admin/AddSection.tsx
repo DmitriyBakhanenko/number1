@@ -34,6 +34,7 @@ const AddSectionOrCollection = () => {
     addItemToCollection('collections', {
       routeName: path,
       title,
+      items: [],
     });
   };
 

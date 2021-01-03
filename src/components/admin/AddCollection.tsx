@@ -9,14 +9,17 @@ import {
 } from '../../firebase/firebase.utils';
 import { useHistory } from 'react-router-dom';
 import AdminInput from './AdminInput';
+import ImgItem from './ImgItem';
 
 const AddSectionOrCollection = () => {
-  const [imageUrl, setImageUrl]: any = useState(null);
-  const [file, setFile] = useState(null);
+  const [imageUrl, setImageUrl]: any = useState([]);
+  const [file, setFile]: any = useState([]);
   const [path, setPath] = useState('');
   const [percentage, setPercentage] = useState(null);
   const [status, setStatus] = useState(null);
   const [childRef, setChildRef]: any = useState(null);
+  const [addCount, setAddCount] = useState(1);
+  const [itemRender, setItemRender]: any = useState([]);
 
   const [title, setTitle] = useState('TEST');
   const [price, setPrice] = useState(0);
@@ -33,6 +36,8 @@ const AddSectionOrCollection = () => {
   const uploadRef: any = useRef();
   const admin = useSelector(selectAdminMode);
   const history = useHistory();
+  const refId: any = useRef();
+  refId.current = 0;
 
   const addItem = () => {
     let link: string = path;
@@ -62,13 +67,14 @@ const AddSectionOrCollection = () => {
   }, [childRef]);
 
   const uploadHandler = (e: any) => {
-    setFile(e.target.files[0]);
+    setFile([...file, e.target.files[0]]);
 
     let reader: any = new FileReader();
     reader.onloadend = () => {
-      setImageUrl(reader.result);
+      setImageUrl([...imageUrl, reader.result]);
     };
     reader.readAsDataURL(e.target.files[0]);
+    console.log(imageUrl[0]);
   };
 
   const uploadFile = () => {
@@ -86,9 +92,21 @@ const AddSectionOrCollection = () => {
     );
   };
 
-  if (!admin) return <h1>Режим админа не включен</h1>;
+  const handleImgChange = () => {};
 
-  if (uploadRef.current) console.log(uploadRef.current);
+  const handleAddItem = () => {
+    const tempArr: any = [];
+    const tempCount = addCount + 1;
+    setAddCount(addCount + 1);
+    for (let i = 1; i < tempCount; i++) {
+      tempArr.push(
+        <ImgItem id={i} imageUrl={imageUrl} handleImgChange={handleImgChange} />
+      );
+    }
+    setItemRender(tempArr);
+  };
+
+  if (!admin) return <h1>Режим админа не включен</h1>;
 
   return (
     <React.Fragment>
@@ -97,7 +115,11 @@ const AddSectionOrCollection = () => {
           <div className='admin_preview_container'>
             <div className='showcard_admin_row'>
               <div onClick={uploadFile} className='collection-item'>
-                <img className='image' src={imageUrl} alt='' />
+                <img
+                  className='image'
+                  src={!!imageUrl ? imageUrl[refId.current] : null}
+                  alt=''
+                />
                 <div className='content-text'>{title}</div>
                 <input
                   className='upload_btn'
@@ -108,10 +130,19 @@ const AddSectionOrCollection = () => {
                 />
               </div>
               <div className='admin_img_prew_container'>
-                <div className='admin_img_prew'></div>
-                <div className='admin_img_prew'></div>
-                <div className='admin_img_prew'></div>
-                <div className='admin_img_prew'></div>
+                <img
+                  id='0'
+                  src={!!imageUrl ? imageUrl[0] : null}
+                  onClick={handleImgChange}
+                  className='admin_img_prew'
+                  alt=''
+                />
+                {!!itemRender ? itemRender : null}
+                {addCount < 8 ? (
+                  <div onClick={handleAddItem} className='admin_img_prew'>
+                    <div className='admin_plus'>+</div>
+                  </div>
+                ) : null}
               </div>
             </div>
             <div className='admin_input_container'>

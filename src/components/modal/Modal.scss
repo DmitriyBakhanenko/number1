@@ -35,8 +35,8 @@
 
       .modal_actions {
         display: flex;
-        justify-content: end;
-        align-content: end;
+        justify-content: flex-end;
+        align-content: flex-end;
         margin: auto;
 
         .modal_delete_button {

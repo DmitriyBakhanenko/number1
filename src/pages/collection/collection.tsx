@@ -63,7 +63,7 @@ const CollectionPage = () => {
 
   const Item = () => (
     <React.Fragment>
-      {collections.items ? (
+      {currentStatus && collections && collections.items ? (
         <React.Fragment>
           {collections.items.map((item: any) => (
             <CollectionItem
