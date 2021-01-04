@@ -28,6 +28,54 @@ export const deleteImage = (childRef: any) => {
     });
 };
 
+export const uploadImageCollection = (
+  path: string,
+  file: any,
+  setStatus: any,
+  setPercentage: any,
+  setUrl: any,
+  setChildRef: any
+) => {
+  const tempArrUrl: any = [];
+  const tempArrChildRef: any = [];
+
+  const uploadAsync = async (uri: any) => {
+    const storageRef = storage.ref();
+    const childRef = storageRef.child(path + uri.name);
+
+    return new Promise(async (res, rej) => {
+      const upload = childRef.put(uri);
+
+      upload.on(
+        'state_changed',
+        (_snapshot) => {},
+        (err) => {
+          rej(err);
+        },
+        async () => {
+          const url = await upload.snapshot.ref.getDownloadURL();
+          res({ url, childRef });
+        }
+      );
+    });
+  };
+
+  const updateImageArray = async (imageArray: any) => {
+    return Promise.all(imageArray.map((item: any) => uploadAsync(item)));
+  };
+
+  updateImageArray(file).then((response) => {
+    response.forEach((element: any) => {
+      tempArrUrl.push(element.url);
+      tempArrChildRef.push(element.childRef);
+    });
+    setUrl(tempArrUrl);
+    setChildRef(tempArrChildRef);
+    setStatus('Все файлы загружены');
+    setPercentage('100');
+  });
+};
+
 export const uploadImage = (
   path: string,
   file: any,
@@ -38,7 +86,7 @@ export const uploadImage = (
 ) => {
   if (!path || !file) return;
   const storageRef = storage.ref();
-  const childRef = storageRef.child('images/sections/' + file.name);
+  const childRef = storageRef.child(path + file.name);
   const uploadTask = childRef.put(file);
 
   uploadTask.on(
@@ -72,7 +120,7 @@ export const uploadImage = (
           break;
       }
     },
-    function () {
+    async function () {
       uploadTask.snapshot.ref.getDownloadURL().then(function (url: any) {
         setUrl(url);
         setChildRef(childRef);
@@ -118,7 +166,7 @@ export const addItemToCollection = async (
   const batch = firestore.batch();
 
   const newDocRef = collectionRef.doc();
-  batch.set(newDocRef, { ...objectToAdd, id: newDocRef.id });
+  batch.set(newDocRef, objectToAdd);
   return await batch.commit();
 };
 
@@ -168,11 +216,11 @@ export const addCollectionAndDocuments = async (
 
 export const convertCollectionsSnapshotToMap = (collections: any) => {
   const transformedCollection = collections.docs.map((doc: any) => {
-    const { title, items, childRef } = doc.data();
+    const { title, items, childRef, id } = doc.data();
 
     return {
       routeName: encodeURI(title.toLowerCase()),
-      id: doc.id,
+      id,
       title,
       items,
       childRef,

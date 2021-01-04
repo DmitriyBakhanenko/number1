@@ -10,7 +10,7 @@ import {
 import { useHistory } from 'react-router-dom';
 import AdminInput from './AdminInput';
 
-const AddSectionOrCollection = () => {
+const AddSection = () => {
   const [imageUrl, setImageUrl]: any = useState(null);
   const [file, setFile] = useState(null);
   const [title, setTitle] = useState('TEST');
@@ -25,13 +25,16 @@ const AddSectionOrCollection = () => {
   const addItem = () => {
     let link: string = path;
     if (!path.includes('shop/')) link = `shop/${path}`;
+    const id = Math.round(Math.random() * 1000000000);
     addItemToCollection('sections', {
+      id,
       imageUrl,
       linkUrl: link,
       title,
       childRef: childRef.fullPath,
     });
     addItemToCollection('collections', {
+      id,
       routeName: path,
       title,
       items: [],
@@ -146,4 +149,4 @@ const AddSectionOrCollection = () => {
   );
 };
 
-export default AddSectionOrCollection;
+export default AddSection;

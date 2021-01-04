@@ -14,6 +14,7 @@ import { selectAdminMode } from '../../redux/admin/admin.selector';
 
 interface Collections {
   collections: {
+    id: number;
     title: string;
     items: any[];
   };
@@ -30,20 +31,21 @@ const CollectionPage = () => {
   const admin = useSelector(selectAdminMode);
   const history = useHistory();
   const match: any = useRouteMatch();
-  const collectionId = match.params.collectionId;
+  const collectionName = match.params.collectionId;
   const { collections }: Collections = useSelector((state: any) => ({
-    collections: selectCollection(collectionId)(state),
+    collections: selectCollection(collectionName)(state),
   }));
 
-  console.log(typeof collections);
-
+  console.log(collections);
   const Admin = () => (
     <React.Fragment>
       {admin ? (
         <div
           className='collection_item_admin'
           onClick={() => {
-            history.push(`/admin/addcollection/${collectionId}/item`);
+            history.push(
+              `/admin/addcollection/${collectionName}/${collections.id}`
+            );
           }}
         >
           <p className='sign_to_action'>+</p>
@@ -68,7 +70,7 @@ const CollectionPage = () => {
           {collections.items.map((item: any) => (
             <CollectionItem
               key={item.id}
-              collectionId={collectionId}
+              collectionId={collectionName}
               item={item}
             />
           ))}

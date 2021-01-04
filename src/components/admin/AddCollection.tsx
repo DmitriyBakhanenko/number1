@@ -5,12 +5,12 @@ import { selectAdminMode } from '../../redux/admin/admin.selector';
 import CustomButton from '../custom-button/custom-button';
 import {
   addItemToCollection,
-  uploadImage,
+  uploadImageCollection,
 } from '../../firebase/firebase.utils';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useRouteMatch } from 'react-router-dom';
 import AdminInput from './AdminInput';
 
-const AddSectionOrCollection = () => {
+const AddCollection = () => {
   const [imageUrl, setImageUrl]: any = useState([]);
   const [file, setFile]: any = useState([]);
   const [path, setPath] = useState('');
@@ -35,20 +35,21 @@ const AddSectionOrCollection = () => {
   const uploadRef: any = useRef();
   const admin = useSelector(selectAdminMode);
   const history = useHistory();
+  const match: any = useRouteMatch();
 
   const addItem = () => {
-    let link: string = path;
-    if (!path.includes('shop/')) link = `shop/${path}`;
-    addItemToCollection('sections', {
-      imageUrl,
-      linkUrl: link,
-      title,
-      childRef: childRef.fullPath,
-    });
-    addItemToCollection('collections', {
-      routeName: path,
-      title,
-    });
+    //let link: string = path;
+    //if (!path.includes('shop/')) link = `shop/${path}`;
+    //addItemToCollection('sections', {
+    //imageUrl,
+    //linkUrl: link,
+    //title,
+    //childRef: childRef.fullPath,
+    //});
+    //addItemToCollection('collections', {
+    //routeName: path,
+    //title,
+    //});
   };
 
   const addItemRef: any = useRef();
@@ -56,10 +57,10 @@ const AddSectionOrCollection = () => {
 
   useEffect(() => {
     if (childRef) {
-      addItemRef.current();
-      setTimeout(() => {
-        window.location.replace('/');
-      }, 1000);
+      //addItemRef.current();
+      //setTimeout(() => {
+      //window.location.replace('/');
+      //}, 1000);
     }
   }, [childRef]);
 
@@ -96,8 +97,8 @@ const AddSectionOrCollection = () => {
   };
 
   const onUploadSubmit = () => {
-    uploadImage(
-      'images/sections/',
+    uploadImageCollection(
+      `images/${match.params.section}/`,
       file,
       setStatus,
       setPercentage,
@@ -283,7 +284,7 @@ const AddSectionOrCollection = () => {
               Применить
             </CustomButton>
             <CustomButton
-              onClick={() => history.push('/')}
+              onClick={() => history.push(`/shop/${match.params.section}`)}
               className='control_btn'
               type='button'
             >
@@ -306,4 +307,4 @@ const AddSectionOrCollection = () => {
   );
 };
 
-export default AddSectionOrCollection;
+export default AddCollection;
