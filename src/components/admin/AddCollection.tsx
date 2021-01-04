@@ -13,7 +13,6 @@ import AdminInput from './AdminInput';
 const AddCollection = () => {
   const [imageUrl, setImageUrl]: any = useState([]);
   const [file, setFile]: any = useState([]);
-  const [path, setPath] = useState('');
   const [percentage, setPercentage] = useState(null);
   const [status, setStatus] = useState(null);
   const [childRef, setChildRef]: any = useState(null);
@@ -38,18 +37,25 @@ const AddCollection = () => {
   const match: any = useRouteMatch();
 
   const addItem = () => {
-    //let link: string = path;
-    //if (!path.includes('shop/')) link = `shop/${path}`;
-    //addItemToCollection('sections', {
-    //imageUrl,
-    //linkUrl: link,
-    //title,
-    //childRef: childRef.fullPath,
-    //});
-    //addItemToCollection('collections', {
-    //routeName: path,
-    //title,
-    //});
+    addItemToCollection(
+      'collections',
+      {
+        imageUrl,
+        title,
+        childRef,
+        price,
+        brand,
+        country,
+        landing,
+        style,
+        color,
+        fabricType,
+        fabricSettings,
+        fastener,
+        sizes,
+      },
+      match.params.docId
+    );
   };
 
   const addItemRef: any = useRef();
@@ -57,10 +63,10 @@ const AddCollection = () => {
 
   useEffect(() => {
     if (childRef) {
-      //addItemRef.current();
-      //setTimeout(() => {
-      //window.location.replace('/');
-      //}, 1000);
+      addItemRef.current();
+      setTimeout(() => {
+        window.location.replace('/');
+      }, 1000);
     }
   }, [childRef]);
 

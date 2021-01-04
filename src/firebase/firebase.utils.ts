@@ -67,7 +67,7 @@ export const uploadImageCollection = (
   updateImageArray(file).then((response) => {
     response.forEach((element: any) => {
       tempArrUrl.push(element.url);
-      tempArrChildRef.push(element.childRef);
+      tempArrChildRef.push(element.childRef.fullPath);
     });
     setUrl(tempArrUrl);
     setChildRef(tempArrChildRef);
@@ -160,13 +160,25 @@ firebase.initializeApp(config);
 
 export const addItemToCollection = async (
   collectionKey: string,
-  objectToAdd: any
+  objectToAdd: any,
+  docId?: string
 ) => {
   const collectionRef = firestore.collection(collectionKey);
   const batch = firestore.batch();
 
-  const newDocRef = collectionRef.doc();
-  batch.set(newDocRef, objectToAdd);
+  if (docId) {
+    const docRef = collectionRef.doc(docId);
+    const snapshot: any = await docRef.get();
+    const fireObj = snapshot.data();
+    const fireArr = fireObj.items;
+    fireObj.items = [...fireArr, objectToAdd];
+    console.log(fireObj);
+
+    batch.update(docRef, fireObj);
+  } else {
+    const newDocRef = collectionRef.doc();
+    batch.set(newDocRef, objectToAdd);
+  }
   return await batch.commit();
 };
 
@@ -174,10 +186,6 @@ export const deleteItemFromCollection = async (
   collectionKey: string,
   objectKey: string
 ) => {
-  console.log('del from coll');
-  console.log(objectKey);
-  console.log(collectionKey);
-
   const collectionRef = firestore.collection(collectionKey);
   const batch = firestore.batch();
 
@@ -221,6 +229,7 @@ export const convertCollectionsSnapshotToMap = (collections: any) => {
     return {
       routeName: encodeURI(title.toLowerCase()),
       id,
+      docId: doc.id,
       title,
       items,
       childRef,

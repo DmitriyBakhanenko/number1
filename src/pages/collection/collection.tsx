@@ -14,7 +14,7 @@ import { selectAdminMode } from '../../redux/admin/admin.selector';
 
 interface Collections {
   collections: {
-    id: number;
+    docId: string;
     title: string;
     items: any[];
   };
@@ -36,7 +36,6 @@ const CollectionPage = () => {
     collections: selectCollection(collectionName)(state),
   }));
 
-  console.log(collections);
   const Admin = () => (
     <React.Fragment>
       {admin ? (
@@ -44,7 +43,7 @@ const CollectionPage = () => {
           className='collection_item_admin'
           onClick={() => {
             history.push(
-              `/admin/addcollection/${collectionName}/${collections.id}`
+              `/admin/addcollection/${collectionName}/${collections.docId}`
             );
           }}
         >

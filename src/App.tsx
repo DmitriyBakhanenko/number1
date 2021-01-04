@@ -50,7 +50,7 @@ const App = () => {
         />
         <Route
           exact
-          path={'/admin/addcollection/:section/:sectionId'}
+          path={'/admin/addcollection/:section/:docId'}
           component={AddCollectionPage}
         />
         <Route
