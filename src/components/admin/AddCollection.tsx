@@ -9,7 +9,6 @@ import {
 } from '../../firebase/firebase.utils';
 import { useHistory } from 'react-router-dom';
 import AdminInput from './AdminInput';
-import ImgItem from './ImgItem';
 
 const AddSectionOrCollection = () => {
   const [imageUrl, setImageUrl]: any = useState([]);
@@ -18,10 +17,10 @@ const AddSectionOrCollection = () => {
   const [percentage, setPercentage] = useState(null);
   const [status, setStatus] = useState(null);
   const [childRef, setChildRef]: any = useState(null);
-  const [addCount, setAddCount] = useState(1);
-  const [itemRender, setItemRender]: any = useState([]);
+  const [count, setCount] = useState(0);
+  const [currentId, setCurrentId] = useState(0);
 
-  const [title, setTitle] = useState('TEST');
+  const [title, setTitle] = useState('');
   const [price, setPrice] = useState(0);
   const [brand, setBrand] = useState('');
   const [country, setCountry] = useState('');
@@ -36,8 +35,6 @@ const AddSectionOrCollection = () => {
   const uploadRef: any = useRef();
   const admin = useSelector(selectAdminMode);
   const history = useHistory();
-  const refId: any = useRef();
-  refId.current = 0;
 
   const addItem = () => {
     let link: string = path;
@@ -67,14 +64,31 @@ const AddSectionOrCollection = () => {
   }, [childRef]);
 
   const uploadHandler = (e: any) => {
-    setFile([...file, e.target.files[0]]);
+    if (!file[currentId]) {
+      setFile([...file, e.target.files[0]]);
 
-    let reader: any = new FileReader();
-    reader.onloadend = () => {
-      setImageUrl([...imageUrl, reader.result]);
-    };
-    reader.readAsDataURL(e.target.files[0]);
-    console.log(imageUrl[0]);
+      let reader: any = new FileReader();
+      reader.onloadend = () => {
+        setImageUrl([...imageUrl, reader.result]);
+      };
+      reader.readAsDataURL(e.target.files[0]);
+    } else {
+      console.log('else');
+      const fArr = file.map((item: any, idx: number) =>
+        idx === currentId ? e.target.files[0] : item
+      );
+
+      setFile(fArr);
+
+      let reader: any = new FileReader();
+      reader.onloadend = () => {
+        const iArr = imageUrl.map((item: any, idx: number) =>
+          idx === Number(currentId) ? reader.result : item
+        );
+        setImageUrl(iArr);
+      };
+      reader.readAsDataURL(e.target.files[0]);
+    }
   };
 
   const uploadFile = () => {
@@ -92,18 +106,12 @@ const AddSectionOrCollection = () => {
     );
   };
 
-  const handleImgChange = () => {};
+  const handleImgChange = (e: any) => {
+    setCurrentId(e.target.id);
+  };
 
-  const handleAddItem = () => {
-    const tempArr: any = [];
-    const tempCount = addCount + 1;
-    setAddCount(addCount + 1);
-    for (let i = 1; i < tempCount; i++) {
-      tempArr.push(
-        <ImgItem id={i} imageUrl={imageUrl} handleImgChange={handleImgChange} />
-      );
-    }
-    setItemRender(tempArr);
+  const handleIncrement = () => {
+    setCount(count + 1);
   };
 
   if (!admin) return <h1>Режим админа не включен</h1>;
@@ -117,7 +125,7 @@ const AddSectionOrCollection = () => {
               <div onClick={uploadFile} className='collection-item'>
                 <img
                   className='image'
-                  src={!!imageUrl ? imageUrl[refId.current] : null}
+                  src={!!imageUrl ? imageUrl[currentId] : null}
                   alt=''
                 />
                 <div className='content-text'>{title}</div>
@@ -132,14 +140,76 @@ const AddSectionOrCollection = () => {
               <div className='admin_img_prew_container'>
                 <img
                   id='0'
-                  src={!!imageUrl ? imageUrl[0] : null}
+                  src={imageUrl[0] ? imageUrl[0] : null}
                   onClick={handleImgChange}
                   className='admin_img_prew'
                   alt=''
                 />
-                {!!itemRender ? itemRender : null}
-                {addCount < 8 ? (
-                  <div onClick={handleAddItem} className='admin_img_prew'>
+                {count > 0 ? (
+                  <img
+                    id='1'
+                    src={imageUrl[1] ? imageUrl[1] : null}
+                    onClick={handleImgChange}
+                    className='admin_img_prew'
+                    alt=''
+                  />
+                ) : null}
+                {count > 1 ? (
+                  <img
+                    id='2'
+                    src={imageUrl[2] ? imageUrl[2] : null}
+                    onClick={handleImgChange}
+                    className='admin_img_prew'
+                    alt=''
+                  />
+                ) : null}
+                {count > 2 ? (
+                  <img
+                    id='3'
+                    src={imageUrl[3] ? imageUrl[3] : null}
+                    onClick={handleImgChange}
+                    className='admin_img_prew'
+                    alt=''
+                  />
+                ) : null}
+                {count > 3 ? (
+                  <img
+                    id='4'
+                    src={imageUrl[4] ? imageUrl[4] : null}
+                    onClick={handleImgChange}
+                    className='admin_img_prew'
+                    alt=''
+                  />
+                ) : null}
+                {count > 4 ? (
+                  <img
+                    id='5'
+                    src={imageUrl[5] ? imageUrl[5] : null}
+                    onClick={handleImgChange}
+                    className='admin_img_prew'
+                    alt=''
+                  />
+                ) : null}
+                {count > 5 ? (
+                  <img
+                    id='6'
+                    src={imageUrl[6] ? imageUrl[6] : null}
+                    onClick={handleImgChange}
+                    className='admin_img_prew'
+                    alt=''
+                  />
+                ) : null}
+                {count > 6 ? (
+                  <img
+                    id='7'
+                    src={imageUrl[7] ? imageUrl[7] : null}
+                    onClick={handleImgChange}
+                    className='admin_img_prew'
+                    alt=''
+                  />
+                ) : null}
+                {count < 7 ? (
+                  <div onClick={handleIncrement} className='admin_img_prew'>
                     <div className='admin_plus'>+</div>
                   </div>
                 ) : null}

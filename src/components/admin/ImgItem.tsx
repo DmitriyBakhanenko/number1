@@ -7,13 +7,14 @@ const ImgItem = ({
 }: {
   id: number;
   imageUrl: [any];
-  handleImgChange: () => void;
+  handleImgChange: (arg: any) => void;
 }) => {
+  if (imageUrl[id]) console.log(imageUrl[id]);
   return (
     <React.Fragment>
       <img
         id={`${id}`}
-        src={imageUrl || imageUrl[id] ? imageUrl[id] : null}
+        src={imageUrl[id] ? imageUrl[id] : null}
         onClick={handleImgChange}
         className='admin_img_prew'
         alt=''
