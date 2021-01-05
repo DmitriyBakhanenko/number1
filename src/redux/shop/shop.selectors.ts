@@ -7,9 +7,9 @@ export const selectCollections = createSelector(
   (shop) => shop.collections
 );
 
-export const selectCollection = (collectionUrlParam: any) =>
+export const selectCollection = (collectionId: any) =>
   createSelector([selectCollections], (collections) =>
-    collections ? collections[collectionUrlParam] : null
+    collections ? collections[collectionId] : null
   );
 
 export const selectIsCollectionFetching = createSelector(

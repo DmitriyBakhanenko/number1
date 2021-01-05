@@ -42,11 +42,20 @@ const Collection = () => {
           ) : null}
           {directory.map((section: any) => (
             <div key={section.id} className='collection-item'>
-              <Link className='image' to={section.linkUrl}>
-                <img src={section.imageUrl} alt='card pic' />
+              <Link
+                className='image'
+                to={section.linkUrl + '/' + section.collectionId}
+              >
+                <img
+                  src={section.imageUrl + '/' + section.collectionId}
+                  alt='card pic'
+                />
               </Link>
               <div className='content-text'>
-                <Link className='header-text' to={section.linkUrl}>
+                <Link
+                  className='header-text'
+                  to={section.linkUrl + section.collectionId}
+                >
                   {section.title}
                 </Link>
               </div>

@@ -172,12 +172,12 @@ export const addItemToCollection = async (
     const fireObj = snapshot.data();
     const fireArr = fireObj.items;
     fireObj.items = [...fireArr, objectToAdd];
-    console.log(fireObj);
-
     batch.update(docRef, fireObj);
   } else {
     const newDocRef = collectionRef.doc();
     batch.set(newDocRef, objectToAdd);
+    await batch.commit();
+    return newDocRef.id;
   }
   return await batch.commit();
 };
@@ -244,7 +244,7 @@ export const convertCollectionsSnapshotToMap = (collections: any) => {
 
 export const convertDirectorySnapshotToMap = (sections: any) => {
   const transformedDirectory = sections.docs.map((doc: any) => {
-    const { title, imageUrl, linkUrl, childRef } = doc.data();
+    const { title, imageUrl, linkUrl, childRef, collectionId } = doc.data();
 
     return {
       id: doc.id,
@@ -252,6 +252,7 @@ export const convertDirectorySnapshotToMap = (sections: any) => {
       imageUrl,
       linkUrl,
       childRef,
+      collectionId,
     };
   });
 

@@ -37,7 +37,11 @@ const App = () => {
       <Switch>
         <Route exact path={'/'} component={HomePage} />
         <Route exact path={'/contacts'} component={ContactPage} />
-        <Route exact path={'/shop/:collectionId'} component={CollectionPage} />
+        <Route
+          exact
+          path={'/shop/:collectionName/:collectionId'}
+          component={CollectionPage}
+        />
         <Route
           exact
           path={'/shop/:collectionId/:itemId'}

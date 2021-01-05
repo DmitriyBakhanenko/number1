@@ -37,11 +37,13 @@ const AddCollection = () => {
   const match: any = useRouteMatch();
 
   const addItem = () => {
+    const id = Math.round(Math.random() * 1000000000);
     addItemToCollection(
       'collections',
       {
+        id,
         imageUrl,
-        title,
+        name: title,
         childRef,
         price,
         brand,

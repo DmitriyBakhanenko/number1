@@ -12,14 +12,6 @@ import './collection.scss';
 import { useHistory, useRouteMatch } from 'react-router-dom';
 import { selectAdminMode } from '../../redux/admin/admin.selector';
 
-interface Collections {
-  collections: {
-    docId: string;
-    title: string;
-    items: any[];
-  };
-}
-
 const CollectionPage = () => {
   const isLoaded = useSelector(selectIsCollectionsLoaded);
   const [currentStatus, setCurrentStatus] = useState(isLoaded);
@@ -31,10 +23,9 @@ const CollectionPage = () => {
   const admin = useSelector(selectAdminMode);
   const history = useHistory();
   const match: any = useRouteMatch();
-  const collectionName = match.params.collectionId;
-  const { collections }: Collections = useSelector((state: any) => ({
-    collections: selectCollection(collectionName)(state),
-  }));
+  const collectionName = match.params.collectionName;
+  const collectionId = match.params.collectionId;
+  const collections: any = useSelector(selectCollection(collectionName));
 
   const Admin = () => (
     <React.Fragment>
@@ -43,7 +34,7 @@ const CollectionPage = () => {
           className='collection_item_admin'
           onClick={() => {
             history.push(
-              `/admin/addcollection/${collectionName}/${collections.docId}`
+              `/admin/addcollection/${collectionName}/${collectionId}`
             );
           }}
         >
