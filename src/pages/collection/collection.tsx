@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { selectCollection } from '../../redux/shop/shop.selectors';
+import { selectCollections } from '../../redux/shop/shop.selectors';
 import CollectionItem from '../../components/collection-item/collection-item';
 
 import {
@@ -25,7 +25,10 @@ const CollectionPage = () => {
   const match: any = useRouteMatch();
   const collectionName = match.params.collectionName;
   const collectionId = match.params.collectionId;
-  const collections: any = useSelector(selectCollection(collectionName));
+  const collections: any = useSelector(selectCollections);
+  const collection: any = collections
+    ? Object.values(collections).filter((i: any) => i.docId === collectionId)
+    : null;
 
   const Admin = () => (
     <React.Fragment>
@@ -47,20 +50,22 @@ const CollectionPage = () => {
 
   const Title = () => (
     <React.Fragment>
-      {currentStatus && collections ? (
-        <h2 className='title'>{collections.title}</h2>
+      {currentStatus && collection[0] ? (
+        <h2 className='title'>{collection[0].title}</h2>
       ) : null}
     </React.Fragment>
   );
 
   const Item = () => (
     <React.Fragment>
-      {currentStatus && collections && collections.items ? (
+      {currentStatus && collection[0] && collection[0].items ? (
         <React.Fragment>
-          {collections.items.map((item: any) => (
+          {console.log(collection[0])}
+          {collection[0].items.map((item: any) => (
             <CollectionItem
               key={item.id}
-              collectionId={collectionName}
+              collectionId={collectionId}
+              collectionName={collectionName}
               item={item}
             />
           ))}

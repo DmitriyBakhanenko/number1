@@ -15,16 +15,9 @@ interface Props {
   editLink: string;
   fireColl: string;
   isCollection?: boolean;
-  isItem?: boolean;
 }
 
-const AdminBtns = ({
-  item,
-  editLink,
-  fireColl,
-  isCollection,
-  isItem,
-}: Props) => {
+const AdminBtns = ({ item, editLink, fireColl, isCollection }: Props) => {
   const admin = useSelector(selectAdminMode);
   const history = useHistory();
   const [toggleModal, setToggleModal] = useState(false);
@@ -50,7 +43,7 @@ const AdminBtns = ({
           onSubmit={onSubmit}
         />
       );
-    else if (isItem)
+    else
       return (
         <Modal
           title={item.title}
@@ -62,7 +55,6 @@ const AdminBtns = ({
           onSubmit={onSubmit}
         />
       );
-    else return null;
   };
 
   return (

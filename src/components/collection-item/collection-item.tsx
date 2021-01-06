@@ -7,7 +7,7 @@ import { useHistory } from 'react-router-dom';
 import { selectAdminMode } from '../../redux/admin/admin.selector';
 import AdminBtns from '../admin/AdminBtns';
 
-const CollectionItem = ({ item, collectionId }: any) => {
+const CollectionItem = ({ item, collectionId, collectionName }: any) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { name, price, imageUrl } = item;
@@ -32,7 +32,7 @@ const CollectionItem = ({ item, collectionId }: any) => {
         <AdminBtns
           item={item}
           editLink={`/admin/editcollection/${collectionId}/${item.id}`}
-          fireColl={`collections/${collectionId}`}
+          fireColl={`collections/${collectionName}`}
         />
       ) : (
         <CustomButton onClick={() => dispatch(addItem(item))} inverted>
