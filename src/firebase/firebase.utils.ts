@@ -177,8 +177,10 @@ export const addItemToCollection = async (
   if (docId) {
     const docRef = collectionRef.doc(docId);
     const snapshot: any = await docRef.get();
-    const fireObj = snapshot.data();
-    const fireArr = fireObj.items;
+    const fireObj: any = await snapshot.data();
+    let fireArr = [];
+    if (fireObj.items)
+      fireArr = fireObj.items.filter((i: any) => i.id !== objectToAdd.id);
     fireObj.items = [...fireArr, objectToAdd];
     batch.update(docRef, fireObj);
   } else {

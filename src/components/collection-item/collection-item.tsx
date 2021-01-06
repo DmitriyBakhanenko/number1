@@ -14,7 +14,7 @@ const CollectionItem = ({ item, collectionId, collectionName }: any) => {
   const admin = useSelector(selectAdminMode);
 
   const showDetails = () => {
-    history.push(`/shop/${collectionId}/${item.id}`);
+    history.push(`/details/${collectionId}/${item.id}`);
   };
 
   return (

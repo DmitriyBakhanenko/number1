@@ -1,191 +1,364 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './section.scss';
 import { useSelector } from 'react-redux';
-import {
-  SpinnerOverlay,
-  SpinnerContainer,
-} from '../../components/with-spinner/with-spinner.styles';
-import {
-  selectDirectorySection,
-  selectIsDirectoryLoaded,
-} from '../../redux/directory/directory.selectors';
 import { selectAdminMode } from '../../redux/admin/admin.selector';
 import CustomButton from '../custom-button/custom-button';
+import {
+  addItemToCollection,
+  deleteImage,
+  uploadImageCollection,
+} from '../../firebase/firebase.utils';
 import { useHistory, useRouteMatch } from 'react-router-dom';
-import { deleteImage, uploadImage } from '../../firebase/firebase.utils';
-import { updateItemInCollection } from '../../firebase/firebase.utils';
 import AdminInput from './AdminInput';
+import { selectCollection } from '../../redux/shop/shop.selectors';
 
-const EditSectionOrCollection = () => {
-  const isLoaded = useSelector(selectIsDirectoryLoaded);
-  const directory = useSelector(selectDirectorySection);
+const EditCollection = () => {
+  const [imageUrl, setImageUrl]: any = useState([]);
+  const [file, setFile]: any = useState([]);
+  const [percentage, setPercentage] = useState(null);
+  const [status, setStatus] = useState(null);
+  const [childRef, setChildRef]: any = useState(null);
+  const [count, setCount] = useState(0);
+  const [currentId, setCurrentId] = useState(0);
+
+  const [name, setName] = useState('');
+  const [price, setPrice] = useState(0);
+  const [brand, setBrand] = useState('');
+  const [country, setCountry] = useState('');
+  const [landing, setLanding] = useState('');
+  const [style, setStyle] = useState('');
+  const [color, setColor] = useState('');
+  const [fabricType, setFabricType] = useState('');
+  const [fabricSettings, setFabricSettings] = useState('');
+  const [fastener, setFastener] = useState('');
+  const [sizes, setSizes] = useState('');
+  const [startUpdate, setStartUpdate] = useState(false);
+
+  const uploadRef: any = useRef();
   const admin = useSelector(selectAdminMode);
-  const match: any = useRouteMatch();
   const history = useHistory();
+  const match: any = useRouteMatch();
 
-  const [currentStatus, setCurrentStatus] = useState(isLoaded);
-  const [file, setFile] = useState({});
-  const [title, setTitle] = useState('TEST');
-  const [imageUrl, setImageUrl] = useState('');
-  const [path, setPath] = useState('');
-  const [percentage, setPercentage] = useState('');
-  const [status, setStatus] = useState('');
-  const [id, setId] = useState('');
-  const [childRef, setChildRef]: any = useState();
+  const collection: any = useSelector(
+    selectCollection(match.params.collectionId)
+  );
+  const item: any = collection[0].items.filter(
+    (i: any) => Number(i.id) === Number(match.params.itemId)
+  );
 
-  const sectionDataToStateRef: any = useRef();
-  const updateItemRef: any = useRef();
-
-  const sectionDataToState = () => {
-    directory
-      .filter((section: any) => section.id === match.params.sectionId)
-      .forEach((item: any) => {
-        setImageUrl(item.imageUrl);
-        setPath(item.linkUrl);
-        setId(item.id);
-        setTitle(item.title);
-        if (item.childRef && setChildRef) setChildRef(item.childRef);
-      });
+  const fetchItem = () => {
+    const {
+      name,
+      price,
+      brand,
+      country,
+      landing,
+      style,
+      color,
+      fabricType,
+      fabricSettings,
+      fastener,
+      sizes,
+    } = item[0];
+    name ? setName(name) : console.log('no name');
+    price ? setPrice(price) : console.log('no price');
+    brand ? setBrand(brand) : console.log('no brand');
+    country ? setCountry(country) : console.log('no country');
+    landing ? setLanding(landing) : console.log('no landing');
+    style ? setStyle(style) : console.log('no style');
+    color ? setColor(color) : console.log('no color');
+    fabricType ? setFabricType(fabricType) : console.log('no fabricType');
+    fabricSettings
+      ? setFabricSettings(fabricSettings)
+      : console.log('no fabricSettings');
+    fastener ? setFastener(fastener) : console.log('no fastener');
+    sizes ? setSizes(sizes) : console.log('no sizes');
   };
 
-  const updateItem = () => {
-    let link: string = path;
-    if (!path.includes('shop/')) link = `shop/${path}`;
-    if (childRef === undefined) {
-      updateItemInCollection('sections', id, {
-        title: title,
-        linkUrl: link,
-      });
-    } else {
-      updateItemInCollection('sections', id, {
+  const fetchItemRef = useRef(fetchItem);
+
+  const addItem = () => {
+    const { id } = item[0];
+    addItemToCollection(
+      'collections',
+      {
+        id,
         imageUrl,
-        linkUrl: link,
-        title,
-        childRef: childRef.fullPath,
-      });
-    }
-
-    //setTimeout(() => {
-    //window.location.replace('/');
-    //}, 500);
+        name,
+        childRef,
+        price,
+        brand,
+        country,
+        landing,
+        style,
+        color,
+        fabricType,
+        fabricSettings,
+        fastener,
+        sizes,
+      },
+      match.params.docId
+    );
   };
-  sectionDataToStateRef.current = sectionDataToState;
-  updateItemRef.current = updateItem;
+
+  const addItemRef: any = useRef();
+  addItemRef.current = addItem;
+
+  useEffect(() => fetchItemRef.current(), []);
 
   useEffect(() => {
-    setCurrentStatus(isLoaded);
-  }, [isLoaded]);
-
-  useEffect(() => {
-    if (status === 'Загрузка завершена успешно' || status === 'Сохранено')
-      updateItemRef.current();
-  }, [status]);
-
-  useEffect(() => {
-    if (directory) sectionDataToStateRef.current();
-  }, [directory]);
+    if (startUpdate) {
+      addItemRef.current();
+      setTimeout(() => {
+        window.location.replace('/');
+      }, 1000);
+    }
+  }, [startUpdate]);
 
   const uploadHandler = (e: any) => {
-    setFile(e.target.files[0]);
+    if (!file[currentId]) {
+      setFile([...file, e.target.files[0]]);
 
-    let reader: any = new FileReader();
-    reader.onloadend = () => {
-      setImageUrl(reader.result);
-    };
-    reader.readAsDataURL(e.target.files[0]);
+      let reader: any = new FileReader();
+      reader.onloadend = () => {
+        setImageUrl([...imageUrl, reader.result]);
+      };
+      reader.readAsDataURL(e.target.files[0]);
+    } else {
+      const fArr = file.map((item: any, idx: number) =>
+        idx === currentId ? e.target.files[0] : item
+      );
+
+      setFile(fArr);
+
+      let reader: any = new FileReader();
+      reader.onloadend = () => {
+        const iArr = imageUrl.map((item: any, idx: number) =>
+          idx === Number(currentId) ? reader.result : item
+        );
+        setImageUrl(iArr);
+      };
+      reader.readAsDataURL(e.target.files[0]);
+    }
   };
 
-  const onSubmit = () => {
-    if (file && childRef) {
-      deleteImage(childRef);
-      uploadImage(
-        'images/sections/',
+  const uploadFile = () => {
+    uploadRef.current.click();
+  };
+
+  const onUploadSubmit = () => {
+    if (file) {
+      deleteImage(`images/${match.params.docId}`);
+      uploadImageCollection(
+        `images/${match.params.docId}/`,
         file,
         setStatus,
         setPercentage,
         setImageUrl,
         setChildRef
       );
-    } else {
-      setStatus('Сохранено');
     }
+    setStartUpdate(true);
+  };
+
+  const handleImgChange = (e: any) => {
+    setCurrentId(e.target.id);
+  };
+
+  const handleIncrement = () => {
+    setCount(count + 1);
   };
 
   if (!admin) return <h1>Режим админа не включен</h1>;
 
   return (
     <React.Fragment>
-      {currentStatus && admin ? (
+      {admin ? (
         <React.Fragment>
           <div className='admin_preview_container'>
-            <div className='collection-item'>
-              <div className='image'>
-                <img src={imageUrl} alt='card pic' />
+            <div className='showcard_admin_row'>
+              <div onClick={uploadFile} className='collection-item'>
+                <img
+                  className='image'
+                  src={!!imageUrl ? imageUrl[currentId] : null}
+                  alt=''
+                />
+                <div className='content-text'>{name}</div>
+                <input
+                  className='upload_btn'
+                  type='file'
+                  name='sectionImg'
+                  onChange={uploadHandler}
+                  ref={uploadRef}
+                />
               </div>
-              <div className='content-text'>
-                <div className='header-text'>{title}</div>
+              <div className='admin_img_prew_container'>
+                <img
+                  id='0'
+                  src={imageUrl[0] ? imageUrl[0] : null}
+                  onClick={handleImgChange}
+                  className='admin_img_prew'
+                  alt=''
+                />
+                {count > 0 ? (
+                  <img
+                    id='1'
+                    src={imageUrl[1] ? imageUrl[1] : null}
+                    onClick={handleImgChange}
+                    className='admin_img_prew'
+                    alt=''
+                  />
+                ) : null}
+                {count > 1 ? (
+                  <img
+                    id='2'
+                    src={imageUrl[2] ? imageUrl[2] : null}
+                    onClick={handleImgChange}
+                    className='admin_img_prew'
+                    alt=''
+                  />
+                ) : null}
+                {count > 2 ? (
+                  <img
+                    id='3'
+                    src={imageUrl[3] ? imageUrl[3] : null}
+                    onClick={handleImgChange}
+                    className='admin_img_prew'
+                    alt=''
+                  />
+                ) : null}
+                {count > 3 ? (
+                  <img
+                    id='4'
+                    src={imageUrl[4] ? imageUrl[4] : null}
+                    onClick={handleImgChange}
+                    className='admin_img_prew'
+                    alt=''
+                  />
+                ) : null}
+                {count > 4 ? (
+                  <img
+                    id='5'
+                    src={imageUrl[5] ? imageUrl[5] : null}
+                    onClick={handleImgChange}
+                    className='admin_img_prew'
+                    alt=''
+                  />
+                ) : null}
+                {count > 5 ? (
+                  <img
+                    id='6'
+                    src={imageUrl[6] ? imageUrl[6] : null}
+                    onClick={handleImgChange}
+                    className='admin_img_prew'
+                    alt=''
+                  />
+                ) : null}
+                {count > 6 ? (
+                  <img
+                    id='7'
+                    src={imageUrl[7] ? imageUrl[7] : null}
+                    onClick={handleImgChange}
+                    className='admin_img_prew'
+                    alt=''
+                  />
+                ) : null}
+                {count < 7 ? (
+                  <div onClick={handleIncrement} className='admin_img_prew'>
+                    <div className='admin_plus'>+</div>
+                  </div>
+                ) : null}
               </div>
             </div>
+            <div className='admin_input_container'>
+              <AdminInput
+                inputLabel={'Название продукта'}
+                inputValue={name}
+                setInput={setName}
+              />
+              <AdminInput
+                inputLabel={'Цена'}
+                inputValue={price}
+                setInput={setPrice}
+              />
+              <AdminInput
+                inputLabel={'Бренд'}
+                inputValue={brand}
+                setInput={setBrand}
+              />
+              <AdminInput
+                inputLabel={'Страна'}
+                inputValue={country}
+                setInput={setCountry}
+              />
+              <AdminInput
+                inputLabel={'Посадка'}
+                inputValue={landing}
+                setInput={setLanding}
+              />
+              <AdminInput
+                inputLabel={'Стиль'}
+                inputValue={style}
+                setInput={setStyle}
+              />
+              <AdminInput
+                inputLabel={'Цвет'}
+                inputValue={color}
+                setInput={setColor}
+              />
+              <AdminInput
+                inputLabel={'Тип ткани'}
+                inputValue={fabricType}
+                setInput={setFabricType}
+              />
+              <AdminInput
+                inputLabel={'Свойства ткани'}
+                inputValue={fabricSettings}
+                setInput={setFabricSettings}
+              />
+              <AdminInput
+                inputLabel={'Застежка'}
+                inputValue={fastener}
+                setInput={setFastener}
+              />
+              <AdminInput
+                inputLabel={'Размеры'}
+                inputValue={sizes}
+                setInput={setSizes}
+              />
+            </div>
           </div>
-          <input
-            className='upload_btn'
-            type='file'
-            name='sectionImg'
-            onChange={uploadHandler}
-          />
-          <AdminInput inputLabel inputValue setInput />
-          <p className='title_label'>Название раздела</p>
-          <div className='input_title_cont'>
-            <input
-              type='input'
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              className='input_title'
-            />
-          </div>
-          <p className='title_label'>Url англ</p>
-          <div className='input_title_cont'>
-            <input
-              type='input'
-              value={path}
-              onChange={(e) => setPath(e.target.value)}
-              className='input_title'
-            />
-          </div>
-          <div className='control_btn_container'>
+          <div className='admin_btn_container'>
             <CustomButton
-              onClick={onSubmit}
+              onClick={onUploadSubmit}
               className='control_btn'
               type='button'
               apply
             >
-              Обновить
+              Применить
             </CustomButton>
             <CustomButton
-              onClick={() => history.push('/')}
+              onClick={() => history.push(`/shop/${match.params.section}`)}
               className='control_btn'
               type='button'
             >
               Вернуться
             </CustomButton>
           </div>
-          {status && percentage ? (
-            <div className='upload_status'>
-              <p className='status'>{status}</p>
-              {percentage !== '100' ? (
-                <p className='percentage'>{percentage}%</p>
-              ) : null}
-            </div>
-          ) : null}
+          <div className='admin_status_container'>
+            {status && percentage ? (
+              <div className='upload_status'>
+                <p className='status'>{status}</p>
+                {percentage !== '100' ? (
+                  <p className='percentage'>{percentage}%</p>
+                ) : null}
+              </div>
+            ) : null}
+          </div>
         </React.Fragment>
-      ) : (
-        <SpinnerOverlay>
-          <p>Загрузка</p>
-          <SpinnerContainer />
-        </SpinnerOverlay>
-      )}
+      ) : null}
     </React.Fragment>
   );
 };
 
-export default EditSectionOrCollection;
+export default EditCollection;

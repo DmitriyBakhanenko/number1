@@ -29,9 +29,9 @@ const AdminBtns = ({ item, editLink, fireColl, isCollection }: Props) => {
       deleteItemFromCollection('collections', item.collectionId);
       deleteImage(`images/${item.collectionId}`, true);
     }
-    //setInterval(() => {
-    //window.location.reload();
-    //}, 1000);
+    setInterval(() => {
+      window.location.reload();
+    }, 1000);
   };
 
   const renderModal = () => {

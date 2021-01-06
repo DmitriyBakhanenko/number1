@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { selectCollections } from '../../redux/shop/shop.selectors';
 import CollectionItem from '../../components/collection-item/collection-item';
 
 import {
   SpinnerOverlay,
   SpinnerContainer,
 } from '../../components/with-spinner/with-spinner.styles';
-import { selectIsCollectionsLoaded } from '../../redux/shop/shop.selectors';
+import {
+  selectCollection,
+  selectIsCollectionsLoaded,
+} from '../../redux/shop/shop.selectors';
 import './collection.scss';
 import { useHistory, useRouteMatch } from 'react-router-dom';
 import { selectAdminMode } from '../../redux/admin/admin.selector';
@@ -25,10 +27,7 @@ const CollectionPage = () => {
   const match: any = useRouteMatch();
   const collectionName = match.params.collectionName;
   const collectionId = match.params.collectionId;
-  const collections: any = useSelector(selectCollections);
-  const collection: any = collections
-    ? Object.values(collections).filter((i: any) => i.docId === collectionId)
-    : null;
+  const collection: any = useSelector(selectCollection(collectionId));
 
   const Admin = () => (
     <React.Fragment>

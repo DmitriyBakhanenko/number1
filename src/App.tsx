@@ -45,7 +45,7 @@ const App = () => {
         />
         <Route
           exact
-          path={'/shop/:collectionId/:itemId'}
+          path={'/details/:collectionId/:itemId'}
           component={DetailsPage}
         />
         <Route
@@ -65,7 +65,7 @@ const App = () => {
         />
         <Route
           exact
-          path={'/admin/editcollection/:section/:itemId'}
+          path={'/admin/editcollection/:collectionId/:itemId'}
           component={EditCollectionPage}
         />
         <Route

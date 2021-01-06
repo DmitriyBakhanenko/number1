@@ -19,7 +19,7 @@ const AddCollection = () => {
   const [count, setCount] = useState(0);
   const [currentId, setCurrentId] = useState(0);
 
-  const [title, setTitle] = useState('');
+  const [name, setName] = useState('');
   const [price, setPrice] = useState(0);
   const [brand, setBrand] = useState('');
   const [country, setCountry] = useState('');
@@ -37,11 +37,13 @@ const AddCollection = () => {
   const match: any = useRouteMatch();
 
   const addItem = () => {
+    const id = Math.round(Math.random() * 1000000);
     addItemToCollection(
       'collections',
       {
+        id,
         imageUrl,
-        name: title,
+        name,
         childRef,
         price,
         brand,
@@ -64,9 +66,9 @@ const AddCollection = () => {
   useEffect(() => {
     if (childRef) {
       addItemRef.current();
-      setTimeout(() => {
-        window.location.replace('/');
-      }, 1000);
+      //setTimeout(() => {
+      //window.location.replace('/');
+      //}, 1000);
     }
   }, [childRef]);
 
@@ -134,7 +136,7 @@ const AddCollection = () => {
                   src={!!imageUrl ? imageUrl[currentId] : null}
                   alt=''
                 />
-                <div className='content-text'>{title}</div>
+                <div className='content-text'>{name}</div>
                 <input
                   className='upload_btn'
                   type='file'
@@ -224,8 +226,8 @@ const AddCollection = () => {
             <div className='admin_input_container'>
               <AdminInput
                 inputLabel={'Название продукта'}
-                inputValue={title}
-                setInput={setTitle}
+                inputValue={name}
+                setInput={setName}
               />
               <AdminInput
                 inputLabel={'Цена'}
