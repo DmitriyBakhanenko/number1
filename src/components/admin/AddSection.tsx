@@ -25,16 +25,13 @@ const AddSection = () => {
   const addItem = async () => {
     let link: string = path;
     if (!path.includes('shop/')) link = `shop/${path}`;
-    const id = Math.round(Math.random() * 1000000000);
     const response: any = addItemToCollection('collections', {
-      id,
       routeName: path,
       title,
       items: [],
     });
     const collectionId = await response;
     addItemToCollection('sections', {
-      id,
       imageUrl,
       linkUrl: link,
       title,
@@ -50,9 +47,9 @@ const AddSection = () => {
   useEffect(() => {
     if (childRef) {
       addItemRef.current();
-      //setTimeout(() => {
-      //window.location.replace('/');
-      //}, 1000);
+      setTimeout(() => {
+        window.location.replace('/');
+      }, 500);
     }
   }, [childRef]);
 

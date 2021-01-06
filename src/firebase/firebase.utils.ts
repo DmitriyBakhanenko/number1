@@ -13,18 +13,26 @@ const config = {
   measurementId: 'G-39DG6L3LWP',
 };
 
-export const deleteImage = (childRef: any) => {
-  console.log(childRef);
+export const deleteImage = (childRef: any, isListAll = false) => {
   const storageRef = storage.ref();
   const desertRef = storageRef.child(childRef);
 
-  desertRef
-    .delete()
-    .then(() => {
-      console.log('fileDeleted');
-    })
-    .catch((err: any) => {
-      console.log(err.message);
+  if (!isListAll)
+    desertRef
+      .delete()
+      .then(() => {
+        console.log('fileDeleted');
+      })
+      .catch((err: any) => {
+        console.log(err.message);
+      });
+  else
+    desertRef.listAll().then((res: any) => {
+      console.log(res);
+      res.items.forEach((item: any) => {
+        console.log(item);
+        item.delete();
+      });
     });
 };
 

@@ -37,11 +37,9 @@ const AddCollection = () => {
   const match: any = useRouteMatch();
 
   const addItem = () => {
-    const id = Math.round(Math.random() * 1000000000);
     addItemToCollection(
       'collections',
       {
-        id,
         imageUrl,
         name: title,
         childRef,
@@ -82,7 +80,6 @@ const AddCollection = () => {
       };
       reader.readAsDataURL(e.target.files[0]);
     } else {
-      console.log('else');
       const fArr = file.map((item: any, idx: number) =>
         idx === currentId ? e.target.files[0] : item
       );
@@ -106,7 +103,7 @@ const AddCollection = () => {
 
   const onUploadSubmit = () => {
     uploadImageCollection(
-      `images/${match.params.section}/`,
+      `images/${match.params.docId}/`,
       file,
       setStatus,
       setPercentage,

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -24,12 +24,13 @@ const App = () => {
   const dispatch = useDispatch();
   const currentUser = useSelector(selectCurrentUser);
   const cartIsEmpty = useSelector(selectIfCartIsEmpty);
-
-  useEffect(() => {
+  const fetchRef = useRef(() => {
     dispatch(checkUserSession());
     dispatch(fetchDirectoryStart());
     dispatch(fetchCollectionsStart());
-  }, [dispatch]);
+  });
+
+  useEffect(() => fetchRef.current(), []);
 
   return (
     <div>

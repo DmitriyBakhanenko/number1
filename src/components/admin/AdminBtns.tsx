@@ -23,11 +23,15 @@ const AdminBtns = ({ item, editLink, fireColl, isCollection }: Props) => {
   const [toggleModal, setToggleModal] = useState(false);
 
   const onSubmit = () => {
-    deleteImage(item.childRef);
-    deleteItemFromCollection(fireColl, item.id);
-    setInterval(() => {
-      window.location.reload();
-    }, 1000);
+    if (isCollection) {
+      deleteImage(item.childRef);
+      deleteItemFromCollection(fireColl, item.id);
+      deleteItemFromCollection('collections', item.collectionId);
+      deleteImage(`images/${item.collectionId}`, true);
+    }
+    //setInterval(() => {
+    //window.location.reload();
+    //}, 1000);
   };
 
   const renderModal = () => {
