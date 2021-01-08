@@ -24,6 +24,7 @@ const App = () => {
   const dispatch = useDispatch();
   const currentUser = useSelector(selectCurrentUser);
   const cartIsEmpty = useSelector(selectIfCartIsEmpty);
+
   const fetchRef = useRef(() => {
     dispatch(checkUserSession());
     dispatch(fetchDirectoryStart());
@@ -45,7 +46,7 @@ const App = () => {
         />
         <Route
           exact
-          path={'/details/:collectionId/:itemId'}
+          path={'/details/:section/:collectionId/:itemId'}
           component={DetailsPage}
         />
         <Route
@@ -65,7 +66,7 @@ const App = () => {
         />
         <Route
           exact
-          path={'/admin/editcollection/:collectionId/:itemId'}
+          path={'/admin/editcollection/:section/:collectionId/:docId'}
           component={EditCollectionPage}
         />
         <Route

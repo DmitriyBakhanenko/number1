@@ -10,7 +10,10 @@ import {
 } from '../../firebase/firebase.utils';
 import { useHistory, useRouteMatch } from 'react-router-dom';
 import AdminInput from './AdminInput';
-import { selectCollection } from '../../redux/shop/shop.selectors';
+import {
+  selectCollection,
+  selectIsCollectionsLoaded,
+} from '../../redux/shop/shop.selectors';
 
 const EditCollection = () => {
   const [imageUrl, setImageUrl]: any = useState([]);
@@ -33,20 +36,27 @@ const EditCollection = () => {
   const [fastener, setFastener] = useState('');
   const [sizes, setSizes] = useState('');
   const [startUpdate, setStartUpdate] = useState(false);
+  const isLoaded = useSelector(selectIsCollectionsLoaded);
+  const [currentStatus, setCurrentStatus] = useState(isLoaded);
+
+  useEffect(() => {
+    setCurrentStatus(isLoaded);
+  }, [isLoaded]);
 
   const uploadRef: any = useRef();
   const admin = useSelector(selectAdminMode);
   const history = useHistory();
   const match: any = useRouteMatch();
-
   const collection: any = useSelector(
     selectCollection(match.params.collectionId)
   );
-  const item: any = collection[0].items.filter(
-    (i: any) => Number(i.id) === Number(match.params.itemId)
-  );
 
   const fetchItem = () => {
+    console.log(collection);
+    const item: any = collection[0].items.filter(
+      (i: any) => Number(i.id) === Number(match.params.docId)
+    );
+    console.log(item);
     const {
       name,
       price,
@@ -78,11 +88,10 @@ const EditCollection = () => {
   const fetchItemRef = useRef(fetchItem);
 
   const addItem = () => {
-    const { id } = item[0];
     addItemToCollection(
       'collections',
       {
-        id,
+        id: match.params.docId,
         imageUrl,
         name,
         childRef,
@@ -97,21 +106,30 @@ const EditCollection = () => {
         fastener,
         sizes,
       },
-      match.params.docId
+      match.params.collectionId
     );
   };
 
   const addItemRef: any = useRef();
   addItemRef.current = addItem;
+  const reload: any = useRef(() => {
+    setTimeout(() => {
+      window.location.replace(
+        `/shop/${match.params.section}/${match.params.collectionId}`
+      );
+    }, 1000);
+  });
 
-  useEffect(() => fetchItemRef.current(), []);
+  useEffect(() => {
+    if (currentStatus) {
+      fetchItemRef.current();
+    }
+  }, [currentStatus]);
 
   useEffect(() => {
     if (startUpdate) {
       addItemRef.current();
-      setTimeout(() => {
-        window.location.replace('/');
-      }, 1000);
+      reload.current();
     }
   }, [startUpdate]);
 
@@ -148,7 +166,7 @@ const EditCollection = () => {
 
   const onUploadSubmit = () => {
     if (file) {
-      deleteImage(`images/${match.params.docId}`);
+      deleteImage(`images/${match.params.docId}`, true);
       uploadImageCollection(
         `images/${match.params.docId}/`,
         file,
@@ -338,7 +356,11 @@ const EditCollection = () => {
               Применить
             </CustomButton>
             <CustomButton
-              onClick={() => history.push(`/shop/${match.params.section}`)}
+              onClick={() =>
+                history.push(
+                  `/shop/${match.params.section}/${match.params.collectionId}`
+                )
+              }
               className='control_btn'
               type='button'
             >

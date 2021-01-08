@@ -14,7 +14,7 @@ const CollectionItem = ({ item, collectionId, collectionName }: any) => {
   const admin = useSelector(selectAdminMode);
 
   const showDetails = () => {
-    history.push(`/details/${collectionId}/${item.id}`);
+    history.push(`/details/${collectionName}/${collectionId}/${item.id}`);
   };
 
   return (
@@ -31,7 +31,7 @@ const CollectionItem = ({ item, collectionId, collectionName }: any) => {
       {admin ? (
         <AdminBtns
           item={item}
-          editLink={`/admin/editcollection/${collectionId}/${item.id}`}
+          editLink={`/admin/editcollection/${collectionName}/${collectionId}/${item.id}`}
           fireColl={`collections/${collectionName}`}
         />
       ) : (

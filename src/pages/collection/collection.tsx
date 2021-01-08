@@ -57,9 +57,8 @@ const CollectionPage = () => {
 
   const Item = () => (
     <React.Fragment>
-      {currentStatus && collection[0] && collection[0].items ? (
+      {currentStatus && collection[0].items ? (
         <React.Fragment>
-          {console.log(collection[0])}
           {collection[0].items.map((item: any) => (
             <CollectionItem
               key={item.id}

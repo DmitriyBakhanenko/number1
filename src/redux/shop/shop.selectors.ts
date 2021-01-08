@@ -11,7 +11,7 @@ export const selectCollection = (collectionId: any) =>
   createSelector([selectCollections], (collections) =>
     collections
       ? Object.values(collections).filter((i: any) => i.docId === collectionId)
-      : null
+      : console.log('no collection selected ' + collectionId)
   );
 
 export const selectIsCollectionFetching = createSelector(

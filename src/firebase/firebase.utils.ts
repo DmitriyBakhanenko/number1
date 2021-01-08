@@ -175,17 +175,21 @@ export const addItemToCollection = async (
   const batch = firestore.batch();
 
   if (docId) {
+    console.log(docId);
     const docRef = collectionRef.doc(docId);
     const snapshot: any = await docRef.get();
     const fireObj: any = await snapshot.data();
     let fireArr = [];
+    console.log(fireObj);
     if (fireObj.items)
-      fireArr = fireObj.items.filter((i: any) => i.id !== objectToAdd.id);
+      fireArr = fireObj.items.filter(
+        (i: any) => Number(i.id) !== Number(objectToAdd.id)
+      );
     fireObj.items = [...fireArr, objectToAdd];
     batch.update(docRef, fireObj);
   } else {
     const newDocRef = collectionRef.doc();
-    batch.set(newDocRef, objectToAdd);
+    batch.set(newDocRef, { ...objectToAdd, id: newDocRef.id });
     await batch.commit();
     return newDocRef.id;
   }

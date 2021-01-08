@@ -37,7 +37,7 @@ const AddCollection = () => {
   const match: any = useRouteMatch();
 
   const addItem = () => {
-    const id = Math.round(Math.random() * 1000000);
+    const id = Math.round(Math.random() * 1000000000);
     addItemToCollection(
       'collections',
       {
@@ -66,9 +66,9 @@ const AddCollection = () => {
   useEffect(() => {
     if (childRef) {
       addItemRef.current();
-      //setTimeout(() => {
-      //window.location.replace('/');
-      //}, 1000);
+      setTimeout(() => {
+        window.location.replace('/');
+      }, 1000);
     }
   }, [childRef]);
 
@@ -291,7 +291,11 @@ const AddCollection = () => {
               Применить
             </CustomButton>
             <CustomButton
-              onClick={() => history.push(`/shop/${match.params.section}`)}
+              onClick={() =>
+                history.push(
+                  `/shop/${match.params.section}/${match.params.docId}`
+                )
+              }
               className='control_btn'
               type='button'
             >
