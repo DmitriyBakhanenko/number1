@@ -18,7 +18,7 @@
     width: 80%;
     opacity: 0.7;
     position: absolute;
-    top: 255px;
+    top: 275px;
     display: none;
   }
 
@@ -41,12 +41,11 @@
     font-size: 18px;
 
     .name {
-      width: 90%;
       margin-bottom: 15px;
     }
 
     .price {
-      width: 10%;
+      color: black;
     }
   }
 

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@googlemaps/js-api-loader": "^1.11.1",
     "axios": "^0.21.0",
     "firebase": "^7.15.5",
     "react": "^17.0.1",
@@ -22,6 +23,7 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "@types/googlemaps": "^3.43.1",
     "@types/jest": "^26.0.16",
     "@types/node": "^14.14.10",
     "@types/react": "^17.0.0",

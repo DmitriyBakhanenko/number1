@@ -19,11 +19,7 @@ const CollectionItem = ({ item, collectionId, collectionName }: any) => {
 
   return (
     <div className='collection-item'>
-      <div
-        className='image'
-        onClick={showDetails}
-        style={{ backgroundImage: `url(${imageUrl})` }}
-      />
+      <img className='image' onClick={showDetails} src={imageUrl} alt='' />
       <div className='collection-footer'>
         <span className='name'>{name}</span>
         <span className='price'>{price}</span>
