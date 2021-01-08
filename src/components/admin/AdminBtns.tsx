@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useRouteMatch } from 'react-router-dom';
 import {
   deleteImage,
   deleteItemFromCollection,
@@ -13,7 +13,7 @@ import './adminBtns.scss';
 interface Props {
   item: any;
   editLink: string;
-  fireColl: string;
+  fireColl?: string;
   isCollection?: boolean;
 }
 
@@ -21,17 +21,25 @@ const AdminBtns = ({ item, editLink, fireColl, isCollection }: Props) => {
   const admin = useSelector(selectAdminMode);
   const history = useHistory();
   const [toggleModal, setToggleModal] = useState(false);
+  const match: any = useRouteMatch();
 
   const onSubmit = () => {
-    if (isCollection) {
+    if (isCollection && fireColl) {
       deleteImage(item.childRef);
       deleteItemFromCollection(fireColl, item.id);
       deleteItemFromCollection('collections', item.collectionId);
       deleteImage(`images/${item.collectionId}`, true);
+    } else {
+      deleteImage(`images/${item.id}`, true);
+      deleteItemFromCollection(
+        'collections',
+        match.params.collectionId,
+        item.id
+      );
     }
-    setInterval(() => {
-      window.location.reload();
-    }, 1000);
+    //setInterval(() => {
+    //window.location.reload();
+    //}, 1000);
   };
 
   const renderModal = () => {

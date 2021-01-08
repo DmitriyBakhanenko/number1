@@ -32,7 +32,6 @@ const CollectionItem = ({ item, collectionId, collectionName }: any) => {
         <AdminBtns
           item={item}
           editLink={`/admin/editcollection/${collectionName}/${collectionId}/${item.id}`}
-          fireColl={`collections/${collectionName}`}
         />
       ) : (
         <CustomButton onClick={() => dispatch(addItem(item))} inverted>

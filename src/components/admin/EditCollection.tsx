@@ -52,7 +52,7 @@ const EditCollection = () => {
   );
 
   const fetchItem = () => {
-    console.log(collection);
+    if (!collection) return;
     const item: any = collection[0].items.filter(
       (i: any) => Number(i.id) === Number(match.params.docId)
     );
@@ -69,6 +69,7 @@ const EditCollection = () => {
       fabricSettings,
       fastener,
       sizes,
+      imageUrl,
     } = item[0];
     name ? setName(name) : console.log('no name');
     price ? setPrice(price) : console.log('no price');
@@ -83,6 +84,8 @@ const EditCollection = () => {
       : console.log('no fabricSettings');
     fastener ? setFastener(fastener) : console.log('no fastener');
     sizes ? setSizes(sizes) : console.log('no sizes');
+    imageUrl ? setImageUrl(imageUrl) : console.log('no image url');
+    imageUrl.length > 0 ? setCount(imageUrl.length) : console.log('no count');
   };
 
   const fetchItemRef = useRef(fetchItem);
@@ -165,7 +168,7 @@ const EditCollection = () => {
   };
 
   const onUploadSubmit = () => {
-    if (file) {
+    if (file.length > 0) {
       deleteImage(`images/${match.params.docId}`, true);
       uploadImageCollection(
         `images/${match.params.docId}/`,
@@ -198,7 +201,7 @@ const EditCollection = () => {
               <div onClick={uploadFile} className='collection-item'>
                 <img
                   className='image'
-                  src={!!imageUrl ? imageUrl[currentId] : null}
+                  src={imageUrl.length > 0 ? imageUrl[currentId] : null}
                   alt=''
                 />
                 <div className='content-text'>{name}</div>

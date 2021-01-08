@@ -10,7 +10,7 @@ export const selectCollections = createSelector(
 export const selectCollection = (collectionId: any) =>
   createSelector([selectCollections], (collections) =>
     collections
-      ? Object.values(collections).filter((i: any) => i.docId === collectionId)
+      ? Object.values(collections).filter((i: any) => i.id === collectionId)
       : console.log('no collection selected ' + collectionId)
   );
 

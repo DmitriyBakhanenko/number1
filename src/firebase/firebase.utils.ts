@@ -175,12 +175,10 @@ export const addItemToCollection = async (
   const batch = firestore.batch();
 
   if (docId) {
-    console.log(docId);
     const docRef = collectionRef.doc(docId);
     const snapshot: any = await docRef.get();
     const fireObj: any = await snapshot.data();
     let fireArr = [];
-    console.log(fireObj);
     if (fireObj.items)
       fireArr = fireObj.items.filter(
         (i: any) => Number(i.id) !== Number(objectToAdd.id)
@@ -198,13 +196,27 @@ export const addItemToCollection = async (
 
 export const deleteItemFromCollection = async (
   collectionKey: string,
-  objectKey: string
+  objectKey: string,
+  docId?: any
 ) => {
   const collectionRef = firestore.collection(collectionKey);
   const batch = firestore.batch();
 
-  const delDocRef = collectionRef.doc(objectKey);
-  batch.delete(delDocRef);
+  if (docId) {
+    const docRef = collectionRef.doc(objectKey);
+    const snapshot: any = await docRef.get();
+    const fireObj: any = await snapshot.data();
+    let fireArr = [];
+    if (fireObj.items)
+      fireArr = fireObj.items.filter(
+        (i: any) => Number(i.id) !== Number(docId)
+      );
+    fireObj.items = fireArr;
+    batch.update(docRef, fireObj);
+  } else {
+    const delDocRef = collectionRef.doc(objectKey);
+    batch.delete(delDocRef);
+  }
   return await batch.commit();
 };
 

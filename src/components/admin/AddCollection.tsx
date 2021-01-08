@@ -19,6 +19,7 @@ const AddCollection = () => {
   const [count, setCount] = useState(0);
   const [currentId, setCurrentId] = useState(0);
 
+  const [id, setId]: any = useState();
   const [name, setName] = useState('');
   const [price, setPrice] = useState(0);
   const [brand, setBrand] = useState('');
@@ -37,7 +38,6 @@ const AddCollection = () => {
   const match: any = useRouteMatch();
 
   const addItem = () => {
-    const id = Math.round(Math.random() * 1000000000);
     addItemToCollection(
       'collections',
       {
@@ -62,13 +62,18 @@ const AddCollection = () => {
 
   const addItemRef: any = useRef();
   addItemRef.current = addItem;
+  const reload: any = useRef(() => {
+    setTimeout(() => {
+      window.location.replace(
+        `/shop/${match.params.section}/${match.params.docId}`
+      );
+    }, 1000);
+  });
 
   useEffect(() => {
     if (childRef) {
       addItemRef.current();
-      setTimeout(() => {
-        window.location.replace('/');
-      }, 1000);
+      reload.current();
     }
   }, [childRef]);
 
@@ -104,8 +109,10 @@ const AddCollection = () => {
   };
 
   const onUploadSubmit = () => {
+    const id = Math.round(Math.random() * 1000000000);
+    setId(id);
     uploadImageCollection(
-      `images/${match.params.docId}/`,
+      `images/${id}/`,
       file,
       setStatus,
       setPercentage,
