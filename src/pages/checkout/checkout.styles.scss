@@ -35,4 +35,38 @@
     font-size: 1.5rem;
     text-align: center;
   }
+
+  .payment {
+    display: flex;
+    margin: 30px;
+  }
+
+  .payment_form {
+    display: flex;
+    flex-direction: column;
+
+    .pay_row {
+      margin: 10px;
+      display: flex;
+      justify-content: space-between;
+
+      .pay_label {
+        margin-right: 10px;
+        margin-top: 5px;
+      }
+
+      .pay_input {
+        outline: none;
+        border: none;
+        border-bottom: solid 1px black;
+        height: 30px;
+        font-size: 16px;
+        justify-self: end;
+        background-color: #fcf6f5ff;
+      }
+    }
+    .pay_btn {
+      margin-top: 30px;
+    }
+  }
 }

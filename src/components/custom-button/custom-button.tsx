@@ -1,4 +1,5 @@
 import React from 'react';
+
 import './custom-button.scss';
 
 interface Props {
@@ -10,6 +11,8 @@ interface Props {
   onClick?: () => void;
   type?: any;
   className?: string;
+  component?: any;
+  ref?: any;
 }
 
 const CustomButton: React.FC<Props> = ({

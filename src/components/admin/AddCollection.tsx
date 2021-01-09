@@ -127,6 +127,7 @@ const AddCollection = () => {
 
   const handleIncrement = () => {
     setCount(count + 1);
+    setCurrentId(count + 1);
   };
 
   if (!admin) return <h1>Режим админа не включен</h1>;

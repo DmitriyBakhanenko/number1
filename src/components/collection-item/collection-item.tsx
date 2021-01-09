@@ -22,7 +22,7 @@ const CollectionItem = ({ item, collectionId, collectionName }: any) => {
       <img className='image' onClick={showDetails} src={imageUrl} alt='' />
       <div className='collection-footer'>
         <span className='name'>{name}</span>
-        <span className='price'>{price}</span>
+        <span className='price'>{price}грн.</span>
       </div>
       {admin ? (
         <AdminBtns

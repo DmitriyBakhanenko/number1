@@ -1,0 +1,64 @@
+import React, { useEffect, useRef } from 'react';
+import Map from 'ol/Map';
+import View from 'ol/View';
+import TileLayer from 'ol/layer/Tile';
+import XYZ from 'ol/source/XYZ';
+import { fromLonLat } from 'ol/proj';
+import Feature from 'ol/Feature';
+import Point from 'ol/geom/Point';
+import VectorLayer from 'ol/layer/Vector';
+import VectorSource from 'ol/source/Vector';
+import { Style, Circle as CircleStyle, Fill, Stroke } from 'ol/style';
+
+const ContactPage = () => {
+  const mapRef: any = useRef();
+
+  const geoMarker = new Feature({
+    type: 'geoMarker',
+    geometry: new Point(fromLonLat([30.51867874857184, 50.42134914372104])),
+  });
+
+  const styles = {
+    geoMarker: new Style({
+      image: new CircleStyle({
+        radius: 7,
+        fill: new Fill({ color: 'black' }),
+        stroke: new Stroke({
+          color: 'white',
+          width: 2,
+        }),
+      }),
+    }),
+  };
+  useEffect(() => {
+    const mapOptions = {
+      center: fromLonLat([30.51867874857184, 50.42134914372104]),
+      zoom: 18,
+    };
+    new Map({
+      target: mapRef.current,
+      layers: [
+        new TileLayer({
+          source: new XYZ({
+            url: 'https://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+          }),
+        }),
+        new VectorLayer({
+          source: new VectorSource({
+            features: [geoMarker],
+          }),
+        }),
+      ],
+      view: new View(mapOptions),
+    });
+  }, [mapRef]);
+
+  return (
+    <div>
+      <div>CONTACT PAGE</div>
+      <div ref={mapRef} id='map' style={{ width: '80vw', height: '60vh' }} />
+    </div>
+  );
+};
+
+export default ContactPage;

@@ -26,7 +26,7 @@ const CheckoutItem = ({ cartItem }: any) => {
           &#10095;
         </div>
       </span>
-      <span className='price'>{price * quantity}$</span>
+      <span className='price'>{price * quantity}₴</span>
       <span
         className='remove-button'
         onClick={() => dispatch(clearItemFromCart(cartItem))}

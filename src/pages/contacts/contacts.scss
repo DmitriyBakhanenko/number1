@@ -1,0 +1,20 @@
+.ctc_main_cont {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 20px;
+  align-items: center;
+
+  .ctc_title {
+    margin-bottom: 10px;
+  }
+
+  .ctc_adress {
+    margin-top: 10px;
+  }
+
+  .ctc_tel {
+    font-size: 1.5rem;
+    margin: 10px;
+  }
+}

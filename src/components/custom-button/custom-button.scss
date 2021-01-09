@@ -15,6 +15,7 @@
   cursor: pointer;
   display: flex;
   justify-content: center;
+  outline: none;
 
   &:hover {
     background-color: white;
@@ -38,7 +39,7 @@
 
     &:hover {
       background-color: lightgreen;
-      color: black; 
+      color: black;
     }
   }
 
