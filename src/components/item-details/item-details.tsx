@@ -1,15 +1,17 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { useRouteMatch } from 'react-router-dom';
+import { useHistory, useRouteMatch } from 'react-router-dom';
 import CustomButton from '../custom-button/custom-button';
 import { selectCollection } from '../../redux/shop/shop.selectors';
 import { addItem } from '../../redux/cart/cart.actions';
 //import { ReactComponent as CloseBtn } from '../../assets/times-solid.svg';
 
 import { useDispatch } from 'react-redux';
+import './item-details.scss';
 
 const ItemDetails = () => {
   const match: any = useRouteMatch();
+  const history = useHistory();
   const dispatch = useDispatch();
   const collection: any = useSelector(
     selectCollection(match.params.collectionId)
@@ -33,73 +35,90 @@ const ItemDetails = () => {
     sizes,
   } = item[0];
   return (
-    <div id='overlay'>
-      <div className='overlay-item-container'>
-        <img className='overlay-img' src={imageUrl[0]} alt='' />
-        <div className='overlay-product-info'>
-          <div className='overlay-controls'>
-            <div
-              className='close-btn-container'
-              onClick={() => {
-                /*  TODO */
-              }}
-            >
-              {/*              <CloseBtn />  */}
-            </div>
-          </div>
-          <div className='overlay-info'>
-            <h1 className='overlay-product-tittle'>{name}</h1>
-            <h2 className='overlay-product-price'>{price}$</h2>
+    <div className='details_item_container'>
+      <div className='details_header'>
+        <h1 className='details_product_tittle'>{name}</h1>
+        <h1 className='details_product_price'>{price} грн</h1>
+      </div>
+      <div className='details_product_container'>
+        <img className='details_img' src={imageUrl[0]} alt='' />
+        <div className='details_product_info'>
+          <table className='details_table'>
             {brand ? (
-              <p className='overlay-product-brand'>
-                <strong>Бренд:</strong> <span>{brand}</span>
-              </p>
+              <tr>
+                <th>Бренд</th>
+                <th>{brand}</th>
+              </tr>
             ) : null}
             {country ? (
-              <p className='overlay-product-brand'>
-                <strong>Страна:</strong> <span>{country}</span>
-              </p>
+              <tr>
+                <th>Страна</th>
+                <th>{country}</th>
+              </tr>
             ) : null}
             {landing ? (
-              <p className='overlay-product-brand'>
-                <strong>Посадка:</strong> <span>{landing}</span>
-              </p>
+              <tr>
+                <th>Посадка</th>
+                <th>{landing}</th>
+              </tr>
             ) : null}
             {style ? (
-              <p className='overlay-product-brand'>
-                <strong>Стиль:</strong> <span>{style}</span>
-              </p>
+              <tr>
+                <th>Стиль</th>
+                <th>{style}</th>
+              </tr>
             ) : null}
             {color ? (
-              <p className='overlay-product-brand'>
-                <strong>Цвет:</strong> <span>{color}</span>
-              </p>
+              <tr>
+                <th>Цвет</th>
+                <th>{color}</th>
+              </tr>
             ) : null}
             {fabricType ? (
-              <p className='overlay-product-brand'>
-                <strong>Тип ткани:</strong> <span>{fabricType}</span>
-              </p>
+              <tr>
+                <th>Тип ткани</th>
+                <th>{fabricType}</th>
+              </tr>
             ) : null}
             {fabricSettings ? (
-              <p className='overlay-product-brand'>
-                <strong>Свойства ткани:</strong> <span>{fabricSettings}</span>
-              </p>
+              <tr>
+                <th>Свойства ткани</th>
+                <th>{fabricSettings}</th>
+              </tr>
             ) : null}
             {fastener ? (
-              <p className='overlay-product-brand'>
-                <strong>Застежка:</strong> <span>{fastener}</span>
-              </p>
+              <tr>
+                <th>Застежка</th>
+                <th>{fastener}</th>
+              </tr>
             ) : null}
             {sizes ? (
-              <p className='overlay-product-brand'>
-                <strong>Размеры:</strong> <span>{sizes}</span>
-              </p>
+              <tr>
+                <th>Размеры</th>
+                <th>{sizes}</th>
+              </tr>
             ) : null}
-          </div>
-          <CustomButton onClick={() => dispatch(addItem(item[0]))} overlay>
-            Добавить в корзину
-          </CustomButton>
+          </table>
         </div>
+      </div>
+      <div className='details_btns'>
+        <CustomButton
+          className='details_back_btn'
+          onClick={() =>
+            history.push(
+              `/shop/${match.params.section}/${match.params.collectionId}`
+            )
+          }
+        >
+          Вернуться
+        </CustomButton>
+        <CustomButton
+          className='details_add_btn'
+          onClick={() => dispatch(addItem(item[0]))}
+          overlay
+        >
+          Добавить в корзину
+        </CustomButton>
       </div>
     </div>
   );
