@@ -5,7 +5,7 @@ import {
   selectCartTotal,
 } from '../../redux/cart/cart.selectors';
 import CheckoutItem from '../../components/checkout-item/checkout-item';
-//import StripeCheckoutBtn from '../../components/stripe-btn/stripe-btn.component';
+import StripeCheckoutBtn from '../../components/stripe-btn/stripe-btn.component';
 import { useSelector } from 'react-redux';
 import CustomButton from '../../components/custom-button/custom-button';
 
@@ -47,14 +47,14 @@ const CheckoutPage = () => {
       <div className='total'>
         <span>Всего: {total}₴</span>
       </div>
-      {/*<div className='test-warning'>
+      <div className='test-warning'>
         *Данные для тестовой оплаты карты*
         <br />
         4242 4242 4242 4242 - Exp: 01/21 - CVV: 123
-          </div>
+      </div>
       <div className='stripe-btn'>
         <StripeCheckoutBtn price={total} />
-      </div>*/}
+      </div>
       <div className='payment'>
         <CustomButton onClick={stripeCheckout}>Оплата картой</CustomButton>
         <CustomButton inverted={inverted} onClick={deliveryPayment}>

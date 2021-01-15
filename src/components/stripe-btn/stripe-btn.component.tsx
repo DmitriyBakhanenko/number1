@@ -38,7 +38,7 @@ const StripeCheckoutBtn = ({ price }: any) => {
       name='Number1 Ltd.'
       billingAddress
       shippingAddress
-      image='../../../public/favicon-16x16.png'
+      image=''
       description={`Your total is: ₴${price}`}
       amount={priceForStripe}
       panelLabel='Pay Now'
