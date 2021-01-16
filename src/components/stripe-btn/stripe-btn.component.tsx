@@ -12,6 +12,12 @@ const StripeCheckoutBtn = ({ price }: any) => {
     'pk_test_51HpHg6FlzvANYvNV4E37iWhqiosVdlMXvho3IIwea2am8YFctygmeHBzwWTpUrtbfIKeTcedPHEZgDgMTX3Ahbvw00nNXQ7Yxg';
 
   const onToken = (token: any) => {
+    const config = {
+      headers: {
+        'content-type': 'application/javascript',
+      },
+    };
+
     axios({
       url: 'payment',
       method: 'post',
@@ -19,6 +25,7 @@ const StripeCheckoutBtn = ({ price }: any) => {
         amount: priceForStripe,
         token,
       },
+      config,
     })
       .then((_response) => {
         alert('Payment successful!');
