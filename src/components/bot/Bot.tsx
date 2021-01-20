@@ -12,7 +12,8 @@ const Bot = () => {
   const [animeClass, setAnimeClass] = useState('bot_contact_icon_initialState');
 
   const botIconRef: any = useRef();
-  const showBot = () => {
+
+  const handleBotShow = () => {
     if (animeClass === 'bot_contact_icon_secondState') return;
     setAnimeClass('bot_contact_icon_show');
     setTimeout(() => {
@@ -52,7 +53,7 @@ const Bot = () => {
   };
 
   return (
-    <div ref={botIconRef} onClick={showBot} className={animeClass}>
+    <div ref={botIconRef} onClick={handleBotShow} className={animeClass}>
       <img
         src={PhoneIcon}
         alt='PhoneIcon'

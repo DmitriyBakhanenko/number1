@@ -3,6 +3,7 @@ import StripeCheckout from 'react-stripe-checkout';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { paymentSuccess } from '../../redux/user/user.actions';
+import Image from '../../assets/favicon-32x32.png';
 
 // TODO - price, paymentSuccess
 const StripeCheckoutBtn = ({ price }: any) => {
@@ -21,12 +22,12 @@ const StripeCheckoutBtn = ({ price }: any) => {
       },
     })
       .then((_response) => {
-        alert('Payment successful!');
+        alert('Оплата произведена успешно!');
         dispatch(paymentSuccess());
       })
       .catch((err) => {
         alert(
-          'There was an issue with your payment. Please make sure you have provided the correct credit card credentials.'
+          'Ошибка при оплате. Пожалуйста убедитесь, что Вы ввели коректные данные карты.'
         );
         console.log('payment error', JSON.parse(err));
       });
@@ -34,14 +35,14 @@ const StripeCheckoutBtn = ({ price }: any) => {
 
   return (
     <StripeCheckout
-      label='Pay Now'
-      name='Number1 Ltd.'
+      label='Оплата картой'
+      name='Number1 Ltd'
       billingAddress
       shippingAddress
-      image=''
-      description={`Your total is: ₴${price}`}
+      image={Image}
+      description={`Сумма Вашего заказа: ₴${price}`}
       amount={priceForStripe}
-      panelLabel='Pay Now'
+      panelLabel='Оплата картой'
       token={onToken}
       stripeKey={publishableKey}
     />

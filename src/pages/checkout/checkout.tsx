@@ -14,8 +14,11 @@ const CheckoutPage = () => {
   const total = useSelector(selectCartTotal);
   const [inverted, setInverted] = useState(false);
 
+  const stripeRef: any = useRef();
+
   const stripeCheckout = () => {
-    console.log('stripe payment');
+    setInverted(false);
+    stripeRef.current.click();
   };
 
   const deliveryPayment = () => {
@@ -52,12 +55,16 @@ const CheckoutPage = () => {
         <br />
         4242 4242 4242 4242 - Exp: 01/21 - CVV: 123
       </div>
-      <div className='stripe-btn'>
+      <div className='stripe-btn' ref={stripeRef} style={{ display: 'none' }}>
         <StripeCheckoutBtn price={total} />
       </div>
       <div className='payment'>
         <CustomButton onClick={stripeCheckout}>Оплата картой</CustomButton>
-        <CustomButton inverted={inverted} onClick={deliveryPayment}>
+        <CustomButton
+          className='pay_delivery_btn'
+          inverted={inverted}
+          onClick={deliveryPayment}
+        >
           Оплата при получении
         </CustomButton>
       </div>
