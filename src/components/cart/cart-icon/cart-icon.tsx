@@ -13,8 +13,8 @@ const CartIcon = ({ color }: Props) => {
   const itemCount = useSelector(selectCartItemsCount);
 
   return (
-    <div onClick={() => dispatch(toggleCartHidden())}>
-      <ShopingIcon stroke={color} fill={color} className='shop_icon' />
+    <div className='shop_icon' onClick={() => dispatch(toggleCartHidden())}>
+      <ShopingIcon stroke={color} fill={color} />
       <span className='items_count'>{itemCount}</span>
     </div>
   );

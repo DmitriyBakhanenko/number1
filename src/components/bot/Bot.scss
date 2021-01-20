@@ -7,7 +7,7 @@
   height: 80px;
   border-radius: 30%;
   border: black solid 2px;
-  background-color: lightgreen;
+  background-color: darken($color: white, $amount: 2%);
 
   .bot_phone_icon {
     padding: 1px;
@@ -62,6 +62,7 @@
       .bot_btns {
         display: flex;
         width: 300px;
+        margin-top: 10px;
 
         .bot_btn {
           width: 150px;
