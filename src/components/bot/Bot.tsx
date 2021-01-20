@@ -37,7 +37,7 @@ const Bot = () => {
     }
     if (tel || text) {
       axios({
-        url: 'http://13.58.115.150:5000/post',
+        url: 'http://13.58.115.150:5000/message',
         method: 'POST',
         data: { name, tel, text },
       })

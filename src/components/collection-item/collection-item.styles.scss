@@ -1,16 +1,18 @@
 .collection-item {
-  width: 20vw;
+  width: 100px;
   display: flex;
   flex-direction: column;
   height: 350px;
   align-items: center;
   position: relative;
+  border: #696969 solid 1px;
 
   .image {
     width: 100%;
     height: 100%;
     background-size: cover;
     background-position: center;
+    padding: 6px;
     cursor: pointer;
   }
 
@@ -18,7 +20,7 @@
     width: 80%;
     opacity: 0.7;
     position: absolute;
-    top: 275px;
+    top: 315px;
     display: none;
   }
 
@@ -35,14 +37,11 @@
 
   .collection-footer {
     width: 100%;
-    height: 5%;
     display: flex;
     justify-content: space-between;
-    font-size: 18px;
-
-    .name {
-      margin-bottom: 15px;
-    }
+    font-size: 20px;
+    padding: 0 10px;
+    margin-bottom: 10px;
 
     .price {
       color: black;

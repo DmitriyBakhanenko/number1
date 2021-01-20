@@ -14,7 +14,7 @@ const StripeCheckoutBtn = ({ price }: any) => {
 
   const onToken = (token: any) => {
     axios({
-      url: 'http://18.191.152.175:5000/payment',
+      url: 'http://13.58.115.150:5000/payment',
       method: 'POST',
       data: {
         amount: priceForStripe,
@@ -29,7 +29,7 @@ const StripeCheckoutBtn = ({ price }: any) => {
         alert(
           'Ошибка при оплате. Пожалуйста убедитесь, что Вы ввели коректные данные карты.'
         );
-        console.log('payment error', JSON.parse(err));
+        console.log('payment error', err.message);
       });
   };
 
@@ -45,6 +45,7 @@ const StripeCheckoutBtn = ({ price }: any) => {
       panelLabel='Оплата картой'
       token={onToken}
       stripeKey={publishableKey}
+      locale='auto'
     />
   );
 };

@@ -6,25 +6,59 @@ import {
 } from '../../redux/cart/cart.selectors';
 import CheckoutItem from '../../components/checkout-item/checkout-item';
 import StripeCheckoutBtn from '../../components/stripe-btn/stripe-btn.component';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import CustomButton from '../../components/custom-button/custom-button';
+import axios from 'axios';
+import { paymentSuccess } from '../../redux/user/user.actions';
 
 const CheckoutPage = () => {
   const cartItems = useSelector(selectCartItems);
   const total = useSelector(selectCartTotal);
   const [inverted, setInverted] = useState(false);
+  const [name, setName] = useState('');
+  const [tel, setTel] = useState('');
+  const [place, setPlace] = useState('');
+  const [department, setDepartment] = useState('');
+  const dispatch = useDispatch();
 
   const stripeRef: any = useRef();
 
   const stripeCheckout = () => {
     setInverted(false);
-    stripeRef.current.click();
+    stripeRef.current.children[0].click();
   };
 
   const deliveryPayment = () => {
     setInverted(!inverted);
   };
 
+  const handleSubmitDelivery = (e: any) => {
+    e.preventDefault();
+    axios({
+      url: 'http://13.58.115.150:5000/delivery',
+      method: 'POST',
+      data: {
+        total,
+        cartItems,
+        credentials: { name, tel, place, department },
+      },
+    })
+      .then((_response) => {
+        alert('Заявка отправлена!');
+        dispatch(paymentSuccess());
+      })
+      .catch((err) => {
+        alert('Ошибка при отправке.');
+        console.log('error', err.message);
+      });
+    setName('');
+    setTel('');
+    setPlace('');
+    setDepartment('');
+    setInverted(!inverted);
+  };
+
+  console.log(cartItems);
   return (
     <div className='checkout-page'>
       <div className='checkout-header'>
@@ -69,7 +103,10 @@ const CheckoutPage = () => {
         </CustomButton>
       </div>
       {inverted ? (
-        <form className='payment_form'>
+        <form
+          className='payment_form'
+          onSubmit={(e) => handleSubmitDelivery(e)}
+        >
           <div className='pay_row'>
             <label htmlFor='pay_name' className='pay_label'>
               Имя и Фамилия
@@ -78,6 +115,11 @@ const CheckoutPage = () => {
               type='text'
               placeholder='имя получателя'
               className='pay_input'
+              value={name}
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
+              required
             />
           </div>
 
@@ -87,8 +129,13 @@ const CheckoutPage = () => {
             </label>
             <input
               type='telephone'
+              value={tel}
+              onChange={(e) => {
+                setTel(e.target.value);
+              }}
               placeholder='телефон получателя'
               className='pay_input'
+              required
             />
           </div>
 
@@ -99,7 +146,12 @@ const CheckoutPage = () => {
             <input
               type='text'
               placeholder='город получателя'
+              value={place}
+              onChange={(e) => {
+                setPlace(e.target.value);
+              }}
               className='pay_input'
+              required
             />
           </div>
 
@@ -110,7 +162,12 @@ const CheckoutPage = () => {
             <input
               type='text'
               placeholder='номер отдела почты'
+              value={department}
+              onChange={(e) => {
+                setDepartment(e.target.value);
+              }}
               className='pay_input'
+              required
             />
           </div>
           <CustomButton className='pay_btn' type='submit'>

@@ -37,9 +37,9 @@ const AdminBtns = ({ item, editLink, fireColl, isCollection }: Props) => {
         item.id
       );
     }
-    //setInterval(() => {
-    //window.location.reload();
-    //}, 1000);
+    setInterval(() => {
+      window.location.reload();
+    }, 1000);
   };
 
   const renderModal = () => {
