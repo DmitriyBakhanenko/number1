@@ -1,0 +1,121 @@
+.bot_contact_icon_initialState {
+  display: flex;
+  position: absolute;
+  bottom: 50px;
+  right: 50px;
+  width: 80px;
+  height: 80px;
+  border-radius: 30%;
+  border: black solid 2px;
+  background-color: lightgreen;
+
+  .bot_phone_icon {
+    padding: 1px;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  .bot_message_container {
+    flex-direction: column;
+
+    .bot_message_header {
+      text-align: center;
+      margin: 10px 0;
+      text-transform: uppercase;
+      font-size: 14px;
+      opacity: 0.8;
+      padding: 10px;
+    }
+
+    .bot_message_body {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      margin-top: auto;
+
+      .bot_form {
+        margin-bottom: 20px;
+
+        .bot_input {
+          margin-left: 20px;
+          margin-bottom: 10px;
+          width: 260px;
+
+          &:focus {
+            outline: none;
+          }
+        }
+
+        .bot_textarea {
+          text-indent: 10px;
+          font-size: 14px;
+          width: 260px;
+          height: 140px;
+          margin-left: 20px;
+          outline: none;
+          resize: none;
+        }
+      }
+
+      .bot_btns {
+        display: flex;
+        width: 300px;
+
+        .bot_btn {
+          width: 150px;
+        }
+      }
+    }
+  }
+}
+
+.bot_contact_icon_secondState {
+  @extend .bot_contact_icon_initialState;
+  width: 302px;
+  height: 400px;
+  border-radius: 0;
+  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 80px rgba(0, 0, 0, 0.12);
+}
+
+.bot_contact_icon_show {
+  @extend .bot_contact_icon_initialState;
+  animation-name: botAnimeShow;
+  animation-duration: 1s;
+}
+
+.bot_contact_icon_hide {
+  @extend .bot_contact_icon_secondState;
+  animation-name: botAnimeHide;
+  animation-duration: 1s;
+}
+
+@keyframes botAnimeShow {
+  from {
+    width: 60px;
+    height: 60px;
+    border-radius: 30%;
+  }
+  to {
+    width: 302px;
+    height: 400px;
+    border-radius: 0;
+  }
+}
+
+@keyframes botAnimeHide {
+  from {
+    width: 302px;
+    height: 400px;
+    border-radius: 0;
+  }
+  to {
+    width: 80px;
+    height: 80px;
+    border-radius: 30%;
+  }
+}

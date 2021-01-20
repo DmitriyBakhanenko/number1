@@ -19,6 +19,7 @@ import CollectionPage from './pages/collection/collection';
 import { fetchDirectoryStart } from './redux/directory/directory.actions';
 import AddCollectionPage from './pages/admin/addCollectionPage';
 import EditCollectionPage from './pages/admin/editCollectionPage';
+import Bot from './components/bot/Bot';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -80,6 +81,7 @@ const App = () => {
           render={() => (currentUser ? <Redirect to='/' /> : <LoginPage />)}
         />
       </Switch>
+      <Bot />
     </div>
   );
 };
