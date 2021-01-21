@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useRef, useState } from 'react';
 import CustomButton from '../custom-button/custom-button';
 import './Bot.scss';
-import PhoneIcon from '../../assets/phone.svg';
+import { ReactComponent as PhoneIcon } from '../../assets/speach.svg';
 
 const Bot = () => {
   const [display, setDisplay] = useState('none');
@@ -24,6 +24,7 @@ const Bot = () => {
 
   const handleBotHide = () => {
     setDisplay('none');
+    setAnimeClass('bot_contact_icon_subState');
     setAnimeClass('bot_contact_icon_hide');
     setTimeout(() => {
       setAnimeClass('bot_contact_icon_initialState');
@@ -54,12 +55,13 @@ const Bot = () => {
 
   return (
     <div ref={botIconRef} onClick={handleBotShow} className={animeClass}>
-      <img
+      {/* <img
         src={PhoneIcon}
         alt='PhoneIcon'
         style={display === 'none' ? { display: 'flex' } : { display: 'none' }}
         className='bot_phone_icon'
-      />
+      /> */}
+      <PhoneIcon className='bot_phone_icon' />
       <div className='bot_message_container' style={{ display }}>
         <div className='bot_message_header'>
           <h2 className='bot_title'>Услуга перезвонить или оставить отзыв</h2>
@@ -89,10 +91,10 @@ const Bot = () => {
             />
           </form>
           <div className='bot_btns'>
-            <CustomButton className='bot_btn' onClick={handleBotHide}>
+            <CustomButton className='bot_btn' inverted onClick={handleBotHide}>
               Закрыть
             </CustomButton>
-            <CustomButton className='bot_btn' onClick={handleSubmit}>
+            <CustomButton className='bot_btn' inverted onClick={handleSubmit}>
               Отправить
             </CustomButton>
           </div>

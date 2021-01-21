@@ -6,7 +6,7 @@
   line-height: 50px;
   padding: 0 35px 0 35px;
   font-size: 15px;
-  background-color: black;
+  background-color: #131921;
   color: white;
   text-transform: uppercase;
   font-family: 'Open Sans Condensed';
@@ -19,8 +19,8 @@
 
   &:hover {
     background-color: white;
-    color: black;
-    border: 1px solid black;
+    color: #131921;
+    border: 1px solid #131921;
   }
 
   &.google-sign-in {
@@ -39,17 +39,17 @@
 
     &:hover {
       background-color: lightgreen;
-      color: black;
+      color: #131921;
     }
   }
 
   &.inverted {
     background-color: white;
-    color: black;
-    border: 1px solid black;
+    color: #131921;
+    border: 1px solid #131921;
 
     &:hover {
-      background-color: black;
+      background-color: #131921;
       color: white;
       border: none;
     }
@@ -58,8 +58,8 @@
   &.pay_delivery_btn.inverted {
     &:hover {
       background-color: white;
-      color: black;
-      border: 1px solid black;
+      color: #131921;
+      border: 1px solid #131921;
     }
   }
 }

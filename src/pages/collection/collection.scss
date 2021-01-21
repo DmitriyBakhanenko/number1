@@ -14,6 +14,7 @@
     font-size: 38px;
     margin: 0 auto 30px;
     margin-top: 10px;
+    color: white;
   }
 
   .items {
@@ -30,7 +31,7 @@
       align-items: center;
       position: relative;
       margin-bottom: 30px;
-      background: rgba($color: #696969, $alpha: 0.5);
+      background: rgba($color: #fff, $alpha: 0.1);
     }
 
     .collection_item_admin {
