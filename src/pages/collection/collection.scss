@@ -24,12 +24,13 @@
 
     .collection-item {
       display: flex;
-      width: 320px;
+      width: 270px;
       flex-direction: column;
-      height: 420px;
+      height: 350px;
       align-items: center;
       position: relative;
       margin-bottom: 30px;
+      background: rgba($color: #696969, $alpha: 0.5);
     }
 
     .collection_item_admin {
@@ -37,7 +38,7 @@
       width: 90%;
       height: 350px;
       margin-bottom: 30px;
-      border: 1px solid grey;
+      border: 1px solid rgba(0, 0, 0, 0.2);
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
         0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
