@@ -9,7 +9,7 @@
     .collection-item {
       position: relative;
       width: 250px;
-      border: 1px solid grey;
+      border: 1px solid white;
       margin: 0 7.5px 15px;
       overflow: hidden;
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
@@ -64,7 +64,8 @@
 
     .admin_img_prew {
       width: 55px;
-      border: solid black 1px;
+      border: solid white 1px;
+      color: white;
       height: 64px;
       margin: 0 10px 0 0;
 
@@ -94,6 +95,8 @@
 
   .admin_input_container {
     margin: 10px 10px 0 10px;
+    background-color: rgba($color: #000, $alpha: 0.7);
+    padding: 0 20px;
 
     .admin_label {
       font-weight: 600;
@@ -107,7 +110,7 @@
       border: none;
       font-size: 16px;
       margin-bottom: 5px;
-      background-color: lightgrey;
+      background-color: rgba($color: lightgrey, $alpha: 0.7);
 
       &:focus {
         outline: none;

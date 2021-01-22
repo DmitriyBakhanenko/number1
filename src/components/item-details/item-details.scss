@@ -8,7 +8,13 @@
     display: flex;
     margin: 0 20px;
     margin-bottom: 40px;
-    justify-content: space-between;
+    //justify-content: space-between;
+    justify-content: center;
+    color: white;
+
+    .details_product_tittle {
+      margin-right: 10px;
+    }
   }
 
   .details_product_container {
@@ -24,10 +30,12 @@
       .details_table {
         tr {
           th {
-            border: 1px solid black;
+            border: 1px solid white;
             border-collapse: collapse;
             text-align: left;
             padding: 5px 15px;
+            background-color: rgba($color: #000, $alpha: 0.6);
+            color: white;
           }
         }
       }

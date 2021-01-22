@@ -24,7 +24,6 @@ const Bot = () => {
 
   const handleBotHide = () => {
     setDisplay('none');
-    setAnimeClass('bot_contact_icon_subState');
     setAnimeClass('bot_contact_icon_hide');
     setTimeout(() => {
       setAnimeClass('bot_contact_icon_initialState');

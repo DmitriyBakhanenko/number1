@@ -41,12 +41,9 @@
     display: flex;
     justify-content: space-between;
     font-size: 20px;
-    padding: 0 10px;
+    padding: 0 12px;
     margin-bottom: 10px;
-
-    .price {
-      color: black;
-    }
+    color: white;
   }
 
   @import '../admin/adminBtns.scss';

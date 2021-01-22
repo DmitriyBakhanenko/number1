@@ -85,7 +85,10 @@ const EditCollection = () => {
     fastener ? setFastener(fastener) : console.log('no fastener');
     sizes ? setSizes(sizes) : console.log('no sizes');
     imageUrl ? setImageUrl(imageUrl) : console.log('no image url');
-    imageUrl.length > 0 ? setCount(imageUrl.length) : console.log('no count');
+    imageUrl.length > 0
+      ? setCount(imageUrl.length - 1)
+      : console.log('no count');
+    console.log(count);
   };
 
   const fetchItemRef = useRef(fetchItem);

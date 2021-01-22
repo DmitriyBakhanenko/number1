@@ -53,6 +53,10 @@ const Header = () => {
             </React.Fragment>
           ) : null}
         </React.Fragment>
+        <Link to='/' className='header_option standart'>
+          <span className='header_optionLineOne'>Коллекции</span>
+          <span className='header_optionLineTwo'>Главная</span>
+        </Link>
         <Link to='/login' className='header_option standart'>
           <span className='header_optionLineOne'>Привет</span>
           {currentUser ? (
@@ -80,7 +84,7 @@ const Header = () => {
           <span className='header_optionLineTwo'>Контакты</span>
         </Link>
         <div
-          onMouseEnter={() => setColor('#FF9900')}
+          onMouseEnter={() => setColor('#743ad5')}
           onMouseLeave={() => setColor('#fff')}
           className='shopicon_container'
         >
