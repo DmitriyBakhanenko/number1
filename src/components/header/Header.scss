@@ -76,8 +76,11 @@
     }
 
     .header_option:hover {
-      border: solid white 1px;
+      //border: solid white 1px;
       cursor: pointer;
+      .header_optionLineTwo {
+        color: #743ad5;
+      }
     }
 
     .header_option_slider {

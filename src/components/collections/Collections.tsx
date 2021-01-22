@@ -2,16 +2,17 @@ import React, { useState, useEffect } from 'react';
 import './Collections.scss';
 import { Link, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import {
-  SpinnerOverlay,
-  SpinnerContainer,
-} from '../../components/with-spinner/with-spinner.styles';
+//import {
+//SpinnerOverlay,
+//SpinnerContainer,
+//} from '../../components/with-spinner/with-spinner.styles';
 import {
   selectDirectorySection,
   selectIsDirectoryLoaded,
 } from '../../redux/directory/directory.selectors';
 import { selectAdminMode } from '../../redux/admin/admin.selector';
 import AdminBtns from '../admin/AdminBtns';
+import NewSpinner from '../new-spinner/NewSpinner';
 
 const Collection = () => {
   const isLoaded = useSelector(selectIsDirectoryLoaded);
@@ -69,9 +70,7 @@ const Collection = () => {
           ))}
         </div>
       ) : (
-        <SpinnerOverlay>
-          <SpinnerContainer />
-        </SpinnerOverlay>
+        <NewSpinner />
       )}
     </React.Fragment>
   );

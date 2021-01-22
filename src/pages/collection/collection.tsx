@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import CollectionItem from '../../components/collection-item/collection-item';
 
-import {
-  SpinnerOverlay,
-  SpinnerContainer,
-} from '../../components/with-spinner/with-spinner.styles';
+//import {
+//SpinnerOverlay,
+//SpinnerContainer,
+//} from '../../components/with-spinner/with-spinner.styles';
 import {
   selectCollection,
   selectIsCollectionsLoaded,
@@ -13,6 +13,7 @@ import {
 import './collection.scss';
 import { useHistory, useRouteMatch } from 'react-router-dom';
 import { selectAdminMode } from '../../redux/admin/admin.selector';
+import NewSpinner from '../../components/new-spinner/NewSpinner';
 
 const CollectionPage = () => {
   const isLoaded = useSelector(selectIsCollectionsLoaded);
@@ -76,11 +77,7 @@ const CollectionPage = () => {
     </React.Fragment>
   );
 
-  const Spinner = () => (
-    <SpinnerOverlay>
-      <SpinnerContainer />
-    </SpinnerOverlay>
-  );
+  const Spinner = () => <NewSpinner />;
 
   return (
     <div className='collection-page'>

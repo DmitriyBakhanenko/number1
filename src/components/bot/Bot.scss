@@ -136,9 +136,9 @@
 
 @keyframes sizing {
   from {
-    transform: scale(0.7);
+    transform: rotate(10deg) scale(0.7);
   }
   to {
-    transform: scale(1);
+    transform: rotate(-10deg) scale(1);
   }
 }

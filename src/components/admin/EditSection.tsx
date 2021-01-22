@@ -15,6 +15,7 @@ import { useHistory, useRouteMatch } from 'react-router-dom';
 import { deleteImage, uploadImage } from '../../firebase/firebase.utils';
 import { updateItemInCollection } from '../../firebase/firebase.utils';
 import AdminInput from './AdminInput';
+import NewSpinner from '../new-spinner/NewSpinner';
 
 const EditSectionOrCollection = () => {
   const isLoaded = useSelector(selectIsDirectoryLoaded);
@@ -182,10 +183,7 @@ const EditSectionOrCollection = () => {
           </div>
         </React.Fragment>
       ) : (
-        <SpinnerOverlay>
-          <p>Загрузка</p>
-          <SpinnerContainer />
-        </SpinnerOverlay>
+        <NewSpinner />
       )}
     </React.Fragment>
   );

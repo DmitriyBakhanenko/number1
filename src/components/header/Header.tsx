@@ -77,7 +77,7 @@ const Header = () => {
         </Link>
         <Link to='/checkout' className='header_option standart'>
           <span className='header_optionLineOne'>Покупки</span>
-          <span className='header_optionLineTwo'>& Заказы</span>
+          <span className='header_optionLineTwo'>Заказы</span>
         </Link>
         <Link to='/contacts' className='header_option standart'>
           <span className='header_optionLineOne'>О нас</span>
