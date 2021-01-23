@@ -12,6 +12,12 @@
 
   .ctc_adress {
     margin-top: 10px;
+    padding: 10px;
+    @media (max-width: 1080px) {
+      margin-left: 40px;
+      padding-right: 40px;
+      text-align: center;
+    }
   }
 
   .ctc_tel {

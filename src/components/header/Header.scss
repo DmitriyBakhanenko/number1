@@ -12,6 +12,11 @@
     object-fit: contain;
     margin: 10px 0px 10px 20px;
     cursor: pointer;
+    padding-top: 4px;
+    @media (max-width: 640px) {
+      width: 98px;
+      padding-top: 4px;
+    }
   }
 
   .header_search {
@@ -20,6 +25,19 @@
     flex: auto;
     background: white;
     min-width: 100px;
+    //@media (max-width: 780px) {
+    //flex: none;
+    //min-width: 26px;
+    //width: 26px;
+    //}
+    @media (max-width: 780px) {
+      position: absolute;
+      display: none;
+      top: 80px;
+      left: 0;
+      min-width: 26px;
+      width: 26px;
+    }
 
     .header_searchInput {
       flex: auto;
@@ -34,6 +52,10 @@
       font-weight: 600;
       min-width: 80px;
 
+      @media (max-width: 780px) {
+        display: none;
+      }
+
       &:focus {
         outline: none;
       }
@@ -44,10 +66,15 @@
       height: 32px;
       width: 36px;
       background-color: #743ad5;
+      @media (max-width: 640px) {
+        height: 26px;
+        width: 26px;
+        padding-top: 8px;
+      }
     }
   }
   .header_nav {
-    justify-self: end;
+    margin-left: auto;
     display: flex;
 
     .header_option,
@@ -60,6 +87,13 @@
       justify-content: center;
       flex-direction: column;
       text-decoration: none;
+      @media (max-width: 780px) {
+        margin-right: 6px;
+      }
+      @media (max-width: 680px) {
+        width: 70px;
+        margin-right: 2px;
+      }
 
       .header_optionLineOne {
         text-align: center;

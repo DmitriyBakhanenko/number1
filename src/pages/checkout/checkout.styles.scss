@@ -8,6 +8,10 @@
   color: white;
   background-color: rgba($color: #171921, $alpha: 0.8);
   padding: 30px;
+  @media (max-width: 780px) {
+    width: 100%;
+    margin: 0;
+  }
 
   .checkout-header {
     width: 100%;
@@ -43,6 +47,7 @@
   .payment {
     display: flex;
     margin: 30px;
+    width: 100%;
   }
 
   .payment_form {
@@ -70,7 +75,7 @@
         text-indent: 10px;
       }
     }
-    .pay_btn {
+    .pay_btn button {
       margin-top: 30px;
     }
   }
