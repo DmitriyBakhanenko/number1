@@ -42,6 +42,9 @@ const AdminBtns = ({ item, editLink, fireColl, isCollection }: Props) => {
     }, 1000);
   };
 
+  const modBtnClass: () => string = () =>
+    isCollection ? 'modify_btn_container_col' : 'modify_btn_container';
+
   const renderModal = () => {
     if (isCollection)
       return (
@@ -72,7 +75,7 @@ const AdminBtns = ({ item, editLink, fireColl, isCollection }: Props) => {
   return (
     <React.Fragment>
       {admin ? (
-        <div className='modify_btn_container'>
+        <div className={modBtnClass()}>
           <CustomButton
             onClick={() => history.push(editLink)}
             className='modify_btn'

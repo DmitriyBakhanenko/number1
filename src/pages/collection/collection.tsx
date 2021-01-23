@@ -51,7 +51,7 @@ const CollectionPage = () => {
   const Title = () => (
     <React.Fragment>
       {currentStatus && collection[0] ? (
-        <h2 className='title'>{collection[0].title}</h2>
+        <h2 className='title'>{collectionName}</h2>
       ) : null}
     </React.Fragment>
   );

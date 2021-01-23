@@ -141,11 +141,11 @@ const CheckoutPage = () => {
 
           <div className='pay_row'>
             <label htmlFor='pay_city' className='pay_label'>
-              Город получения
+              Город(нп.) получения
             </label>
             <input
               type='text'
-              placeholder='город получателя'
+              placeholder='место получателя'
               value={place}
               onChange={(e) => {
                 setPlace(e.target.value);

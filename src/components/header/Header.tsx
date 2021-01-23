@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import Logo from '../../assets/logoMain1.png';
+import Logo from '../../assets/logoMain2.png';
 import { ReactComponent as Search } from '../../assets/search.svg';
 import CartIcon from '../cart/cart-icon/cart-icon';
 import { selectCartHidden } from '../../redux/cart/cart.selectors';

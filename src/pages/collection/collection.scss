@@ -27,18 +27,18 @@
       display: flex;
       width: 270px;
       flex-direction: column;
-      height: 350px;
+      height: 366px;
       align-items: center;
       position: relative;
-      margin-bottom: 30px;
-      background: rgba($color: #fff, $alpha: 0.1);
+      margin-bottom: 10px;
+      background: rgba($color: #000, $alpha: 0.6);
     }
 
     .collection_item_admin {
       position: relative;
-      width: 90%;
-      height: 350px;
-      margin-bottom: 30px;
+      width: 270px;
+      height: 366px;
+      margin-bottom: 10px;
       border: 1px solid rgba(0, 0, 0, 0.2);
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
         0 6px 20px 0 rgba(0, 0, 0, 0.19);

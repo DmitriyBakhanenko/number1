@@ -3,7 +3,7 @@ import StripeCheckout from 'react-stripe-checkout';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { paymentSuccess } from '../../redux/user/user.actions';
-import Image from '../../assets/favicon-32x32.png';
+import Image from '../../assets/favicon-logo1.png';
 
 // TODO - price, paymentSuccess
 const StripeCheckoutBtn = ({ price }: any) => {

@@ -2,7 +2,7 @@
   display: flex;
   position: fixed;
   bottom: 10px;
-  right: 20px;
+  right: 2px;
   width: 80px;
   height: 80px;
   border-radius: 30%;
@@ -26,7 +26,8 @@
       margin: 10px 0;
       text-transform: uppercase;
       padding: 10px;
-      color: #131921;
+      //color: #131921;
+      color: white;
       opacity: 75%;
       text-shadow: 1px 1px #123;
     }
@@ -88,7 +89,8 @@
   height: 400px;
   border-radius: 0;
   border-bottom: none;
-  background-color: rgba($color: #fff, $alpha: 0.6);
+  //background-color: rgba($color: #fff, $alpha: 0.8);
+  background-color: #152123;
   box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
     0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
     0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),

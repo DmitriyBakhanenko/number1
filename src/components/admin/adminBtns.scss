@@ -17,3 +17,8 @@
     top: 0;
   }
 }
+
+.modify_btn_container_col {
+  @extend .modify_btn_container;
+  left: 10px;
+}

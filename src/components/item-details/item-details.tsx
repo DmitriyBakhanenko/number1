@@ -38,7 +38,7 @@ const ItemDetails = () => {
     <div className='details_item_container'>
       <div className='details_header'>
         <h1 className='details_product_tittle'>{name}</h1>
-        <h1 className='details_product_price'>{price} грн</h1>
+        <h1 className='details_product_price'>{price}грн</h1>
       </div>
       <div className='details_product_container'>
         <img className='details_img' src={imageUrl[0]} alt='' />
