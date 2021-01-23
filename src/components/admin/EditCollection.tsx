@@ -201,13 +201,16 @@ const EditCollection = () => {
         <React.Fragment>
           <div className='admin_preview_container'>
             <div className='showcard_admin_row'>
-              <div onClick={uploadFile} className='collection-item'>
+              <div onClick={uploadFile} className='collection-item_admin'>
                 <img
                   className='image'
                   src={imageUrl.length > 0 ? imageUrl[currentId] : null}
                   alt=''
                 />
-                <div className='content-text'>{name}</div>
+                <div className='collection-footer'>
+                  <span className='name'>{name}</span>
+                  <span className='price'>{price}грн</span>
+                </div>
                 <input
                   className='upload_btn'
                   type='file'

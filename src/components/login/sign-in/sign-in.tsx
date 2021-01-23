@@ -56,8 +56,16 @@ const SignIn = () => {
           required
         />
         <div className='buttons'>
-          <CustomButton type='submit'> Логин </CustomButton>
-          <CustomButton onClick={signGoogle} type='button' isGoogleSignIn>
+          <CustomButton className='l_btn' type='submit'>
+            {' '}
+            Логин{' '}
+          </CustomButton>
+          <CustomButton
+            className='l_btn'
+            onClick={signGoogle}
+            type='button'
+            isGoogleSignIn
+          >
             {' '}
             Google Логин{' '}
           </CustomButton>

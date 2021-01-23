@@ -1,9 +1,19 @@
 .sign-up {
   display: flex;
   flex-direction: column;
-  width: 30vw;
+  width: 40vw;
+  background: rgba($color: #000, $alpha: 0.8);
+  padding: 0 20px;
 
   .title {
     margin: 25px 0 5px 0;
+  }
+
+  .sign-up-form {
+    padding-bottom: 30px;
+
+    button {
+      width: 100%;
+    }
   }
 }
