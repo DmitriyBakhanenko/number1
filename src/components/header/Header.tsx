@@ -33,25 +33,25 @@ const Header = () => {
       </div>
       <div className='header_nav'>
         <React.Fragment>
-          {currentUser ? (
-            <React.Fragment>
-              {currentUser.displayName === 'Dmitriy Bahanenko' ? (
-                <div className='header_option_slider'>
-                  <span className='header_optionLineOne'>Админ</span>
-                  <div className='header_optionLineTwo'>
-                    <label className='switch'>
-                      <input
-                        onChange={() => dispatch(toggleAdmin())}
-                        type='checkbox'
-                        checked={admin ? true : false}
-                      />
-                      <span className='slider round'></span>
-                    </label>
-                  </div>
-                </div>
-              ) : null}
-            </React.Fragment>
-          ) : null}
+          {/* currentUser ? ( */}
+          <React.Fragment>
+            {/* currentUser.displayName === 'Dmitriy Bahanenko' ? ( */}
+            <div className='header_option_slider'>
+              <span className='header_optionLineOne'>Админ</span>
+              <div className='header_optionLineTwo'>
+                <label className='switch'>
+                  <input
+                    onChange={() => dispatch(toggleAdmin())}
+                    type='checkbox'
+                    checked={admin ? true : false}
+                  />
+                  <span className='slider round'></span>
+                </label>
+              </div>
+            </div>
+            {/* ) : null} */}
+          </React.Fragment>
+          {/*) : null} */}
         </React.Fragment>
         <Link to='/' className='header_option standart'>
           <span className='header_optionLineOne'>Коллекции</span>

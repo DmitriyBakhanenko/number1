@@ -38,10 +38,22 @@ const EditCollection = () => {
   const [startUpdate, setStartUpdate] = useState(false);
   const isLoaded = useSelector(selectIsCollectionsLoaded);
   const [currentStatus, setCurrentStatus] = useState(isLoaded);
+  const [discountToggle, setDiscountToggle] = useState(false);
+  const [discount, setDiscount] = useState(0);
+  const [oldPrice, setOldPrice] = useState(0);
+
+  const discountRef = useRef(() => {
+    setOldPrice(price);
+    setPrice((Number(price) * Number(discount)) / 100);
+  });
 
   useEffect(() => {
     setCurrentStatus(isLoaded);
   }, [isLoaded]);
+
+  useEffect(() => {
+    if (discount) discountRef.current();
+  }, [discount]);
 
   const uploadRef: any = useRef();
   const admin = useSelector(selectAdminMode);
@@ -353,6 +365,25 @@ const EditCollection = () => {
                 inputValue={sizes}
                 setInput={setSizes}
               />
+            </div>
+            <div className='discount_container'>
+              <h1 className='discount_title'>Скидка</h1>
+              <input
+                className='discount_check'
+                type='checkbox'
+                id='discount'
+                name='discount'
+                value='discount'
+                onChange={() => setDiscountToggle(!discountToggle)}
+              />
+              <label htmlFor='discount'> АКТИВИРОВАТЬ</label>
+              {discountToggle ? (
+                <AdminInput
+                  inputLabel={'Discount'}
+                  inputValue={discount}
+                  setInput={setDiscount}
+                />
+              ) : null}
             </div>
           </div>
           <div className='admin_btn_container'>
