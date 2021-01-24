@@ -41,19 +41,25 @@ const EditCollection = () => {
   const [discountToggle, setDiscountToggle] = useState(false);
   const [discount, setDiscount] = useState(0);
   const [oldPrice, setOldPrice] = useState(0);
+  const [newPrice, setNewPrice] = useState(0);
 
-  const discountRef = useRef(() => {
+  const discountRef: any = useRef();
+  const discountFunc = () => {
+    if (!discount || discount === 0) return;
     setOldPrice(price);
-    setPrice((Number(price) * Number(discount)) / 100);
-  });
+    setDiscount(discount);
+    const newPriceVar = (Number(price) * Number(discount)) / 100;
+    setNewPrice(Math.round(price - newPriceVar));
+  };
+  discountRef.current = discountFunc;
+
+  useEffect(() => {
+    discountRef.current();
+  }, [discount]);
 
   useEffect(() => {
     setCurrentStatus(isLoaded);
   }, [isLoaded]);
-
-  useEffect(() => {
-    if (discount) discountRef.current();
-  }, [discount]);
 
   const uploadRef: any = useRef();
   const admin = useSelector(selectAdminMode);
@@ -219,9 +225,19 @@ const EditCollection = () => {
                   src={imageUrl.length > 0 ? imageUrl[currentId] : null}
                   alt=''
                 />
+                <div className='image_discount_back' />
+                <div className='image_discount_num'>{discount}%</div>
+                <div className='image_discount_word'>Скидка</div>
                 <div className='collection-footer'>
                   <span className='name'>{name}</span>
-                  <span className='price'>{price}грн</span>
+                  <div className='price_cont'>
+                    <span className='oldPrice'>{oldPrice}</span>
+                    {newPrice ? (
+                      <span className='price'>{newPrice}грн</span>
+                    ) : (
+                      <span className='price'>{price}грн</span>
+                    )}
+                  </div>
                 </div>
                 <input
                   className='upload_btn'
