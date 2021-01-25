@@ -18,9 +18,7 @@
   outline: none;
 
   &:hover {
-    background-color: white;
-    color: #131921;
-    border: 1px solid #131921;
+    background-color: darken(#743ad5, 10%);
   }
 
   &.google-sign-in {
@@ -49,7 +47,7 @@
     border: 1px solid #131921;
 
     &:hover {
-      background-color: #131921;
+      background-color: darken(#743ad5, 10%);
       color: white;
       border: none;
     }

@@ -90,10 +90,10 @@ const Bot = () => {
             />
           </form>
           <div className='bot_btns'>
-            <CustomButton className='bot_btn' inverted onClick={handleBotHide}>
+            <CustomButton className='bot_btn' onClick={handleBotHide}>
               Закрыть
             </CustomButton>
-            <CustomButton className='bot_btn' inverted onClick={handleSubmit}>
+            <CustomButton className='bot_btn' onClick={handleSubmit}>
               Отправить
             </CustomButton>
           </div>

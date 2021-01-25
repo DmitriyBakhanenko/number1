@@ -83,8 +83,14 @@ const CollectionPage = () => {
     <div className='collection-page'>
       <Title />
       <div className='items'>
-        <Admin />
-        {currentStatus ? <Item /> : <Spinner />}
+        {currentStatus ? (
+          <React.Fragment>
+            <Admin />
+            <Item />
+          </React.Fragment>
+        ) : (
+          <Spinner />
+        )}
       </div>
     </div>
   );

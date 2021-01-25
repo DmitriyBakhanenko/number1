@@ -24,8 +24,8 @@ const ContactPage = () => {
     geoMarker.setStyle(
       new Style({
         image: new CircleStyle({
-          radius: 9,
-          fill: new Fill({ color: 'blue' }),
+          radius: 12,
+          fill: new Fill({ color: '#743ad5' }),
           stroke: new Stroke({
             color: 'white',
             width: 3,
@@ -68,9 +68,9 @@ const ContactPage = () => {
         ВЛАДИМИРСКИЙ РЫНОК . Магазин № 1ВП (пассаж) и № 66В - 4 ряд
       </div>
       <div className='ctc_tel'>
-        Тел: +380503587856 Сергей <br /> Тел: +380503534950 Таня
+        Тел: +380503587856 Сергей <br /> Тел: +380503534950 Таня <br />{' '}
+        <span className='ctc_mail'> Email: bakhanenko@gmail.com</span>
       </div>
-      <div className='ctc_email'>Email: bakhanenko@gmail.com</div>
     </div>
   );
 };

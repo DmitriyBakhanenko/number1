@@ -47,55 +47,55 @@ const ItemDetails = () => {
             {brand ? (
               <tr>
                 <th>Бренд</th>
-                <th>{brand}</th>
+                <td>{brand}</td>
               </tr>
             ) : null}
             {country ? (
               <tr>
-                <th>Страна</th>
-                <th>{country}</th>
+                <th className='th2'>Страна</th>
+                <td className='td2'>{country}</td>
               </tr>
             ) : null}
             {landing ? (
               <tr>
                 <th>Посадка</th>
-                <th>{landing}</th>
+                <td>{landing}</td>
               </tr>
             ) : null}
             {style ? (
               <tr>
-                <th>Стиль</th>
-                <th>{style}</th>
+                <th className='th2'>Стиль</th>
+                <td className='td2'>{style}</td>
               </tr>
             ) : null}
             {color ? (
               <tr>
                 <th>Цвет</th>
-                <th>{color}</th>
+                <td>{color}</td>
               </tr>
             ) : null}
             {fabricType ? (
               <tr>
-                <th>Тип ткани</th>
-                <th>{fabricType}</th>
+                <th className='th2'>Тип ткани</th>
+                <td className='td2'>{fabricType}</td>
               </tr>
             ) : null}
             {fabricSettings ? (
               <tr>
                 <th>Свойства ткани</th>
-                <th>{fabricSettings}</th>
+                <td>{fabricSettings}</td>
               </tr>
             ) : null}
             {fastener ? (
               <tr>
-                <th>Застежка</th>
-                <th>{fastener}</th>
+                <th className='th2'>Застежка</th>
+                <td className='td2'>{fastener}</td>
               </tr>
             ) : null}
             {sizes ? (
               <tr>
                 <th>Размеры</th>
-                <th>{sizes}</th>
+                <td>{sizes}</td>
               </tr>
             ) : null}
           </table>
