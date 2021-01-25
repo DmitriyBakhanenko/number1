@@ -225,14 +225,20 @@ const EditCollection = () => {
                   src={imageUrl.length > 0 ? imageUrl[currentId] : null}
                   alt=''
                 />
-                <div className='image_discount_back' />
-                <div className='image_discount_num'>{discount}%</div>
-                <div className='image_discount_word'>Скидка</div>
+                {discountToggle ? (
+                  <React.Fragment>
+                    <div className='image_discount_back' />
+                    <div className='image_discount_num'>{discount}%</div>
+                    <div className='image_discount_word'>Скидка</div>
+                  </React.Fragment>
+                ) : null}
                 <div className='collection-footer'>
                   <span className='name'>{name}</span>
                   <div className='price_cont'>
-                    <span className='oldPrice'>{oldPrice}</span>
-                    {newPrice ? (
+                    {discountToggle ? (
+                      <span className='oldPrice'>{oldPrice}</span>
+                    ) : null}
+                    {newPrice && discountToggle ? (
                       <span className='price'>{newPrice}грн</span>
                     ) : (
                       <span className='price'>{price}грн</span>

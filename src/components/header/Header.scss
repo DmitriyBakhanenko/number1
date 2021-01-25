@@ -113,7 +113,7 @@
       //border: solid white 1px;
       cursor: pointer;
       .header_optionLineTwo {
-        color: #743ad5;
+        color: lighten($color: #743ad5, $amount: 15%);
       }
     }
 

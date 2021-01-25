@@ -1,5 +1,5 @@
 .checkout-page {
-  width: 55%;
+  width: 75%;
   min-height: 70vh;
   display: flex;
   flex-direction: column;
@@ -17,16 +17,43 @@
     width: 100%;
     padding: 10px 0;
     display: flex;
-    justify-content: space-between;
+    //justify-content: flex-end;
     border-bottom: 1px solid darkgrey;
-    margin: 0 20px;
+    //margin: 0 10px;
 
     .header-block {
       text-transform: capitalize;
-      width: 23%;
+      width: 75%;
 
+      &:first-child {
+        padding-left: 0px;
+        width: 26%;
+      }
       &:last-child {
-        width: 8%;
+        text-align: end;
+        padding-left: 10px;
+        width: 17%;
+      }
+      &:nth-child(2) {
+        width: 18%;
+      }
+      &:nth-child(3) {
+        width: 12%;
+      }
+      &:nth-child(4) {
+        text-align: end;
+        width: 16%;
+        padding-right: 26px;
+      }
+      &:nth-child(5) {
+        text-align: end;
+        padding-right: 6px;
+        width: 16%;
+      }
+      &:nth-child(6) {
+        text-align: end;
+        padding-right: 8px;
+        width: 16%;
       }
     }
   }
@@ -48,6 +75,10 @@
     display: flex;
     margin: 30px;
     width: 100%;
+
+    button {
+      width: 50%;
+    }
   }
 
   .payment_form {
@@ -75,7 +106,7 @@
         text-indent: 10px;
       }
     }
-    .pay_btn button {
+    .pay_btn {
       margin-top: 30px;
     }
   }

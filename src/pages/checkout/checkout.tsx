@@ -75,6 +75,12 @@ const CheckoutPage = () => {
           <span>Цена</span>
         </div>
         <div className='header-block'>
+          <span>Размер</span>
+        </div>
+        <div className='header-block'>
+          <span>Цвет</span>
+        </div>
+        <div className='header-block'>
           <span>Удалить</span>
         </div>
       </div>
