@@ -10,7 +10,7 @@ import AdminBtns from '../admin/AdminBtns';
 const CollectionItem = ({ item, collectionId, collectionName }: any) => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const { name, price, imageUrl } = item;
+  const { name, price, imageUrl, discount, newPrice } = item;
   const admin = useSelector(selectAdminMode);
 
   const showDetails = () => {
@@ -20,9 +20,25 @@ const CollectionItem = ({ item, collectionId, collectionName }: any) => {
   return (
     <div className='collection-item'>
       <img className='image' onClick={showDetails} src={imageUrl} alt='' />
+      {discount ? (
+        <React.Fragment>
+          <div className='image_discount_back' />
+          <div className='image_discount_num'>{discount}%</div>
+          <div className='image_discount_word'>Скидка</div>
+        </React.Fragment>
+      ) : null}
       <div className='collection-footer'>
         <span className='name'>{name}</span>
-        <span className='price'>{price}грн</span>
+        <div className='price_cont'>
+          {newPrice ? (
+            <React.Fragment>
+              <span className='oldPrice'>{price}</span>
+              <span className='price'>{newPrice}грн</span>
+            </React.Fragment>
+          ) : (
+            <span className='price'>{price}грн</span>
+          )}
+        </div>
       </div>
       {admin ? (
         <AdminBtns

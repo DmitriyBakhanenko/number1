@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Map from 'ol/Map';
 import View from 'ol/View';
 import TileLayer from 'ol/layer/Tile';
@@ -24,7 +24,7 @@ const ContactPage = () => {
     geoMarker.setStyle(
       new Style({
         image: new CircleStyle({
-          radius: 12,
+          radius: 10,
           fill: new Fill({ color: '#743ad5' }),
           stroke: new Stroke({
             color: 'white',
@@ -33,6 +33,7 @@ const ContactPage = () => {
         }),
       })
     );
+
     const mapOptions = {
       center: fromLonLat([30.51867874857184, 50.42134914372104]),
       zoom: 18,

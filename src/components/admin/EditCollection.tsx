@@ -40,13 +40,11 @@ const EditCollection = () => {
   const [currentStatus, setCurrentStatus] = useState(isLoaded);
   const [discountToggle, setDiscountToggle] = useState(false);
   const [discount, setDiscount] = useState(0);
-  const [oldPrice, setOldPrice] = useState(0);
   const [newPrice, setNewPrice] = useState(0);
 
   const discountRef: any = useRef();
   const discountFunc = () => {
     if (!discount || discount === 0) return;
-    setOldPrice(price);
     setDiscount(discount);
     const newPriceVar = (Number(price) * Number(discount)) / 100;
     setNewPrice(Math.round(price - newPriceVar));
@@ -55,7 +53,11 @@ const EditCollection = () => {
 
   useEffect(() => {
     discountRef.current();
-  }, [discount]);
+    if (discountToggle === false) {
+      setNewPrice(0);
+      setDiscount(0);
+    }
+  }, [discount, discountToggle]);
 
   useEffect(() => {
     setCurrentStatus(isLoaded);
@@ -88,6 +90,8 @@ const EditCollection = () => {
       fastener,
       sizes,
       imageUrl,
+      newPrice,
+      discount,
     } = item[0];
     name ? setName(name) : console.log('no name');
     price ? setPrice(price) : console.log('no price');
@@ -106,7 +110,9 @@ const EditCollection = () => {
     imageUrl.length > 0
       ? setCount(imageUrl.length - 1)
       : console.log('no count');
-    console.log(count);
+    newPrice ? setNewPrice(newPrice) : console.log('no newPrice');
+    discount ? setDiscount(discount) : console.log('no discount');
+    newPrice ? setDiscountToggle(true) : console.log('no togleDiscount');
   };
 
   const fetchItemRef = useRef(fetchItem);
@@ -129,6 +135,8 @@ const EditCollection = () => {
         fabricSettings,
         fastener,
         sizes,
+        newPrice,
+        discount,
       },
       match.params.collectionId
     );
@@ -143,6 +151,10 @@ const EditCollection = () => {
       );
     }, 1000);
   });
+
+  useEffect(() => {
+    if (newPrice) setDiscountToggle(true);
+  }, [newPrice]);
 
   useEffect(() => {
     if (currentStatus) {
@@ -235,11 +247,11 @@ const EditCollection = () => {
                 <div className='collection-footer'>
                   <span className='name'>{name}</span>
                   <div className='price_cont'>
-                    {discountToggle ? (
-                      <span className='oldPrice'>{oldPrice}</span>
-                    ) : null}
                     {newPrice && discountToggle ? (
-                      <span className='price'>{newPrice}грн</span>
+                      <React.Fragment>
+                        <span className='oldPrice'>{price}</span>
+                        <span className='price'>{newPrice}грн</span>
+                      </React.Fragment>
                     ) : (
                       <span className='price'>{price}грн</span>
                     )}
@@ -393,9 +405,9 @@ const EditCollection = () => {
               <input
                 className='discount_check'
                 type='checkbox'
-                id='discount'
+                checked={discountToggle ? true : false}
                 name='discount'
-                value='discount'
+                value={discount}
                 onChange={() => setDiscountToggle(!discountToggle)}
               />
               <label htmlFor='discount'> АКТИВИРОВАТЬ</label>
