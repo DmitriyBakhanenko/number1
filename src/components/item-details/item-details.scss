@@ -9,6 +9,7 @@
     margin-bottom: 40px;
     justify-content: center;
     color: white;
+    align-items: flex-end;
 
     .details_product_tittle {
       margin-right: 10px;
@@ -17,6 +18,13 @@
 
     .details_product_price {
       font-weight: 300;
+    }
+    .details_product_old_price {
+      font-weight: 200;
+      text-decoration: line-through purple;
+      font-size: 18px;
+      padding-bottom: 4px;
+      margin-left: 6px;
     }
   }
 

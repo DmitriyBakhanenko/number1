@@ -33,12 +33,20 @@ const ItemDetails = () => {
     fabricSettings,
     fastener,
     sizes,
+    newPrice,
   } = item[0];
   return (
     <div className='details_item_container'>
       <div className='details_header'>
         <h1 className='details_product_tittle'>{name}</h1>
-        <h1 className='details_product_price'>{price}грн</h1>
+        {newPrice ? (
+          <React.Fragment>
+            <h1 className='details_product_old_price'>{price}</h1>
+            <h1 className='details_product_price'>{newPrice}грн</h1>
+          </React.Fragment>
+        ) : (
+          <h1 className='details_product_price'>{price}грн</h1>
+        )}
       </div>
       <div className='details_product_container'>
         <img className='details_img' src={imageUrl[0]} alt='' />

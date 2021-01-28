@@ -39,8 +39,8 @@ const NewSpinner = () => {
               <filter
                 id='glow'
                 filterUnits='userSpaceOnUse'
-                x='-20%'
-                y='-20%'
+                x='-30%'
+                y='-30%'
                 height='140%'
                 width='140%'
               >
@@ -50,8 +50,8 @@ const NewSpinner = () => {
               <filter
                 id='outer-glow'
                 filterUnits='userSpaceOnUse'
-                x='-50%'
-                y='-50%'
+                x='-60%'
+                y='-60%'
                 height='220%'
                 width='220%'
               >

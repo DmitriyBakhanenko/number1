@@ -8,7 +8,7 @@ import {
 } from '../../redux/cart/cart.actions';
 
 const CheckoutItem = ({ cartItem }: any) => {
-  const { name, imageUrl, price, quantity, sizes, color } = cartItem;
+  const { name, imageUrl, price, quantity, sizes, color, newPrice } = cartItem;
   const dispatch = useDispatch();
 
   return (
@@ -26,7 +26,11 @@ const CheckoutItem = ({ cartItem }: any) => {
           &#10095;
         </div>
       </span>
-      <span className='price'>{price * quantity}₴</span>
+      {newPrice ? (
+        <span className='price'>{newPrice * quantity}₴</span>
+      ) : (
+        <span className='price'>{price * quantity}₴</span>
+      )}
       <span className='color'>{color}</span>
       <span className='size'>{sizes}</span>
       <span

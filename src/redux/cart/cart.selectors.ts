@@ -23,11 +23,11 @@ export const selectCartItemsCount = createSelector(
 );
 
 export const selectCartTotal = createSelector([selectCartItems], (cartItems) =>
-  cartItems.reduce(
-    (accumalatedQuantity: number, cartItem: any) =>
-      accumalatedQuantity + cartItem.quantity * cartItem.price,
-    0
-  )
+  cartItems.reduce((accumalatedQuantity: number, cartItem: any) => {
+    if (cartItem.newPrice)
+      return accumalatedQuantity + cartItem.quantity * cartItem.newPrice;
+    else return accumalatedQuantity + cartItem.quantity * cartItem.price;
+  }, 0)
 );
 
 export const selectIfCartIsEmpty = createSelector(

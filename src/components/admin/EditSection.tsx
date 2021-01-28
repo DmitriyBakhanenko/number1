@@ -2,10 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import './section.scss';
 import { useSelector } from 'react-redux';
 import {
-  SpinnerOverlay,
-  SpinnerContainer,
-} from '../../components/with-spinner/with-spinner.styles';
-import {
   selectDirectorySection,
   selectIsDirectoryLoaded,
 } from '../../redux/directory/directory.selectors';
