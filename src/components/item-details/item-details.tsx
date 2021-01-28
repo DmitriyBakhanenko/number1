@@ -1,24 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory, useRouteMatch } from 'react-router-dom';
 import CustomButton from '../custom-button/custom-button';
 import { selectCollection } from '../../redux/shop/shop.selectors';
 import { addItem } from '../../redux/cart/cart.actions';
-//import { ReactComponent as CloseBtn } from '../../assets/times-solid.svg';
 
 import { useDispatch } from 'react-redux';
 import './item-details.scss';
+import NewSpinner from '../new-spinner/NewSpinner';
 
 const ItemDetails = () => {
   const match: any = useRouteMatch();
   const history = useHistory();
   const dispatch = useDispatch();
+  const [currentImg, setCurrentImg] = useState(0);
   const collection: any = useSelector(
     selectCollection(match.params.collectionId)
   );
-  const item: any = collection[0].items.filter(
-    (i: any) => Number(i.id) === Number(match.params.itemId)
-  );
+  const item: any = collection
+    ? collection[0].items.filter(
+        (i: any) => Number(i.id) === Number(match.params.itemId)
+      )
+    : null;
+
+  if (!item) return <NewSpinner />;
 
   const {
     imageUrl,
@@ -35,6 +40,14 @@ const ItemDetails = () => {
     sizes,
     newPrice,
   } = item[0];
+
+  const imgChangeHandler = (e: any) => {
+    e.target.src = imageUrl[currentImg];
+    const temp = e.target.alt;
+    e.target.alt = `${currentImg}`;
+    setCurrentImg(Number(temp));
+  };
+
   return (
     <div className='details_item_container'>
       <div className='details_header'>
@@ -49,7 +62,43 @@ const ItemDetails = () => {
         )}
       </div>
       <div className='details_product_container'>
-        <img className='details_img' src={imageUrl[0]} alt='' />
+        <img className='details_img' src={imageUrl[currentImg]} alt='' />
+        {imageUrl.length > 1 ? (
+          <div className='details_img_container'>
+            {imageUrl[1] ? (
+              <img
+                className='details_img_preview'
+                onClick={(e) => imgChangeHandler(e)}
+                src={imageUrl[1]}
+                alt='1'
+              />
+            ) : null}
+            {imageUrl[2] ? (
+              <img
+                className='details_img_preview'
+                onClick={(e) => imgChangeHandler(e)}
+                src={imageUrl[2]}
+                alt='2'
+              />
+            ) : null}
+            {imageUrl[3] ? (
+              <img
+                className='details_img_preview'
+                onClick={(e) => imgChangeHandler(e)}
+                src={imageUrl[3]}
+                alt='3'
+              />
+            ) : null}
+            {imageUrl[4] ? (
+              <img
+                className='details_img_preview'
+                onClick={(e) => imgChangeHandler(e)}
+                src={imageUrl[4]}
+                alt='4'
+              />
+            ) : null}
+          </div>
+        ) : null}
         <div className='details_product_info'>
           <table className='details_table'>
             {brand ? (

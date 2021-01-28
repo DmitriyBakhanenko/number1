@@ -336,7 +336,7 @@ const EditCollection = () => {
                     alt=''
                   />
                 ) : null}
-                {count < 7 ? (
+                {count < 3 ? (
                   <div onClick={handleIncrement} className='admin_img_prew'>
                     <div className='admin_plus'>+</div>
                   </div>
@@ -410,7 +410,10 @@ const EditCollection = () => {
                 value={discount}
                 onChange={() => setDiscountToggle(!discountToggle)}
               />
-              <label htmlFor='discount'> АКТИВИРОВАТЬ</label>
+              <label style={{ marginBottom: '10px' }} htmlFor='discount'>
+                {' '}
+                АКТИВИРОВАТЬ
+              </label>
               {discountToggle ? (
                 <AdminInput
                   inputLabel={'Discount'}

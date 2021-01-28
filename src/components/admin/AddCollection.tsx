@@ -224,7 +224,7 @@ const AddCollection = () => {
                     alt=''
                   />
                 ) : null}
-                {count < 7 ? (
+                {count < 3 ? (
                   <div onClick={handleIncrement} className='admin_img_prew'>
                     <div className='admin_plus'>+</div>
                   </div>

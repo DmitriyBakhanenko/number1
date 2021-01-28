@@ -24,17 +24,17 @@ main {
   justify-content: center;
 }
 
-p {
-  color: var(--static-dot-color);
+/*p {*/
+/*color: var(--static-dot-color);*/
 
-  font-size: 0.7rem;
-  letter-spacing: 0.1rem;
-}
+/*font-size: 0.7rem;*/
+/*letter-spacing: 0.05rem;*/
+/*}*/
 
-a {
-  color: var(--moving-dot-color);
-  text-decoration: none;
-}
+/*a {*/
+/*color: var(--moving-dot-color);*/
+/*text-decoration: none;*/
+/*}*/
 
 /* --------------------------------------------------
    Classes

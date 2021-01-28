@@ -37,6 +37,23 @@
       margin-right: 10px;
     }
 
+    .details_img_container {
+      width: 60px;
+      margin-right: 10px;
+      display: flex;
+      flex-direction: column;
+      .details_img_preview {
+        width: 60px;
+        height: 80px;
+        border: solid white 1px;
+        margin-bottom: 10px;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+
     .details_product_info {
       .details_table {
         border-collapse: collapse;
