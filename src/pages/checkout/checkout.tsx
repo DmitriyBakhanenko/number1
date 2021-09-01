@@ -88,7 +88,7 @@ const CheckoutPage = () => {
         <CheckoutItem key={cartItem.id} cartItem={cartItem} />
       ))}
       <div className='total'>
-        <span>Всего: {total}₴</span>
+        <span>Сумма к оплате: {total}грн</span>
       </div>
       <div className='test-warning'>
         *Данные для тестовой оплаты карты*
